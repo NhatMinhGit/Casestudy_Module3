@@ -1,0 +1,53 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" external-system-id="GRADLE" name="Gradle : org.example : WebsiteKinhDoanhPC_Casestudy_Module3-1.0-SNAPSHOT.war (exploded)">
+    <output-path>$PROJECT_DIR$/build/libs/exploded/WebsiteKinhDoanhPC_Casestudy_Module3-1.0-SNAPSHOT.war</output-path>
+    <properties id="gradle-properties">
+      <options external-project-path="$PROJECT_DIR$">
+        <buildTaskPath>:war_exploded</buildTaskPath>
+        <cleanTaskPath>:cleanWar_exploded</cleanTaskPath>
+        <manifest>TWFuaWZlc3QtVmVyc2lvbjogMS4wDQoNCg==</manifest>
+      </options>
+    </properties>
+    <root id="root">
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/build/libs/exploded/WebsiteKinhDoanhPC_Casestudy_Module3-1.0-SNAPSHOT.war/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="javaee-facet-resources" facet="WebsiteKinhDoanhPC_Casestudy_Module3.main/web/Web Gradle : WebsiteKinhDoanhPC_Casestudy_Module3-1.0-SNAPSHOT.war" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="WebsiteKinhDoanhPC_Casestudy_Module3.main" />
+          <element id="dir-copy" path="$PROJECT_DIR$/build/resources/main" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Gradle: jakarta.platform:jakarta.jakartaee-api:9.1.0" />
+          <element id="library" level="project" name="Gradle: jakarta.mvc:jakarta.mvc-api:2.0.0" />
+          <element id="library" level="project" name="Gradle: jakarta.xml.ws:jakarta.xml.ws-api:3.0.1" />
+          <element id="library" level="project" name="Gradle: org.glassfish.jaxb:jaxb-runtime:3.0.2" />
+          <element id="library" level="project" name="Gradle: org.glassfish.web:jakarta.servlet.jsp.jstl:2.0.0" />
+          <element id="library" level="project" name="Gradle: jakarta.xml.bind:jakarta.xml.bind-api:3.0.1" />
+          <element id="library" level="project" name="Gradle: jakarta.xml.soap:jakarta.xml.soap-api:2.0.1" />
+          <element id="library" level="project" name="Gradle: jakarta.jws:jakarta.jws-api:3.0.0" />
+          <element id="library" level="project" name="Gradle: org.hibernate.orm:hibernate-core:6.0.2.Final" />
+          <element id="library" level="project" name="Gradle: org.glassfish.jaxb:jaxb-core:3.0.2" />
+          <element id="library" level="project" name="Gradle: com.sun.activation:jakarta.activation:2.0.1" />
+          <element id="library" level="project" name="Gradle: com.mysql:mysql-connector-j:8.0.33" />
+          <element id="library" level="project" name="Gradle: jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api:2.0.0" />
+          <element id="library" level="project" name="Gradle: jakarta.persistence:jakarta.persistence-api:3.0.0" />
+          <element id="library" level="project" name="Gradle: jakarta.transaction:jakarta.transaction-api:2.0.0" />
+          <element id="library" level="project" name="Gradle: org.glassfish.jaxb:txw2:3.0.2" />
+          <element id="library" level="project" name="Gradle: com.sun.istack:istack-commons-runtime:4.0.1" />
+          <element id="library" level="project" name="Gradle: com.google.protobuf:protobuf-java:3.21.9" />
+          <element id="library" level="project" name="Gradle: jakarta.servlet:jakarta.servlet-api:5.0.0" />
+          <element id="library" level="project" name="Gradle: jakarta.el:jakarta.el-api:4.0.0" />
+          <element id="library" level="project" name="Gradle: org.jboss.logging:jboss-logging:3.4.3.Final" />
+          <element id="library" level="project" name="Gradle: org.hibernate.common:hibernate-commons-annotations:6.0.1.Final" />
+          <element id="library" level="project" name="Gradle: org.jboss:jandex:2.4.2.Final" />
+          <element id="library" level="project" name="Gradle: com.fasterxml:classmate:1.5.1" />
+          <element id="library" level="project" name="Gradle: net.bytebuddy:byte-buddy:1.12.9" />
+          <element id="library" level="project" name="Gradle: jakarta.inject:jakarta.inject-api:2.0.0" />
+          <element id="library" level="project" name="Gradle: org.antlr:antlr4-runtime:4.10" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>
