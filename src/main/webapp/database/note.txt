@@ -1,0 +1,22 @@
+    // const products = [
+    //     {title: "Laptop Gaming Asus", price: "25,000,000 VND", image: "../../assets/img/products/asus_gaming_vivobook_laptop01.webp"},
+    //     {title: "PC Văn Phòng Dell", price: "15,000,000 VND", image: "../../assets/img/products/lenovo_office_laptop02.webp"},
+    //     {title: "Card Màn Hình RTX 4060", price: "10,500,000 VND", image: "../../assets/img/products/ManhinhLG24GS65F-B 24-IPS180HzHDR10Gsyncchuyengame.webp"},
+    //     {title: "Laptop Dell XPS 15", price: "30,000,000 VND", image: "../../assets/img/products/asus_gaming_vivobook_laptop01.webp" },
+    //     {title: "PC Gaming MSI", price: "35,000,000 VND", image: "../../assets/img/products/lenovo_office_laptop02.webp" },
+    //     {title: "Bàn Phím Cơ Razer", price: "2,500,000 VND", image: "../../assets/img/products/asus_gaming_vivobook_laptop01.webp" },
+    //     {title: "Chuột Logitech G502", price: "1,500,000 VND", image: "../../assets/img/products/ManhinhLG24GS65F-B 24-IPS180HzHDR10Gsyncchuyengame.webp"},
+    //     {title: "Màn Hình LG UltraGear 27", price: "7,000,000 VND", image: "../../assets/img/products/ManhinhLG24GS65F-B 24-IPS180HzHDR10Gsyncchuyengame.webp" },
+    //     {title: "Tai Nghe Corsair Virtuoso", price: "3,500,000 VND", image: "../../assets/img/products/lenovo_office_laptop02.webp" },
+    //     {title: "Loa Razer Nommo Chroma", price: "4,000,000 VND", image: "../../assets/img/products/lenovo_office_laptop02.webp" },
+    //     {title: "Bộ Tản Nhiệt Nước NZXT", price: "3,000,000 VND", image: "../../assets/img/products/ManhinhLG24GS65F-B 24-IPS180HzHDR10Gsyncchuyengame.webp" },
+    //     {title: "Ổ Cứng SSD Samsung 1TB", price: "2,800,000 VND", image: "../../assets/img/products/ManhinhLG24GS65F-B 24-IPS180HzHDR10Gsyncchuyengame.webp" },
+    //     {title: "RAM Kingston Fury 16GB", price: "1,600,000 VND", image: "../../assets/img/products/ManhinhLG24GS65F-B 24-IPS180HzHDR10Gsyncchuyengame.webp" },
+    //     {title: "Mainboard ASUS ROG Strix B550", price: "4,500,000 VND", image: "../../assets/img/products/ManhinhLG24GS65F-B 24-IPS180HzHDR10Gsyncchuyengame.webp" },
+    //     {title: "CPU Intel Core i7-12700K", price: "9,500,000 VND", image: "../../assets/img/products/ManhinhLG24GS65F-B 24-IPS180HzHDR10Gsyncchuyengame.webp" },
+    //     {title: "Nguồn Corsair 750W", price: "2,200,000 VND", image: "../../assets/img/products/ManhinhLG24GS65F-B 24-IPS180HzHDR10Gsyncchuyengame.webp" },
+    //     {title: "Webcam Logitech C920", price: "1,800,000 VND", image: "../../assets/img/products/ManhinhLG24GS65F-B 24-IPS180HzHDR10Gsyncchuyengame.webp" },
+    //     {title: "Ghế Gaming Secretlab Titan", price: "10,000,000 VND", image: "../../assets/img/products/ManhinhLG24GS65F-B 24-IPS180HzHDR10Gsyncchuyengame.webp" },
+    //     {title: "Bàn Gaming RGB", price: "5,500,000 VND", image: "../../assets/img/products/ManhinhLG24GS65F-B 24-IPS180HzHDR10Gsyncchuyengame.webp" },
+    //     {title: "USB 3.0 Kingston 128GB", price: "500,000 VND", image: "../../assets/img/products/ManhinhLG24GS65F-B 24-IPS180HzHDR10Gsyncchuyengame.webp" }
+    // ];
