@@ -1,0 +1,1046 @@
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ProjectRootManager\">\r\n    <output url=\"file://$PROJECT_DIR$/out\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	(revision a0e171b26d4d74e724e7cd856f262bf26b2dcfdb)
++++ b/.idea/misc.xml	(date 1739686450276)
+@@ -1,6 +1,9 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+-  <component name="ProjectRootManager">
++  <component name="FrameworkDetectionExcludesConfiguration">
++    <file type="web" url="file://$PROJECT_DIR$" />
++  </component>
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_6" project-jdk-name="corretto-17" project-jdk-type="JavaSDK">
+     <output url="file://$PROJECT_DIR$/out" />
+   </component>
+ </project>
+\ No newline at end of file
+Index: .idea/artifacts/Gradle___org_example___WebsiteKinhDoanhPC_Casestudy_Module3_1_0_SNAPSHOT_war__exploded_.xml
+===================================================================
+diff --git a/.idea/artifacts/Gradle___org_example___WebsiteKinhDoanhPC_Casestudy_Module3_1_0_SNAPSHOT_war__exploded_.xml b/.idea/artifacts/Gradle___org_example___WebsiteKinhDoanhPC_Casestudy_Module3_1_0_SNAPSHOT_war__exploded_.xml
+deleted file mode 100644
+--- a/.idea/artifacts/Gradle___org_example___WebsiteKinhDoanhPC_Casestudy_Module3_1_0_SNAPSHOT_war__exploded_.xml	(revision a0e171b26d4d74e724e7cd856f262bf26b2dcfdb)
++++ /dev/null	(revision a0e171b26d4d74e724e7cd856f262bf26b2dcfdb)
+@@ -1,53 +0,0 @@
+-<component name="ArtifactManager">
+-  <artifact type="exploded-war" external-system-id="GRADLE" name="Gradle : org.example : WebsiteKinhDoanhPC_Casestudy_Module3-1.0-SNAPSHOT.war (exploded)">
+-    <output-path>$PROJECT_DIR$/build/libs/exploded/WebsiteKinhDoanhPC_Casestudy_Module3-1.0-SNAPSHOT.war</output-path>
+-    <properties id="gradle-properties">
+-      <options external-project-path="$PROJECT_DIR$">
+-        <buildTaskPath>:war_exploded</buildTaskPath>
+-        <cleanTaskPath>:cleanWar_exploded</cleanTaskPath>
+-        <manifest>TWFuaWZlc3QtVmVyc2lvbjogMS4wDQoNCg==</manifest>
+-      </options>
+-    </properties>
+-    <root id="root">
+-      <element id="directory" name="META-INF">
+-        <element id="file-copy" path="$PROJECT_DIR$/build/libs/exploded/WebsiteKinhDoanhPC_Casestudy_Module3-1.0-SNAPSHOT.war/META-INF/MANIFEST.MF" />
+-      </element>
+-      <element id="javaee-facet-resources" facet="WebsiteKinhDoanhPC_Casestudy_Module3.main/web/Web Gradle : WebsiteKinhDoanhPC_Casestudy_Module3-1.0-SNAPSHOT.war" />
+-      <element id="directory" name="WEB-INF">
+-        <element id="directory" name="classes">
+-          <element id="module-output" name="WebsiteKinhDoanhPC_Casestudy_Module3.main" />
+-          <element id="dir-copy" path="$PROJECT_DIR$/build/resources/main" />
+-        </element>
+-        <element id="directory" name="lib">
+-          <element id="library" level="project" name="Gradle: jakarta.platform:jakarta.jakartaee-api:9.1.0" />
+-          <element id="library" level="project" name="Gradle: jakarta.mvc:jakarta.mvc-api:2.0.0" />
+-          <element id="library" level="project" name="Gradle: jakarta.xml.ws:jakarta.xml.ws-api:3.0.1" />
+-          <element id="library" level="project" name="Gradle: org.glassfish.jaxb:jaxb-runtime:3.0.2" />
+-          <element id="library" level="project" name="Gradle: org.glassfish.web:jakarta.servlet.jsp.jstl:2.0.0" />
+-          <element id="library" level="project" name="Gradle: jakarta.xml.bind:jakarta.xml.bind-api:3.0.1" />
+-          <element id="library" level="project" name="Gradle: jakarta.xml.soap:jakarta.xml.soap-api:2.0.1" />
+-          <element id="library" level="project" name="Gradle: jakarta.jws:jakarta.jws-api:3.0.0" />
+-          <element id="library" level="project" name="Gradle: org.hibernate.orm:hibernate-core:6.0.2.Final" />
+-          <element id="library" level="project" name="Gradle: org.glassfish.jaxb:jaxb-core:3.0.2" />
+-          <element id="library" level="project" name="Gradle: com.sun.activation:jakarta.activation:2.0.1" />
+-          <element id="library" level="project" name="Gradle: com.mysql:mysql-connector-j:8.0.33" />
+-          <element id="library" level="project" name="Gradle: jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api:2.0.0" />
+-          <element id="library" level="project" name="Gradle: jakarta.persistence:jakarta.persistence-api:3.0.0" />
+-          <element id="library" level="project" name="Gradle: jakarta.transaction:jakarta.transaction-api:2.0.0" />
+-          <element id="library" level="project" name="Gradle: org.glassfish.jaxb:txw2:3.0.2" />
+-          <element id="library" level="project" name="Gradle: com.sun.istack:istack-commons-runtime:4.0.1" />
+-          <element id="library" level="project" name="Gradle: com.google.protobuf:protobuf-java:3.21.9" />
+-          <element id="library" level="project" name="Gradle: jakarta.servlet:jakarta.servlet-api:5.0.0" />
+-          <element id="library" level="project" name="Gradle: jakarta.el:jakarta.el-api:4.0.0" />
+-          <element id="library" level="project" name="Gradle: org.jboss.logging:jboss-logging:3.4.3.Final" />
+-          <element id="library" level="project" name="Gradle: org.hibernate.common:hibernate-commons-annotations:6.0.1.Final" />
+-          <element id="library" level="project" name="Gradle: org.jboss:jandex:2.4.2.Final" />
+-          <element id="library" level="project" name="Gradle: com.fasterxml:classmate:1.5.1" />
+-          <element id="library" level="project" name="Gradle: net.bytebuddy:byte-buddy:1.12.9" />
+-          <element id="library" level="project" name="Gradle: jakarta.inject:jakarta.inject-api:2.0.0" />
+-          <element id="library" level="project" name="Gradle: org.antlr:antlr4-runtime:4.10" />
+-        </element>
+-      </element>
+-    </root>
+-  </artifact>
+-</component>
+\ No newline at end of file
+Index: .idea/libraries/Gradle__org_jboss_logging_jboss_logging_3_4_3_Final.xml
+===================================================================
+diff --git a/.idea/libraries/Gradle__org_jboss_logging_jboss_logging_3_4_3_Final.xml b/.idea/libraries/Gradle__org_jboss_logging_jboss_logging_3_4_3_Final.xml
+deleted file mode 100644
+--- a/.idea/libraries/Gradle__org_jboss_logging_jboss_logging_3_4_3_Final.xml	(revision a0e171b26d4d74e724e7cd856f262bf26b2dcfdb)
++++ /dev/null	(revision a0e171b26d4d74e724e7cd856f262bf26b2dcfdb)
+@@ -1,10 +0,0 @@
+-<component name="libraryTable">
+-  <library name="Gradle: org.jboss.logging:jboss-logging:3.4.3.Final" type="java-imported" external-system-id="GRADLE">
+-    <properties groupId="org.jboss.logging" artifactId="jboss-logging" version="3.4.3.Final" />
+-    <CLASSES>
+-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jboss.logging/jboss-logging/3.4.3.Final/c4bd7e12a745c0e7f6cf98c45cdcdf482fd827ea/jboss-logging-3.4.3.Final.jar!/" />
+-    </CLASSES>
+-    <JAVADOC />
+-    <SOURCES />
+-  </library>
+-</component>
+\ No newline at end of file
+Index: .idea/libraries/Gradle__org_junit_platform_junit_platform_commons_1_9_2.xml
+===================================================================
+diff --git a/.idea/libraries/Gradle__org_junit_platform_junit_platform_commons_1_9_2.xml b/.idea/libraries/Gradle__org_junit_platform_junit_platform_commons_1_9_2.xml
+deleted file mode 100644
+--- a/.idea/libraries/Gradle__org_junit_platform_junit_platform_commons_1_9_2.xml	(revision a0e171b26d4d74e724e7cd856f262bf26b2dcfdb)
++++ /dev/null	(revision a0e171b26d4d74e724e7cd856f262bf26b2dcfdb)
+@@ -1,10 +0,0 @@
+-<component name="libraryTable">
+-  <library name="Gradle: org.junit.platform:junit-platform-commons:1.9.2" type="java-imported" external-system-id="GRADLE">
+-    <properties groupId="org.junit.platform" artifactId="junit-platform-commons" version="1.9.2" />
+-    <CLASSES>
+-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.junit.platform/junit-platform-commons/1.9.2/6f9f8621d8230cd38aa42e58ccbc0c00569131ce/junit-platform-commons-1.9.2.jar!/" />
+-    </CLASSES>
+-    <JAVADOC />
+-    <SOURCES />
+-  </library>
+-</component>
+\ No newline at end of file
+Index: .idea/modules/WebsiteKinhDoanhPC_Casestudy_Module3.iml
+===================================================================
+diff --git a/.idea/modules/WebsiteKinhDoanhPC_Casestudy_Module3.iml b/.idea/modules/WebsiteKinhDoanhPC_Casestudy_Module3.iml
+deleted file mode 100644
+--- a/.idea/modules/WebsiteKinhDoanhPC_Casestudy_Module3.iml	(revision a0e171b26d4d74e724e7cd856f262bf26b2dcfdb)
++++ /dev/null	(revision a0e171b26d4d74e724e7cd856f262bf26b2dcfdb)
+@@ -1,12 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<module external.linked.project.id="WebsiteKinhDoanhPC_Casestudy_Module3" external.linked.project.path="$MODULE_DIR$/../.." external.root.project.path="$MODULE_DIR$/../.." external.system.id="GRADLE" external.system.module.group="org.example" external.system.module.version="1.0-SNAPSHOT" type="JAVA_MODULE" version="4">
+-  <component name="NewModuleRootManager" inherit-compiler-output="true">
+-    <exclude-output />
+-    <content url="file://$MODULE_DIR$/../..">
+-      <excludeFolder url="file://$MODULE_DIR$/../../.gradle" />
+-      <excludeFolder url="file://$MODULE_DIR$/../../build" />
+-    </content>
+-    <orderEntry type="inheritedJdk" />
+-    <orderEntry type="sourceFolder" forTests="false" />
+-  </component>
+-</module>
+\ No newline at end of file
+Index: .idea/libraries/Gradle__com_google_protobuf_protobuf_java_3_21_9.xml
+===================================================================
+diff --git a/.idea/libraries/Gradle__com_google_protobuf_protobuf_java_3_21_9.xml b/.idea/libraries/Gradle__com_google_protobuf_protobuf_java_3_21_9.xml
+deleted file mode 100644
+--- a/.idea/libraries/Gradle__com_google_protobuf_protobuf_java_3_21_9.xml	(revision a0e171b26d4d74e724e7cd856f262bf26b2dcfdb)
++++ /dev/null	(revision a0e171b26d4d74e724e7cd856f262bf26b2dcfdb)
+@@ -1,10 +0,0 @@
+-<component name="libraryTable">
+-  <library name="Gradle: com.google.protobuf:protobuf-java:3.21.9" type="java-imported" external-system-id="GRADLE">
+-    <properties groupId="com.google.protobuf" artifactId="protobuf-java" version="3.21.9" />
+-    <CLASSES>
+-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.protobuf/protobuf-java/3.21.9/ed1240d9231044ce6ccf1978512f6e44416bb7e7/protobuf-java-3.21.9.jar!/" />
+-    </CLASSES>
+-    <JAVADOC />
+-    <SOURCES />
+-  </library>
+-</component>
+\ No newline at end of file
+Index: .idea/libraries/Gradle__com_sun_istack_istack_commons_runtime_4_0_1.xml
+===================================================================
+diff --git a/.idea/libraries/Gradle__com_sun_istack_istack_commons_runtime_4_0_1.xml b/.idea/libraries/Gradle__com_sun_istack_istack_commons_runtime_4_0_1.xml
+deleted file mode 100644
+--- a/.idea/libraries/Gradle__com_sun_istack_istack_commons_runtime_4_0_1.xml	(revision a0e171b26d4d74e724e7cd856f262bf26b2dcfdb)
++++ /dev/null	(revision a0e171b26d4d74e724e7cd856f262bf26b2dcfdb)
+@@ -1,10 +0,0 @@
+-<component name="libraryTable">
+-  <library name="Gradle: com.sun.istack:istack-commons-runtime:4.0.1" type="java-imported" external-system-id="GRADLE">
+-    <properties groupId="com.sun.istack" artifactId="istack-commons-runtime" version="4.0.1" />
+-    <CLASSES>
+-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.sun.istack/istack-commons-runtime/4.0.1/4e25c41d338aad4a2c92d0020c9ae0335fad5099/istack-commons-runtime-4.0.1.jar!/" />
+-    </CLASSES>
+-    <JAVADOC />
+-    <SOURCES />
+-  </library>
+-</component>
+\ No newline at end of file
+Index: .idea/libraries/Gradle__jakarta_servlet_jsp_jstl_jakarta_servlet_jsp_jstl_api_2_0_0.xml
+===================================================================
+diff --git a/.idea/libraries/Gradle__jakarta_servlet_jsp_jstl_jakarta_servlet_jsp_jstl_api_2_0_0.xml b/.idea/libraries/Gradle__jakarta_servlet_jsp_jstl_jakarta_servlet_jsp_jstl_api_2_0_0.xml
+deleted file mode 100644
+--- a/.idea/libraries/Gradle__jakarta_servlet_jsp_jstl_jakarta_servlet_jsp_jstl_api_2_0_0.xml	(revision a0e171b26d4d74e724e7cd856f262bf26b2dcfdb)
++++ /dev/null	(revision a0e171b26d4d74e724e7cd856f262bf26b2dcfdb)
+@@ -1,10 +0,0 @@
+-<component name="libraryTable">
+-  <library name="Gradle: jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api:2.0.0" type="java-imported" external-system-id="GRADLE">
+-    <properties groupId="jakarta.servlet.jsp.jstl" artifactId="jakarta.servlet.jsp.jstl-api" version="2.0.0" />
+-    <CLASSES>
+-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/jakarta.servlet.jsp.jstl/jakarta.servlet.jsp.jstl-api/2.0.0/80e6440f16ae9e26e99f3c25cd31b41b477188ad/jakarta.servlet.jsp.jstl-api-2.0.0.jar!/" />
+-    </CLASSES>
+-    <JAVADOC />
+-    <SOURCES />
+-  </library>
+-</component>
+\ No newline at end of file
+Index: .idea/libraries/Gradle__org_hibernate_common_hibernate_commons_annotations_6_0_1_Final.xml
+===================================================================
+diff --git a/.idea/libraries/Gradle__org_hibernate_common_hibernate_commons_annotations_6_0_1_Final.xml b/.idea/libraries/Gradle__org_hibernate_common_hibernate_commons_annotations_6_0_1_Final.xml
+deleted file mode 100644
+--- a/.idea/libraries/Gradle__org_hibernate_common_hibernate_commons_annotations_6_0_1_Final.xml	(revision a0e171b26d4d74e724e7cd856f262bf26b2dcfdb)
++++ /dev/null	(revision a0e171b26d4d74e724e7cd856f262bf26b2dcfdb)
+@@ -1,10 +0,0 @@
+-<component name="libraryTable">
+-  <library name="Gradle: org.hibernate.common:hibernate-commons-annotations:6.0.1.Final" type="java-imported" external-system-id="GRADLE">
+-    <properties groupId="org.hibernate.common" artifactId="hibernate-commons-annotations" version="6.0.1.Final" />
+-    <CLASSES>
+-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.hibernate.common/hibernate-commons-annotations/6.0.1.Final/6fd8510e1201f6de073cf9b999112567c4173b76/hibernate-commons-annotations-6.0.1.Final.jar!/" />
+-    </CLASSES>
+-    <JAVADOC />
+-    <SOURCES />
+-  </library>
+-</component>
+\ No newline at end of file
+Index: .idea/libraries/Gradle__jakarta_xml_ws_jakarta_xml_ws_api_3_0_1.xml
+===================================================================
+diff --git a/.idea/libraries/Gradle__jakarta_xml_ws_jakarta_xml_ws_api_3_0_1.xml b/.idea/libraries/Gradle__jakarta_xml_ws_jakarta_xml_ws_api_3_0_1.xml
+deleted file mode 100644
+--- a/.idea/libraries/Gradle__jakarta_xml_ws_jakarta_xml_ws_api_3_0_1.xml	(revision a0e171b26d4d74e724e7cd856f262bf26b2dcfdb)
++++ /dev/null	(revision a0e171b26d4d74e724e7cd856f262bf26b2dcfdb)
+@@ -1,10 +0,0 @@
+-<component name="libraryTable">
+-  <library name="Gradle: jakarta.xml.ws:jakarta.xml.ws-api:3.0.1" type="java-imported" external-system-id="GRADLE">
+-    <properties groupId="jakarta.xml.ws" artifactId="jakarta.xml.ws-api" version="3.0.1" />
+-    <CLASSES>
+-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/jakarta.xml.ws/jakarta.xml.ws-api/3.0.1/5a800fc4e47fc988fd5acfc33a3bf94a9e64d790/jakarta.xml.ws-api-3.0.1.jar!/" />
+-    </CLASSES>
+-    <JAVADOC />
+-    <SOURCES />
+-  </library>
+-</component>
+\ No newline at end of file
+Index: .idea/libraries/Gradle__org_apiguardian_apiguardian_api_1_1_2.xml
+===================================================================
+diff --git a/.idea/libraries/Gradle__org_apiguardian_apiguardian_api_1_1_2.xml b/.idea/libraries/Gradle__org_apiguardian_apiguardian_api_1_1_2.xml
+deleted file mode 100644
+--- a/.idea/libraries/Gradle__org_apiguardian_apiguardian_api_1_1_2.xml	(revision a0e171b26d4d74e724e7cd856f262bf26b2dcfdb)
++++ /dev/null	(revision a0e171b26d4d74e724e7cd856f262bf26b2dcfdb)
+@@ -1,10 +0,0 @@
+-<component name="libraryTable">
+-  <library name="Gradle: org.apiguardian:apiguardian-api:1.1.2" type="java-imported" external-system-id="GRADLE">
+-    <properties groupId="org.apiguardian" artifactId="apiguardian-api" version="1.1.2" />
+-    <CLASSES>
+-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apiguardian/apiguardian-api/1.1.2/a231e0d844d2721b0fa1b238006d15c6ded6842a/apiguardian-api-1.1.2.jar!/" />
+-    </CLASSES>
+-    <JAVADOC />
+-    <SOURCES />
+-  </library>
+-</component>
+\ No newline at end of file
+Index: .idea/libraries/Gradle__com_sun_activation_jakarta_activation_2_0_1.xml
+===================================================================
+diff --git a/.idea/libraries/Gradle__com_sun_activation_jakarta_activation_2_0_1.xml b/.idea/libraries/Gradle__com_sun_activation_jakarta_activation_2_0_1.xml
+deleted file mode 100644
+--- a/.idea/libraries/Gradle__com_sun_activation_jakarta_activation_2_0_1.xml	(revision a0e171b26d4d74e724e7cd856f262bf26b2dcfdb)
++++ /dev/null	(revision a0e171b26d4d74e724e7cd856f262bf26b2dcfdb)
+@@ -1,10 +0,0 @@
+-<component name="libraryTable">
+-  <library name="Gradle: com.sun.activation:jakarta.activation:2.0.1" type="java-imported" external-system-id="GRADLE">
+-    <properties groupId="com.sun.activation" artifactId="jakarta.activation" version="2.0.1" />
+-    <CLASSES>
+-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.sun.activation/jakarta.activation/2.0.1/828b80e886a52bb09fe41ff410b10b342f533ce1/jakarta.activation-2.0.1.jar!/" />
+-    </CLASSES>
+-    <JAVADOC />
+-    <SOURCES />
+-  </library>
+-</component>
+\ No newline at end of file
+Index: .idea/libraries/Gradle__jakarta_inject_jakarta_inject_api_2_0_0.xml
+===================================================================
+diff --git a/.idea/libraries/Gradle__jakarta_inject_jakarta_inject_api_2_0_0.xml b/.idea/libraries/Gradle__jakarta_inject_jakarta_inject_api_2_0_0.xml
+deleted file mode 100644
+--- a/.idea/libraries/Gradle__jakarta_inject_jakarta_inject_api_2_0_0.xml	(revision a0e171b26d4d74e724e7cd856f262bf26b2dcfdb)
++++ /dev/null	(revision a0e171b26d4d74e724e7cd856f262bf26b2dcfdb)
+@@ -1,10 +0,0 @@
+-<component name="libraryTable">
+-  <library name="Gradle: jakarta.inject:jakarta.inject-api:2.0.0" type="java-imported" external-system-id="GRADLE">
+-    <properties groupId="jakarta.inject" artifactId="jakarta.inject-api" version="2.0.0" />
+-    <CLASSES>
+-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/jakarta.inject/jakarta.inject-api/2.0.0/46fc8560b6fd17b78396d88f39c1a730457671f0/jakarta.inject-api-2.0.0.jar!/" />
+-    </CLASSES>
+-    <JAVADOC />
+-    <SOURCES />
+-  </library>
+-</component>
+\ No newline at end of file
+Index: .idea/libraries/Gradle__org_opentest4j_opentest4j_1_2_0.xml
+===================================================================
+diff --git a/.idea/libraries/Gradle__org_opentest4j_opentest4j_1_2_0.xml b/.idea/libraries/Gradle__org_opentest4j_opentest4j_1_2_0.xml
+deleted file mode 100644
+--- a/.idea/libraries/Gradle__org_opentest4j_opentest4j_1_2_0.xml	(revision a0e171b26d4d74e724e7cd856f262bf26b2dcfdb)
++++ /dev/null	(revision a0e171b26d4d74e724e7cd856f262bf26b2dcfdb)
+@@ -1,10 +0,0 @@
+-<component name="libraryTable">
+-  <library name="Gradle: org.opentest4j:opentest4j:1.2.0" type="java-imported" external-system-id="GRADLE">
+-    <properties groupId="org.opentest4j" artifactId="opentest4j" version="1.2.0" />
+-    <CLASSES>
+-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.opentest4j/opentest4j/1.2.0/28c11eb91f9b6d8e200631d46e20a7f407f2a046/opentest4j-1.2.0.jar!/" />
+-    </CLASSES>
+-    <JAVADOC />
+-    <SOURCES />
+-  </library>
+-</component>
+\ No newline at end of file
+Index: .idea/libraries/Gradle__jakarta_mvc_jakarta_mvc_api_2_0_0.xml
+===================================================================
+diff --git a/.idea/libraries/Gradle__jakarta_mvc_jakarta_mvc_api_2_0_0.xml b/.idea/libraries/Gradle__jakarta_mvc_jakarta_mvc_api_2_0_0.xml
+deleted file mode 100644
+--- a/.idea/libraries/Gradle__jakarta_mvc_jakarta_mvc_api_2_0_0.xml	(revision a0e171b26d4d74e724e7cd856f262bf26b2dcfdb)
++++ /dev/null	(revision a0e171b26d4d74e724e7cd856f262bf26b2dcfdb)
+@@ -1,10 +0,0 @@
+-<component name="libraryTable">
+-  <library name="Gradle: jakarta.mvc:jakarta.mvc-api:2.0.0" type="java-imported" external-system-id="GRADLE">
+-    <properties groupId="jakarta.mvc" artifactId="jakarta.mvc-api" version="2.0.0" />
+-    <CLASSES>
+-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/jakarta.mvc/jakarta.mvc-api/2.0.0/f8820b1d401ac500e82c019acccce2f98e7777e2/jakarta.mvc-api-2.0.0.jar!/" />
+-    </CLASSES>
+-    <JAVADOC />
+-    <SOURCES />
+-  </library>
+-</component>
+\ No newline at end of file
+Index: .idea/libraries/Gradle__jakarta_persistence_jakarta_persistence_api_3_0_0.xml
+===================================================================
+diff --git a/.idea/libraries/Gradle__jakarta_persistence_jakarta_persistence_api_3_0_0.xml b/.idea/libraries/Gradle__jakarta_persistence_jakarta_persistence_api_3_0_0.xml
+deleted file mode 100644
+--- a/.idea/libraries/Gradle__jakarta_persistence_jakarta_persistence_api_3_0_0.xml	(revision a0e171b26d4d74e724e7cd856f262bf26b2dcfdb)
++++ /dev/null	(revision a0e171b26d4d74e724e7cd856f262bf26b2dcfdb)
+@@ -1,10 +0,0 @@
+-<component name="libraryTable">
+-  <library name="Gradle: jakarta.persistence:jakarta.persistence-api:3.0.0" type="java-imported" external-system-id="GRADLE">
+-    <properties groupId="jakarta.persistence" artifactId="jakarta.persistence-api" version="3.0.0" />
+-    <CLASSES>
+-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/jakarta.persistence/jakarta.persistence-api/3.0.0/affc7884a85b6876d438a88b5d21ea29b1cc2dd8/jakarta.persistence-api-3.0.0.jar!/" />
+-    </CLASSES>
+-    <JAVADOC />
+-    <SOURCES />
+-  </library>
+-</component>
+\ No newline at end of file
+Index: .idea/libraries/Gradle__jakarta_transaction_jakarta_transaction_api_2_0_0.xml
+===================================================================
+diff --git a/.idea/libraries/Gradle__jakarta_transaction_jakarta_transaction_api_2_0_0.xml b/.idea/libraries/Gradle__jakarta_transaction_jakarta_transaction_api_2_0_0.xml
+deleted file mode 100644
+--- a/.idea/libraries/Gradle__jakarta_transaction_jakarta_transaction_api_2_0_0.xml	(revision a0e171b26d4d74e724e7cd856f262bf26b2dcfdb)
++++ /dev/null	(revision a0e171b26d4d74e724e7cd856f262bf26b2dcfdb)
+@@ -1,10 +0,0 @@
+-<component name="libraryTable">
+-  <library name="Gradle: jakarta.transaction:jakarta.transaction-api:2.0.0" type="java-imported" external-system-id="GRADLE">
+-    <properties groupId="jakarta.transaction" artifactId="jakarta.transaction-api" version="2.0.0" />
+-    <CLASSES>
+-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/jakarta.transaction/jakarta.transaction-api/2.0.0/24a0525b4acfbca4086d2f1278be3a084fe1c67d/jakarta.transaction-api-2.0.0.jar!/" />
+-    </CLASSES>
+-    <JAVADOC />
+-    <SOURCES />
+-  </library>
+-</component>
+\ No newline at end of file
+Index: .idea/libraries/Gradle__jakarta_xml_soap_jakarta_xml_soap_api_2_0_1.xml
+===================================================================
+diff --git a/.idea/libraries/Gradle__jakarta_xml_soap_jakarta_xml_soap_api_2_0_1.xml b/.idea/libraries/Gradle__jakarta_xml_soap_jakarta_xml_soap_api_2_0_1.xml
+deleted file mode 100644
+--- a/.idea/libraries/Gradle__jakarta_xml_soap_jakarta_xml_soap_api_2_0_1.xml	(revision a0e171b26d4d74e724e7cd856f262bf26b2dcfdb)
++++ /dev/null	(revision a0e171b26d4d74e724e7cd856f262bf26b2dcfdb)
+@@ -1,10 +0,0 @@
+-<component name="libraryTable">
+-  <library name="Gradle: jakarta.xml.soap:jakarta.xml.soap-api:2.0.1" type="java-imported" external-system-id="GRADLE">
+-    <properties groupId="jakarta.xml.soap" artifactId="jakarta.xml.soap-api" version="2.0.1" />
+-    <CLASSES>
+-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/jakarta.xml.soap/jakarta.xml.soap-api/2.0.1/e4843dad5b0092da339dc983167d51d159b52d42/jakarta.xml.soap-api-2.0.1.jar!/" />
+-    </CLASSES>
+-    <JAVADOC />
+-    <SOURCES />
+-  </library>
+-</component>
+\ No newline at end of file
+Index: .idea/libraries/Gradle__net_bytebuddy_byte_buddy_1_12_9.xml
+===================================================================
+diff --git a/.idea/libraries/Gradle__net_bytebuddy_byte_buddy_1_12_9.xml b/.idea/libraries/Gradle__net_bytebuddy_byte_buddy_1_12_9.xml
+deleted file mode 100644
+--- a/.idea/libraries/Gradle__net_bytebuddy_byte_buddy_1_12_9.xml	(revision a0e171b26d4d74e724e7cd856f262bf26b2dcfdb)
++++ /dev/null	(revision a0e171b26d4d74e724e7cd856f262bf26b2dcfdb)
+@@ -1,10 +0,0 @@
+-<component name="libraryTable">
+-  <library name="Gradle: net.bytebuddy:byte-buddy:1.12.9" type="java-imported" external-system-id="GRADLE">
+-    <properties groupId="net.bytebuddy" artifactId="byte-buddy" version="1.12.9" />
+-    <CLASSES>
+-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.bytebuddy/byte-buddy/1.12.9/424ded9ef3496b0d997ce066f2166a4f7ec7b07a/byte-buddy-1.12.9.jar!/" />
+-    </CLASSES>
+-    <JAVADOC />
+-    <SOURCES />
+-  </library>
+-</component>
+\ No newline at end of file
+Index: .idea/libraries/Gradle__jakarta_jws_jakarta_jws_api_3_0_0.xml
+===================================================================
+diff --git a/.idea/libraries/Gradle__jakarta_jws_jakarta_jws_api_3_0_0.xml b/.idea/libraries/Gradle__jakarta_jws_jakarta_jws_api_3_0_0.xml
+deleted file mode 100644
+--- a/.idea/libraries/Gradle__jakarta_jws_jakarta_jws_api_3_0_0.xml	(revision a0e171b26d4d74e724e7cd856f262bf26b2dcfdb)
++++ /dev/null	(revision a0e171b26d4d74e724e7cd856f262bf26b2dcfdb)
+@@ -1,10 +0,0 @@
+-<component name="libraryTable">
+-  <library name="Gradle: jakarta.jws:jakarta.jws-api:3.0.0" type="java-imported" external-system-id="GRADLE">
+-    <properties groupId="jakarta.jws" artifactId="jakarta.jws-api" version="3.0.0" />
+-    <CLASSES>
+-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/jakarta.jws/jakarta.jws-api/3.0.0/af8955221689acfde96fbd4b2c1c270589bc6903/jakarta.jws-api-3.0.0.jar!/" />
+-    </CLASSES>
+-    <JAVADOC />
+-    <SOURCES />
+-  </library>
+-</component>
+\ No newline at end of file
+Index: .idea/libraries/Gradle__jakarta_servlet_jakarta_servlet_api_5_0_0.xml
+===================================================================
+diff --git a/.idea/libraries/Gradle__jakarta_servlet_jakarta_servlet_api_5_0_0.xml b/.idea/libraries/Gradle__jakarta_servlet_jakarta_servlet_api_5_0_0.xml
+deleted file mode 100644
+--- a/.idea/libraries/Gradle__jakarta_servlet_jakarta_servlet_api_5_0_0.xml	(revision a0e171b26d4d74e724e7cd856f262bf26b2dcfdb)
++++ /dev/null	(revision a0e171b26d4d74e724e7cd856f262bf26b2dcfdb)
+@@ -1,10 +0,0 @@
+-<component name="libraryTable">
+-  <library name="Gradle: jakarta.servlet:jakarta.servlet-api:5.0.0" type="java-imported" external-system-id="GRADLE">
+-    <properties groupId="jakarta.servlet" artifactId="jakarta.servlet-api" version="5.0.0" />
+-    <CLASSES>
+-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/jakarta.servlet/jakarta.servlet-api/5.0.0/2e6b8ccde55522c879434ddec3714683ccae6867/jakarta.servlet-api-5.0.0.jar!/" />
+-    </CLASSES>
+-    <JAVADOC />
+-    <SOURCES />
+-  </library>
+-</component>
+\ No newline at end of file
+Index: .idea/libraries/Gradle__org_antlr_antlr4_runtime_4_10.xml
+===================================================================
+diff --git a/.idea/libraries/Gradle__org_antlr_antlr4_runtime_4_10.xml b/.idea/libraries/Gradle__org_antlr_antlr4_runtime_4_10.xml
+deleted file mode 100644
+--- a/.idea/libraries/Gradle__org_antlr_antlr4_runtime_4_10.xml	(revision a0e171b26d4d74e724e7cd856f262bf26b2dcfdb)
++++ /dev/null	(revision a0e171b26d4d74e724e7cd856f262bf26b2dcfdb)
+@@ -1,10 +0,0 @@
+-<component name="libraryTable">
+-  <library name="Gradle: org.antlr:antlr4-runtime:4.10" type="java-imported" external-system-id="GRADLE">
+-    <properties groupId="org.antlr" artifactId="antlr4-runtime" version="4.10" />
+-    <CLASSES>
+-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.antlr/antlr4-runtime/4.10/9e0b9397cf8f81576c20129670fe2063b237f338/antlr4-runtime-4.10.jar!/" />
+-    </CLASSES>
+-    <JAVADOC />
+-    <SOURCES />
+-  </library>
+-</component>
+\ No newline at end of file
+Index: .idea/libraries/Gradle__jakarta_xml_bind_jakarta_xml_bind_api_3_0_1.xml
+===================================================================
+diff --git a/.idea/libraries/Gradle__jakarta_xml_bind_jakarta_xml_bind_api_3_0_1.xml b/.idea/libraries/Gradle__jakarta_xml_bind_jakarta_xml_bind_api_3_0_1.xml
+deleted file mode 100644
+--- a/.idea/libraries/Gradle__jakarta_xml_bind_jakarta_xml_bind_api_3_0_1.xml	(revision a0e171b26d4d74e724e7cd856f262bf26b2dcfdb)
++++ /dev/null	(revision a0e171b26d4d74e724e7cd856f262bf26b2dcfdb)
+@@ -1,10 +0,0 @@
+-<component name="libraryTable">
+-  <library name="Gradle: jakarta.xml.bind:jakarta.xml.bind-api:3.0.1" type="java-imported" external-system-id="GRADLE">
+-    <properties groupId="jakarta.xml.bind" artifactId="jakarta.xml.bind-api" version="3.0.1" />
+-    <CLASSES>
+-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/jakarta.xml.bind/jakarta.xml.bind-api/3.0.1/5257932df36ff3e4e6de50429dde946490a6a800/jakarta.xml.bind-api-3.0.1.jar!/" />
+-    </CLASSES>
+-    <JAVADOC />
+-    <SOURCES />
+-  </library>
+-</component>
+\ No newline at end of file
+Index: .idea/modules/WebsiteKinhDoanhPC_Casestudy_Module3.main.iml
+===================================================================
+diff --git a/.idea/modules/WebsiteKinhDoanhPC_Casestudy_Module3.main.iml b/.idea/modules/WebsiteKinhDoanhPC_Casestudy_Module3.main.iml
+deleted file mode 100644
+--- a/.idea/modules/WebsiteKinhDoanhPC_Casestudy_Module3.main.iml	(revision a0e171b26d4d74e724e7cd856f262bf26b2dcfdb)
++++ /dev/null	(revision a0e171b26d4d74e724e7cd856f262bf26b2dcfdb)
+@@ -1,52 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<module external.linked.project.id="WebsiteKinhDoanhPC_Casestudy_Module3:main" external.linked.project.path="$MODULE_DIR$/../.." external.root.project.path="$MODULE_DIR$/../.." external.system.id="GRADLE" external.system.module.group="org.example" external.system.module.type="sourceSet" external.system.module.version="1.0-SNAPSHOT" type="JAVA_MODULE" version="4">
+-  <component name="FacetManager">
+-    <facet external-system-id="GRADLE" type="web" name="Web Gradle : WebsiteKinhDoanhPC_Casestudy_Module3-1.0-SNAPSHOT.war">
+-      <configuration>
+-        <descriptors>
+-          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/../../src/main/webapp/WEB-INF/web.xml" />
+-        </descriptors>
+-        <webroots>
+-          <root url="file://$MODULE_DIR$/../../src/main/webapp" relative="/" />
+-        </webroots>
+-      </configuration>
+-    </facet>
+-  </component>
+-  <component name="NewModuleRootManager">
+-    <output url="file://$MODULE_DIR$/../../build/classes/java/main" />
+-    <exclude-output />
+-    <content url="file://$MODULE_DIR$/../../src/main">
+-      <sourceFolder url="file://$MODULE_DIR$/../../src/main/java" isTestSource="false" />
+-      <sourceFolder url="file://$MODULE_DIR$/../../src/main/resources" type="java-resource" />
+-    </content>
+-    <orderEntry type="inheritedJdk" />
+-    <orderEntry type="sourceFolder" forTests="false" />
+-    <orderEntry type="library" name="Gradle: jakarta.platform:jakarta.jakartaee-api:9.1.0" level="project" />
+-    <orderEntry type="library" name="Gradle: jakarta.mvc:jakarta.mvc-api:2.0.0" level="project" />
+-    <orderEntry type="library" name="Gradle: jakarta.xml.ws:jakarta.xml.ws-api:3.0.1" level="project" />
+-    <orderEntry type="library" name="Gradle: org.glassfish.jaxb:jaxb-runtime:3.0.2" level="project" />
+-    <orderEntry type="library" name="Gradle: org.glassfish.web:jakarta.servlet.jsp.jstl:2.0.0" level="project" />
+-    <orderEntry type="library" name="Gradle: jakarta.xml.bind:jakarta.xml.bind-api:3.0.1" level="project" />
+-    <orderEntry type="library" name="Gradle: jakarta.xml.soap:jakarta.xml.soap-api:2.0.1" level="project" />
+-    <orderEntry type="library" name="Gradle: jakarta.jws:jakarta.jws-api:3.0.0" level="project" />
+-    <orderEntry type="library" name="Gradle: org.hibernate.orm:hibernate-core:6.0.2.Final" level="project" />
+-    <orderEntry type="library" name="Gradle: org.glassfish.jaxb:jaxb-core:3.0.2" level="project" />
+-    <orderEntry type="library" name="Gradle: com.sun.activation:jakarta.activation:2.0.1" level="project" />
+-    <orderEntry type="library" name="Gradle: com.mysql:mysql-connector-j:8.0.33" level="project" />
+-    <orderEntry type="library" name="Gradle: jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api:2.0.0" level="project" />
+-    <orderEntry type="library" name="Gradle: jakarta.persistence:jakarta.persistence-api:3.0.0" level="project" />
+-    <orderEntry type="library" name="Gradle: jakarta.transaction:jakarta.transaction-api:2.0.0" level="project" />
+-    <orderEntry type="library" name="Gradle: org.glassfish.jaxb:txw2:3.0.2" level="project" />
+-    <orderEntry type="library" name="Gradle: com.sun.istack:istack-commons-runtime:4.0.1" level="project" />
+-    <orderEntry type="library" name="Gradle: com.google.protobuf:protobuf-java:3.21.9" level="project" />
+-    <orderEntry type="library" name="Gradle: jakarta.servlet:jakarta.servlet-api:5.0.0" level="project" />
+-    <orderEntry type="library" name="Gradle: jakarta.el:jakarta.el-api:4.0.0" level="project" />
+-    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.jboss.logging:jboss-logging:3.4.3.Final" level="project" />
+-    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.hibernate.common:hibernate-commons-annotations:6.0.1.Final" level="project" />
+-    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.jboss:jandex:2.4.2.Final" level="project" />
+-    <orderEntry type="library" scope="RUNTIME" name="Gradle: com.fasterxml:classmate:1.5.1" level="project" />
+-    <orderEntry type="library" scope="RUNTIME" name="Gradle: net.bytebuddy:byte-buddy:1.12.9" level="project" />
+-    <orderEntry type="library" scope="RUNTIME" name="Gradle: jakarta.inject:jakarta.inject-api:2.0.0" level="project" />
+-    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.antlr:antlr4-runtime:4.10" level="project" />
+-  </component>
+-</module>
+\ No newline at end of file
+Index: .idea/libraries/Gradle__org_hibernate_orm_hibernate_core_6_0_2_Final.xml
+===================================================================
+diff --git a/.idea/libraries/Gradle__org_hibernate_orm_hibernate_core_6_0_2_Final.xml b/.idea/libraries/Gradle__org_hibernate_orm_hibernate_core_6_0_2_Final.xml
+deleted file mode 100644
+--- a/.idea/libraries/Gradle__org_hibernate_orm_hibernate_core_6_0_2_Final.xml	(revision a0e171b26d4d74e724e7cd856f262bf26b2dcfdb)
++++ /dev/null	(revision a0e171b26d4d74e724e7cd856f262bf26b2dcfdb)
+@@ -1,10 +0,0 @@
+-<component name="libraryTable">
+-  <library name="Gradle: org.hibernate.orm:hibernate-core:6.0.2.Final" type="java-imported" external-system-id="GRADLE">
+-    <properties groupId="org.hibernate.orm" artifactId="hibernate-core" version="6.0.2.Final" />
+-    <CLASSES>
+-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.hibernate.orm/hibernate-core/6.0.2.Final/98eb19f8b3ca517f2aeca1b2ce3aa5904a00ec16/hibernate-core-6.0.2.Final.jar!/" />
+-    </CLASSES>
+-    <JAVADOC />
+-    <SOURCES />
+-  </library>
+-</component>
+\ No newline at end of file
+Index: .idea/libraries/Gradle__org_jboss_jandex_2_4_2_Final.xml
+===================================================================
+diff --git a/.idea/libraries/Gradle__org_jboss_jandex_2_4_2_Final.xml b/.idea/libraries/Gradle__org_jboss_jandex_2_4_2_Final.xml
+deleted file mode 100644
+--- a/.idea/libraries/Gradle__org_jboss_jandex_2_4_2_Final.xml	(revision a0e171b26d4d74e724e7cd856f262bf26b2dcfdb)
++++ /dev/null	(revision a0e171b26d4d74e724e7cd856f262bf26b2dcfdb)
+@@ -1,10 +0,0 @@
+-<component name="libraryTable">
+-  <library name="Gradle: org.jboss:jandex:2.4.2.Final" type="java-imported" external-system-id="GRADLE">
+-    <properties groupId="org.jboss" artifactId="jandex" version="2.4.2.Final" />
+-    <CLASSES>
+-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jboss/jandex/2.4.2.Final/1e1c385990b258ff1a24c801e84aebbacf70eb39/jandex-2.4.2.Final.jar!/" />
+-    </CLASSES>
+-    <JAVADOC />
+-    <SOURCES />
+-  </library>
+-</component>
+\ No newline at end of file
+Index: .idea/.name
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/.name b/.idea/.name
+deleted file mode 100644
+--- a/.idea/.name	(revision a0e171b26d4d74e724e7cd856f262bf26b2dcfdb)
++++ /dev/null	(revision a0e171b26d4d74e724e7cd856f262bf26b2dcfdb)
+@@ -1,1 +0,0 @@
+-WebsiteKinhDoanhPC_Casestudy_Module3
+\ No newline at end of file
+Index: .idea/libraries/Gradle__org_glassfish_jaxb_jaxb_core_3_0_2.xml
+===================================================================
+diff --git a/.idea/libraries/Gradle__org_glassfish_jaxb_jaxb_core_3_0_2.xml b/.idea/libraries/Gradle__org_glassfish_jaxb_jaxb_core_3_0_2.xml
+deleted file mode 100644
+--- a/.idea/libraries/Gradle__org_glassfish_jaxb_jaxb_core_3_0_2.xml	(revision a0e171b26d4d74e724e7cd856f262bf26b2dcfdb)
++++ /dev/null	(revision a0e171b26d4d74e724e7cd856f262bf26b2dcfdb)
+@@ -1,10 +0,0 @@
+-<component name="libraryTable">
+-  <library name="Gradle: org.glassfish.jaxb:jaxb-core:3.0.2" type="java-imported" external-system-id="GRADLE">
+-    <properties groupId="org.glassfish.jaxb" artifactId="jaxb-core" version="3.0.2" />
+-    <CLASSES>
+-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.glassfish.jaxb/jaxb-core/3.0.2/e83d0b0005525ddd8b8642bd0bb02227fcf871f1/jaxb-core-3.0.2.jar!/" />
+-    </CLASSES>
+-    <JAVADOC />
+-    <SOURCES />
+-  </library>
+-</component>
+\ No newline at end of file
+Index: .idea/libraries/Gradle__com_fasterxml_classmate_1_5_1.xml
+===================================================================
+diff --git a/.idea/libraries/Gradle__com_fasterxml_classmate_1_5_1.xml b/.idea/libraries/Gradle__com_fasterxml_classmate_1_5_1.xml
+deleted file mode 100644
+--- a/.idea/libraries/Gradle__com_fasterxml_classmate_1_5_1.xml	(revision a0e171b26d4d74e724e7cd856f262bf26b2dcfdb)
++++ /dev/null	(revision a0e171b26d4d74e724e7cd856f262bf26b2dcfdb)
+@@ -1,10 +0,0 @@
+-<component name="libraryTable">
+-  <library name="Gradle: com.fasterxml:classmate:1.5.1" type="java-imported" external-system-id="GRADLE">
+-    <properties groupId="com.fasterxml" artifactId="classmate" version="1.5.1" />
+-    <CLASSES>
+-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.fasterxml/classmate/1.5.1/3fe0bed568c62df5e89f4f174c101eab25345b6c/classmate-1.5.1.jar!/" />
+-    </CLASSES>
+-    <JAVADOC />
+-    <SOURCES />
+-  </library>
+-</component>
+\ No newline at end of file
+Index: .idea/libraries/Gradle__com_mysql_mysql_connector_j_8_0_33.xml
+===================================================================
+diff --git a/.idea/libraries/Gradle__com_mysql_mysql_connector_j_8_0_33.xml b/.idea/libraries/Gradle__com_mysql_mysql_connector_j_8_0_33.xml
+deleted file mode 100644
+--- a/.idea/libraries/Gradle__com_mysql_mysql_connector_j_8_0_33.xml	(revision a0e171b26d4d74e724e7cd856f262bf26b2dcfdb)
++++ /dev/null	(revision a0e171b26d4d74e724e7cd856f262bf26b2dcfdb)
+@@ -1,10 +0,0 @@
+-<component name="libraryTable">
+-  <library name="Gradle: com.mysql:mysql-connector-j:8.0.33" type="java-imported" external-system-id="GRADLE">
+-    <properties groupId="com.mysql" artifactId="mysql-connector-j" version="8.0.33" />
+-    <CLASSES>
+-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.mysql/mysql-connector-j/8.0.33/9e64d997873abc4318620264703d3fdb6b02dd5a/mysql-connector-j-8.0.33.jar!/" />
+-    </CLASSES>
+-    <JAVADOC />
+-    <SOURCES />
+-  </library>
+-</component>
+\ No newline at end of file
+Index: .idea/libraries/Gradle__jakarta_el_jakarta_el_api_4_0_0.xml
+===================================================================
+diff --git a/.idea/libraries/Gradle__jakarta_el_jakarta_el_api_4_0_0.xml b/.idea/libraries/Gradle__jakarta_el_jakarta_el_api_4_0_0.xml
+deleted file mode 100644
+--- a/.idea/libraries/Gradle__jakarta_el_jakarta_el_api_4_0_0.xml	(revision a0e171b26d4d74e724e7cd856f262bf26b2dcfdb)
++++ /dev/null	(revision a0e171b26d4d74e724e7cd856f262bf26b2dcfdb)
+@@ -1,10 +0,0 @@
+-<component name="libraryTable">
+-  <library name="Gradle: jakarta.el:jakarta.el-api:4.0.0" type="java-imported" external-system-id="GRADLE">
+-    <properties groupId="jakarta.el" artifactId="jakarta.el-api" version="4.0.0" />
+-    <CLASSES>
+-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/jakarta.el/jakarta.el-api/4.0.0/ba9834bd2dba5014072bacbafecffaec1673b0f9/jakarta.el-api-4.0.0.jar!/" />
+-    </CLASSES>
+-    <JAVADOC />
+-    <SOURCES />
+-  </library>
+-</component>
+\ No newline at end of file
+Index: .idea/libraries/Gradle__jakarta_platform_jakarta_jakartaee_api_9_1_0.xml
+===================================================================
+diff --git a/.idea/libraries/Gradle__jakarta_platform_jakarta_jakartaee_api_9_1_0.xml b/.idea/libraries/Gradle__jakarta_platform_jakarta_jakartaee_api_9_1_0.xml
+deleted file mode 100644
+--- a/.idea/libraries/Gradle__jakarta_platform_jakarta_jakartaee_api_9_1_0.xml	(revision a0e171b26d4d74e724e7cd856f262bf26b2dcfdb)
++++ /dev/null	(revision a0e171b26d4d74e724e7cd856f262bf26b2dcfdb)
+@@ -1,10 +0,0 @@
+-<component name="libraryTable">
+-  <library name="Gradle: jakarta.platform:jakarta.jakartaee-api:9.1.0" type="java-imported" external-system-id="GRADLE">
+-    <properties groupId="jakarta.platform" artifactId="jakarta.jakartaee-api" version="9.1.0" />
+-    <CLASSES>
+-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/jakarta.platform/jakarta.jakartaee-api/9.1.0/9904a2846bf266940e0e0b58b7b3d13e28756fa0/jakarta.jakartaee-api-9.1.0.jar!/" />
+-    </CLASSES>
+-    <JAVADOC />
+-    <SOURCES />
+-  </library>
+-</component>
+\ No newline at end of file
+Index: .idea/libraries/Gradle__org_glassfish_web_jakarta_servlet_jsp_jstl_2_0_0.xml
+===================================================================
+diff --git a/.idea/libraries/Gradle__org_glassfish_web_jakarta_servlet_jsp_jstl_2_0_0.xml b/.idea/libraries/Gradle__org_glassfish_web_jakarta_servlet_jsp_jstl_2_0_0.xml
+deleted file mode 100644
+--- a/.idea/libraries/Gradle__org_glassfish_web_jakarta_servlet_jsp_jstl_2_0_0.xml	(revision a0e171b26d4d74e724e7cd856f262bf26b2dcfdb)
++++ /dev/null	(revision a0e171b26d4d74e724e7cd856f262bf26b2dcfdb)
+@@ -1,10 +0,0 @@
+-<component name="libraryTable">
+-  <library name="Gradle: org.glassfish.web:jakarta.servlet.jsp.jstl:2.0.0" type="java-imported" external-system-id="GRADLE">
+-    <properties groupId="org.glassfish.web" artifactId="jakarta.servlet.jsp.jstl" version="2.0.0" />
+-    <CLASSES>
+-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.glassfish.web/jakarta.servlet.jsp.jstl/2.0.0/377ec3878354cb2c1f96f99031728773c8e2603b/jakarta.servlet.jsp.jstl-2.0.0.jar!/" />
+-    </CLASSES>
+-    <JAVADOC />
+-    <SOURCES />
+-  </library>
+-</component>
+\ No newline at end of file
+Index: .idea/libraries/Gradle__org_glassfish_jaxb_txw2_3_0_2.xml
+===================================================================
+diff --git a/.idea/libraries/Gradle__org_glassfish_jaxb_txw2_3_0_2.xml b/.idea/libraries/Gradle__org_glassfish_jaxb_txw2_3_0_2.xml
+deleted file mode 100644
+--- a/.idea/libraries/Gradle__org_glassfish_jaxb_txw2_3_0_2.xml	(revision a0e171b26d4d74e724e7cd856f262bf26b2dcfdb)
++++ /dev/null	(revision a0e171b26d4d74e724e7cd856f262bf26b2dcfdb)
+@@ -1,10 +0,0 @@
+-<component name="libraryTable">
+-  <library name="Gradle: org.glassfish.jaxb:txw2:3.0.2" type="java-imported" external-system-id="GRADLE">
+-    <properties groupId="org.glassfish.jaxb" artifactId="txw2" version="3.0.2" />
+-    <CLASSES>
+-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.glassfish.jaxb/txw2/3.0.2/8c448a44cdcdbb5dd48ff2eb88cab858ed52cf91/txw2-3.0.2.jar!/" />
+-    </CLASSES>
+-    <JAVADOC />
+-    <SOURCES />
+-  </library>
+-</component>
+\ No newline at end of file
+Index: .idea/artifacts/Gradle___org_example___WebsiteKinhDoanhPC_Casestudy_Module3_1_0_SNAPSHOT_war.xml
+===================================================================
+diff --git a/.idea/artifacts/Gradle___org_example___WebsiteKinhDoanhPC_Casestudy_Module3_1_0_SNAPSHOT_war.xml b/.idea/artifacts/Gradle___org_example___WebsiteKinhDoanhPC_Casestudy_Module3_1_0_SNAPSHOT_war.xml
+deleted file mode 100644
+--- a/.idea/artifacts/Gradle___org_example___WebsiteKinhDoanhPC_Casestudy_Module3_1_0_SNAPSHOT_war.xml	(revision a0e171b26d4d74e724e7cd856f262bf26b2dcfdb)
++++ /dev/null	(revision a0e171b26d4d74e724e7cd856f262bf26b2dcfdb)
+@@ -1,14 +0,0 @@
+-<component name="ArtifactManager">
+-  <artifact type="war" external-system-id="GRADLE" name="Gradle : org.example : WebsiteKinhDoanhPC_Casestudy_Module3-1.0-SNAPSHOT.war">
+-    <output-path>$PROJECT_DIR$/build/libs</output-path>
+-    <properties id="gradle-properties">
+-      <options external-project-path="$PROJECT_DIR$">
+-        <buildTaskPath>:war</buildTaskPath>
+-        <cleanTaskPath>:cleanWar</cleanTaskPath>
+-      </options>
+-    </properties>
+-    <root id="archive" name="WebsiteKinhDoanhPC_Casestudy_Module3-1.0-SNAPSHOT.war">
+-      <element id="artifact" artifact-name="Gradle : org.example : WebsiteKinhDoanhPC_Casestudy_Module3-1.0-SNAPSHOT.war (exploded)" />
+-    </root>
+-  </artifact>
+-</component>
+\ No newline at end of file
+Index: .idea/modules/WebsiteKinhDoanhPC_Casestudy_Module3.test.iml
+===================================================================
+diff --git a/.idea/modules/WebsiteKinhDoanhPC_Casestudy_Module3.test.iml b/.idea/modules/WebsiteKinhDoanhPC_Casestudy_Module3.test.iml
+deleted file mode 100644
+--- a/.idea/modules/WebsiteKinhDoanhPC_Casestudy_Module3.test.iml	(revision a0e171b26d4d74e724e7cd856f262bf26b2dcfdb)
++++ /dev/null	(revision a0e171b26d4d74e724e7cd856f262bf26b2dcfdb)
+@@ -1,45 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<module external.linked.project.id="WebsiteKinhDoanhPC_Casestudy_Module3:test" external.linked.project.path="$MODULE_DIR$/../.." external.root.project.path="$MODULE_DIR$/../.." external.system.id="GRADLE" external.system.module.group="org.example" external.system.module.type="sourceSet" external.system.module.version="1.0-SNAPSHOT" type="JAVA_MODULE" version="4">
+-  <component name="NewModuleRootManager">
+-    <output-test url="file://$MODULE_DIR$/../../build/classes/java/test" />
+-    <exclude-output />
+-    <content url="file://$MODULE_DIR$/../../src/test" />
+-    <orderEntry type="inheritedJdk" />
+-    <orderEntry type="sourceFolder" forTests="false" />
+-    <orderEntry type="module" module-name="WebsiteKinhDoanhPC_Casestudy_Module3.main" />
+-    <orderEntry type="library" name="Gradle: jakarta.platform:jakarta.jakartaee-api:9.1.0" level="project" />
+-    <orderEntry type="library" name="Gradle: jakarta.mvc:jakarta.mvc-api:2.0.0" level="project" />
+-    <orderEntry type="library" name="Gradle: jakarta.xml.ws:jakarta.xml.ws-api:3.0.1" level="project" />
+-    <orderEntry type="library" name="Gradle: org.glassfish.jaxb:jaxb-runtime:3.0.2" level="project" />
+-    <orderEntry type="library" name="Gradle: org.glassfish.web:jakarta.servlet.jsp.jstl:2.0.0" level="project" />
+-    <orderEntry type="library" name="Gradle: org.junit.jupiter:junit-jupiter-api:5.9.2" level="project" />
+-    <orderEntry type="library" name="Gradle: jakarta.xml.bind:jakarta.xml.bind-api:3.0.1" level="project" />
+-    <orderEntry type="library" name="Gradle: jakarta.xml.soap:jakarta.xml.soap-api:2.0.1" level="project" />
+-    <orderEntry type="library" name="Gradle: jakarta.jws:jakarta.jws-api:3.0.0" level="project" />
+-    <orderEntry type="library" name="Gradle: org.hibernate.orm:hibernate-core:6.0.2.Final" level="project" />
+-    <orderEntry type="library" name="Gradle: org.glassfish.jaxb:jaxb-core:3.0.2" level="project" />
+-    <orderEntry type="library" name="Gradle: com.sun.activation:jakarta.activation:2.0.1" level="project" />
+-    <orderEntry type="library" name="Gradle: com.mysql:mysql-connector-j:8.0.33" level="project" />
+-    <orderEntry type="library" name="Gradle: jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api:2.0.0" level="project" />
+-    <orderEntry type="library" name="Gradle: org.junit.platform:junit-platform-commons:1.9.2" level="project" />
+-    <orderEntry type="library" name="Gradle: org.opentest4j:opentest4j:1.2.0" level="project" />
+-    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.apiguardian:apiguardian-api:1.1.2" level="project" />
+-    <orderEntry type="library" name="Gradle: jakarta.persistence:jakarta.persistence-api:3.0.0" level="project" />
+-    <orderEntry type="library" name="Gradle: jakarta.transaction:jakarta.transaction-api:2.0.0" level="project" />
+-    <orderEntry type="library" name="Gradle: org.glassfish.jaxb:txw2:3.0.2" level="project" />
+-    <orderEntry type="library" name="Gradle: com.sun.istack:istack-commons-runtime:4.0.1" level="project" />
+-    <orderEntry type="library" name="Gradle: com.google.protobuf:protobuf-java:3.21.9" level="project" />
+-    <orderEntry type="library" name="Gradle: jakarta.servlet:jakarta.servlet-api:5.0.0" level="project" />
+-    <orderEntry type="library" name="Gradle: jakarta.el:jakarta.el-api:4.0.0" level="project" />
+-    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.junit.jupiter:junit-jupiter-engine:5.9.2" level="project" />
+-    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.junit.platform:junit-platform-engine:1.9.2" level="project" />
+-    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.jboss.logging:jboss-logging:3.4.3.Final" level="project" />
+-    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.hibernate.common:hibernate-commons-annotations:6.0.1.Final" level="project" />
+-    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.jboss:jandex:2.4.2.Final" level="project" />
+-    <orderEntry type="library" scope="RUNTIME" name="Gradle: com.fasterxml:classmate:1.5.1" level="project" />
+-    <orderEntry type="library" scope="RUNTIME" name="Gradle: net.bytebuddy:byte-buddy:1.12.9" level="project" />
+-    <orderEntry type="library" scope="RUNTIME" name="Gradle: jakarta.inject:jakarta.inject-api:2.0.0" level="project" />
+-    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.antlr:antlr4-runtime:4.10" level="project" />
+-  </component>
+-  <component name="TestModuleProperties" production-module="WebsiteKinhDoanhPC_Casestudy_Module3.main" />
+-</module>
+\ No newline at end of file
+Index: .idea/libraries/Gradle__org_junit_platform_junit_platform_engine_1_9_2.xml
+===================================================================
+diff --git a/.idea/libraries/Gradle__org_junit_platform_junit_platform_engine_1_9_2.xml b/.idea/libraries/Gradle__org_junit_platform_junit_platform_engine_1_9_2.xml
+deleted file mode 100644
+--- a/.idea/libraries/Gradle__org_junit_platform_junit_platform_engine_1_9_2.xml	(revision a0e171b26d4d74e724e7cd856f262bf26b2dcfdb)
++++ /dev/null	(revision a0e171b26d4d74e724e7cd856f262bf26b2dcfdb)
+@@ -1,10 +0,0 @@
+-<component name="libraryTable">
+-  <library name="Gradle: org.junit.platform:junit-platform-engine:1.9.2" type="java-imported" external-system-id="GRADLE">
+-    <properties groupId="org.junit.platform" artifactId="junit-platform-engine" version="1.9.2" />
+-    <CLASSES>
+-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.junit.platform/junit-platform-engine/1.9.2/40aeef2be7b04f96bb91e8b054affc28b7c7c935/junit-platform-engine-1.9.2.jar!/" />
+-    </CLASSES>
+-    <JAVADOC />
+-    <SOURCES />
+-  </library>
+-</component>
+\ No newline at end of file
+Index: .idea/libraries/Gradle__org_junit_jupiter_junit_jupiter_api_5_9_2.xml
+===================================================================
+diff --git a/.idea/libraries/Gradle__org_junit_jupiter_junit_jupiter_api_5_9_2.xml b/.idea/libraries/Gradle__org_junit_jupiter_junit_jupiter_api_5_9_2.xml
+deleted file mode 100644
+--- a/.idea/libraries/Gradle__org_junit_jupiter_junit_jupiter_api_5_9_2.xml	(revision a0e171b26d4d74e724e7cd856f262bf26b2dcfdb)
++++ /dev/null	(revision a0e171b26d4d74e724e7cd856f262bf26b2dcfdb)
+@@ -1,10 +0,0 @@
+-<component name="libraryTable">
+-  <library name="Gradle: org.junit.jupiter:junit-jupiter-api:5.9.2" type="java-imported" external-system-id="GRADLE">
+-    <properties groupId="org.junit.jupiter" artifactId="junit-jupiter-api" version="5.9.2" />
+-    <CLASSES>
+-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.junit.jupiter/junit-jupiter-api/5.9.2/fed843581520eac594bc36bb4b0f55e7b947dda9/junit-jupiter-api-5.9.2.jar!/" />
+-    </CLASSES>
+-    <JAVADOC />
+-    <SOURCES />
+-  </library>
+-</component>
+\ No newline at end of file
+Index: .idea/libraries/Gradle__org_junit_jupiter_junit_jupiter_engine_5_9_2.xml
+===================================================================
+diff --git a/.idea/libraries/Gradle__org_junit_jupiter_junit_jupiter_engine_5_9_2.xml b/.idea/libraries/Gradle__org_junit_jupiter_junit_jupiter_engine_5_9_2.xml
+deleted file mode 100644
+--- a/.idea/libraries/Gradle__org_junit_jupiter_junit_jupiter_engine_5_9_2.xml	(revision a0e171b26d4d74e724e7cd856f262bf26b2dcfdb)
++++ /dev/null	(revision a0e171b26d4d74e724e7cd856f262bf26b2dcfdb)
+@@ -1,10 +0,0 @@
+-<component name="libraryTable">
+-  <library name="Gradle: org.junit.jupiter:junit-jupiter-engine:5.9.2" type="java-imported" external-system-id="GRADLE">
+-    <properties groupId="org.junit.jupiter" artifactId="junit-jupiter-engine" version="5.9.2" />
+-    <CLASSES>
+-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.junit.jupiter/junit-jupiter-engine/5.9.2/572f7a553b53f83ee59cc045ce1c3772864ab76c/junit-jupiter-engine-5.9.2.jar!/" />
+-    </CLASSES>
+-    <JAVADOC />
+-    <SOURCES />
+-  </library>
+-</component>
+\ No newline at end of file
+Index: .idea/vcs.xml
+===================================================================
+diff --git a/.idea/vcs.xml b/.idea/vcs.xml
+deleted file mode 100644
+--- a/.idea/vcs.xml	(revision a0e171b26d4d74e724e7cd856f262bf26b2dcfdb)
++++ /dev/null	(revision a0e171b26d4d74e724e7cd856f262bf26b2dcfdb)
+@@ -1,6 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="VcsDirectoryMappings">
+-    <mapping directory="$PROJECT_DIR$" vcs="Git" />
+-  </component>
+-</project>
+\ No newline at end of file
+Index: .idea/libraries/Gradle__org_glassfish_jaxb_jaxb_runtime_3_0_2.xml
+===================================================================
+diff --git a/.idea/libraries/Gradle__org_glassfish_jaxb_jaxb_runtime_3_0_2.xml b/.idea/libraries/Gradle__org_glassfish_jaxb_jaxb_runtime_3_0_2.xml
+deleted file mode 100644
+--- a/.idea/libraries/Gradle__org_glassfish_jaxb_jaxb_runtime_3_0_2.xml	(revision a0e171b26d4d74e724e7cd856f262bf26b2dcfdb)
++++ /dev/null	(revision a0e171b26d4d74e724e7cd856f262bf26b2dcfdb)
+@@ -1,10 +0,0 @@
+-<component name="libraryTable">
+-  <library name="Gradle: org.glassfish.jaxb:jaxb-runtime:3.0.2" type="java-imported" external-system-id="GRADLE">
+-    <properties groupId="org.glassfish.jaxb" artifactId="jaxb-runtime" version="3.0.2" />
+-    <CLASSES>
+-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.glassfish.jaxb/jaxb-runtime/3.0.2/9897322f5de201bfbfcd1f4f46ffdd4204673b3c/jaxb-runtime-3.0.2.jar!/" />
+-    </CLASSES>
+-    <JAVADOC />
+-    <SOURCES />
+-  </library>
+-</component>
+\ No newline at end of file
+Index: .idea/modules.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ProjectModuleManager\">\r\n    <modules>\r\n      <module fileurl=\"file://$PROJECT_DIR$/.idea/modules/WebsiteKinhDoanhPC_Casestudy_Module3.iml\" filepath=\"$PROJECT_DIR$/.idea/modules/WebsiteKinhDoanhPC_Casestudy_Module3.iml\" />\r\n      <module fileurl=\"file://$PROJECT_DIR$/.idea/modules/WebsiteKinhDoanhPC_Casestudy_Module3.main.iml\" filepath=\"$PROJECT_DIR$/.idea/modules/WebsiteKinhDoanhPC_Casestudy_Module3.main.iml\" />\r\n      <module fileurl=\"file://$PROJECT_DIR$/.idea/modules/WebsiteKinhDoanhPC_Casestudy_Module3.test.iml\" filepath=\"$PROJECT_DIR$/.idea/modules/WebsiteKinhDoanhPC_Casestudy_Module3.test.iml\" />\r\n    </modules>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/modules.xml b/.idea/modules.xml
+--- a/.idea/modules.xml	(revision a0e171b26d4d74e724e7cd856f262bf26b2dcfdb)
++++ b/.idea/modules.xml	(date 1739686450270)
+@@ -2,9 +2,7 @@
+ <project version="4">
+   <component name="ProjectModuleManager">
+     <modules>
+-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/WebsiteKinhDoanhPC_Casestudy_Module3.iml" filepath="$PROJECT_DIR$/.idea/modules/WebsiteKinhDoanhPC_Casestudy_Module3.iml" />
+-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/WebsiteKinhDoanhPC_Casestudy_Module3.main.iml" filepath="$PROJECT_DIR$/.idea/modules/WebsiteKinhDoanhPC_Casestudy_Module3.main.iml" />
+-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/WebsiteKinhDoanhPC_Casestudy_Module3.test.iml" filepath="$PROJECT_DIR$/.idea/modules/WebsiteKinhDoanhPC_Casestudy_Module3.test.iml" />
++      <module fileurl="file://$PROJECT_DIR$/.idea/modules/CS3.iml" filepath="$PROJECT_DIR$/.idea/modules/CS3.iml" />
+     </modules>
+   </component>
+ </project>
+\ No newline at end of file
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"a5488dc3-a017-49d5-ac28-d05ef3f47cac\" name=\"Changes\" comment=\"\" />\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"ExternalProjectsData\">\r\n    <projectState path=\"$PROJECT_DIR$\">\r\n      <ProjectState />\r\n    </projectState>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\r\n      <map>\r\n        <entry key=\"$PROJECT_DIR$\" value=\"main\" />\r\n      </map>\r\n    </option>\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"ProjectColorInfo\">{\r\n  &quot;associatedIndex&quot;: 8\r\n}</component>\r\n  <component name=\"ProjectId\" id=\"2t6pmzeNNeLPn7gqFhPieQVYMuk\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">{\r\n  &quot;keyToString&quot;: {\r\n    &quot;Gradle.Build CS3.executor&quot;: &quot;Run&quot;,\r\n    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\r\n    &quot;TomEE Server.CS3.executor&quot;: &quot;Run&quot;,\r\n    &quot;TomEE Server.TomEE 9.0.98.executor&quot;: &quot;Run&quot;,\r\n    &quot;TomEE Server.Unnamed.executor&quot;: &quot;Run&quot;,\r\n    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,\r\n    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,\r\n    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,\r\n    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,\r\n    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,\r\n    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,\r\n    &quot;project.structure.last.edited&quot;: &quot;SDKs&quot;,\r\n    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,\r\n    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,\r\n    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;,\r\n    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;\r\n  }\r\n}</component>\r\n  <component name=\"RunManager\">\r\n    <configuration name=\"TomEE 9.0.98\" type=\"TomeeConfiguration\" factoryName=\"Local\" APPLICATION_SERVER_NAME=\"TomEE 9.0.98\" ALTERNATIVE_JRE_ENABLED=\"false\" nameIsGenerated=\"true\">\r\n      <option name=\"UPDATING_POLICY\" value=\"restart-server\" />\r\n      <deployment>\r\n        <artifact name=\"Gradle : org.example : WebsiteKinhDoanhPC_Casestudy_Module3-1.0-SNAPSHOT.war\">\r\n          <settings>\r\n            <option name=\"CONTEXT_PATH\" value=\"/Gradle___org_example___WebsiteKinhDoanhPC_Casestudy_Module3_1_0_SNAPSHOT_war\" />\r\n          </settings>\r\n        </artifact>\r\n      </deployment>\r\n      <server-settings>\r\n        <option name=\"BASE_DIRECTORY_NAME\" value=\"bbe137c2-8019-47a2-92e2-98b84abf1c06\" />\r\n      </server-settings>\r\n      <predefined_log_file enabled=\"true\" id=\"Tomcat\" />\r\n      <predefined_log_file enabled=\"true\" id=\"Tomcat Catalina\" />\r\n      <predefined_log_file id=\"Tomcat Manager\" />\r\n      <predefined_log_file id=\"Tomcat Host Manager\" />\r\n      <predefined_log_file id=\"Tomcat Localhost Access\" />\r\n      <RunnerSettings RunnerId=\"Debug\">\r\n        <option name=\"DEBUG_PORT\" value=\"50795\" />\r\n      </RunnerSettings>\r\n      <ConfigurationWrapper VM_VAR=\"JAVA_OPTS\" RunnerId=\"Cover\">\r\n        <option name=\"USE_ENV_VARIABLES\" value=\"true\" />\r\n        <STARTUP>\r\n          <option name=\"USE_DEFAULT\" value=\"true\" />\r\n          <option name=\"SCRIPT\" value=\"\" />\r\n          <option name=\"VM_PARAMETERS\" value=\"\" />\r\n          <option name=\"PROGRAM_PARAMETERS\" value=\"\" />\r\n        </STARTUP>\r\n        <SHUTDOWN>\r\n          <option name=\"USE_DEFAULT\" value=\"true\" />\r\n          <option name=\"SCRIPT\" value=\"\" />\r\n          <option name=\"VM_PARAMETERS\" value=\"\" />\r\n          <option name=\"PROGRAM_PARAMETERS\" value=\"\" />\r\n        </SHUTDOWN>\r\n      </ConfigurationWrapper>\r\n      <ConfigurationWrapper VM_VAR=\"JAVA_OPTS\" RunnerId=\"Debug\">\r\n        <option name=\"USE_ENV_VARIABLES\" value=\"true\" />\r\n        <STARTUP>\r\n          <option name=\"USE_DEFAULT\" value=\"true\" />\r\n          <option name=\"SCRIPT\" value=\"\" />\r\n          <option name=\"VM_PARAMETERS\" value=\"\" />\r\n          <option name=\"PROGRAM_PARAMETERS\" value=\"\" />\r\n        </STARTUP>\r\n        <SHUTDOWN>\r\n          <option name=\"USE_DEFAULT\" value=\"true\" />\r\n          <option name=\"SCRIPT\" value=\"\" />\r\n          <option name=\"VM_PARAMETERS\" value=\"\" />\r\n          <option name=\"PROGRAM_PARAMETERS\" value=\"\" />\r\n        </SHUTDOWN>\r\n      </ConfigurationWrapper>\r\n      <ConfigurationWrapper VM_VAR=\"JAVA_OPTS\" RunnerId=\"Profile\">\r\n        <option name=\"USE_ENV_VARIABLES\" value=\"true\" />\r\n        <STARTUP>\r\n          <option name=\"USE_DEFAULT\" value=\"true\" />\r\n          <option name=\"SCRIPT\" value=\"\" />\r\n          <option name=\"VM_PARAMETERS\" value=\"\" />\r\n          <option name=\"PROGRAM_PARAMETERS\" value=\"\" />\r\n        </STARTUP>\r\n        <SHUTDOWN>\r\n          <option name=\"USE_DEFAULT\" value=\"true\" />\r\n          <option name=\"SCRIPT\" value=\"\" />\r\n          <option name=\"VM_PARAMETERS\" value=\"\" />\r\n          <option name=\"PROGRAM_PARAMETERS\" value=\"\" />\r\n        </SHUTDOWN>\r\n      </ConfigurationWrapper>\r\n      <ConfigurationWrapper VM_VAR=\"JAVA_OPTS\" RunnerId=\"Run\">\r\n        <option name=\"USE_ENV_VARIABLES\" value=\"true\" />\r\n        <STARTUP>\r\n          <option name=\"USE_DEFAULT\" value=\"true\" />\r\n          <option name=\"SCRIPT\" value=\"\" />\r\n          <option name=\"VM_PARAMETERS\" value=\"\" />\r\n          <option name=\"PROGRAM_PARAMETERS\" value=\"\" />\r\n        </STARTUP>\r\n        <SHUTDOWN>\r\n          <option name=\"USE_DEFAULT\" value=\"true\" />\r\n          <option name=\"SCRIPT\" value=\"\" />\r\n          <option name=\"VM_PARAMETERS\" value=\"\" />\r\n          <option name=\"PROGRAM_PARAMETERS\" value=\"\" />\r\n        </SHUTDOWN>\r\n      </ConfigurationWrapper>\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n        <option name=\"BuildArtifacts\" enabled=\"true\">\r\n          <artifact name=\"Gradle : org.example : WebsiteKinhDoanhPC_Casestudy_Module3-1.0-SNAPSHOT.war\" />\r\n        </option>\r\n      </method>\r\n    </configuration>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"a5488dc3-a017-49d5-ac28-d05ef3f47cac\" name=\"Changes\" comment=\"\" />\r\n      <created>1739682544854</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1739682544854</updated>\r\n      <workItem from=\"1739682546743\" duration=\"2795000\" />\r\n    </task>\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision a0e171b26d4d74e724e7cd856f262bf26b2dcfdb)
++++ b/.idea/workspace.xml	(date 1739686450271)
+@@ -1,10 +1,21 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
++  <component name="ArtifactsWorkspaceSettings">
++    <artifacts-to-build>
++      <artifact name="Gradle : org.example : WebsiteKinhDoanhPC_Casestudy_Module3-1.0-SNAPSHOT.war" />
++    </artifacts-to-build>
++  </component>
+   <component name="AutoImportSettings">
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="a5488dc3-a017-49d5-ac28-d05ef3f47cac" name="Changes" comment="" />
++    <list default="true" id="a5488dc3-a017-49d5-ac28-d05ef3f47cac" name="Changes" comment="Initial commit">
++      <change beforePath="$PROJECT_DIR$/.gradle/8.2/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.2/checksums/checksums.lock" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.gradle/8.2/dependencies-accessors/dependencies-accessors.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.2/dependencies-accessors/dependencies-accessors.lock" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.gradle/8.2/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.2/executionHistory/executionHistory.lock" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.gradle/8.2/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.2/fileHashes/fileHashes.lock" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
++    </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+@@ -15,6 +26,23 @@
+       <ProjectState />
+     </projectState>
+   </component>
++  <component name="ExternalProjectsManager">
++    <system id="GRADLE">
++      <state>
++        <projects_view>
++          <tree_state>
++            <expand>
++              <path>
++                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
++                <item name="WebsiteKinhDoanhPC_Casestudy_Module3" type="f1a62948:ProjectNode" />
++              </path>
++            </expand>
++            <select />
++          </tree_state>
++        </projects_view>
++      </state>
++    </system>
++  </component>
+   <component name="Git.Settings">
+     <option name="RECENT_BRANCH_BY_REPOSITORY">
+       <map>
+@@ -23,6 +51,20 @@
+     </option>
+     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+   </component>
++  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
++  "lastFilter": {
++    "state": "OPEN",
++    "assignee": "Hoanglong2689"
++  }
++}]]></component>
++  <component name="GithubPullRequestsUISettings">
++    <option name="selectedUrlAndAccountId">
++      <UrlAndAccount>
++        <option name="accountId" value="825d2008-93ac-4ab7-bc52-1db0f4eab85a" />
++        <option name="url" value="https://github.com/NhatMinhGit/Casestudy_Module3.git" />
++      </UrlAndAccount>
++    </option>
++  </component>
+   <component name="MarkdownSettingsMigration">
+     <option name="stateVersion" value="1" />
+   </component>
+@@ -35,27 +77,27 @@
+     <option name="hideEmptyMiddlePackages" value="true" />
+     <option name="showLibraryContents" value="true" />
+   </component>
+-  <component name="PropertiesComponent">{
+-  &quot;keyToString&quot;: {
+-    &quot;Gradle.Build CS3.executor&quot;: &quot;Run&quot;,
+-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+-    &quot;TomEE Server.CS3.executor&quot;: &quot;Run&quot;,
+-    &quot;TomEE Server.TomEE 9.0.98.executor&quot;: &quot;Run&quot;,
+-    &quot;TomEE Server.Unnamed.executor&quot;: &quot;Run&quot;,
+-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+-    &quot;project.structure.last.edited&quot;: &quot;SDKs&quot;,
+-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+-    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;,
+-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
++  <component name="PropertiesComponent"><![CDATA[{
++  "keyToString": {
++    "Gradle.Build CS3.executor": "Run",
++    "RunOnceActivity.OpenProjectViewOnStart": "true",
++    "RunOnceActivity.ShowReadmeOnStart": "true",
++    "TomEE Server.CS3.executor": "Run",
++    "TomEE Server.TomEE 9.0.98.executor": "Run",
++    "TomEE Server.Unnamed.executor": "Run",
++    "kotlin-language-version-configured": "true",
++    "node.js.detected.package.eslint": "true",
++    "node.js.detected.package.tslint": "true",
++    "node.js.selected.package.eslint": "(autodetect)",
++    "node.js.selected.package.tslint": "(autodetect)",
++    "nodejs_package_manager_path": "npm",
++    "project.structure.last.edited": "SDKs",
++    "project.structure.proportion": "0.0",
++    "project.structure.side.proportion": "0.2",
++    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings",
++    "vue.rearranger.settings.migration": "true"
+   }
+-}</component>
++}]]></component>
+   <component name="RunManager">
+     <configuration name="TomEE 9.0.98" type="TomeeConfiguration" factoryName="Local" APPLICATION_SERVER_NAME="TomEE 9.0.98" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
+       <option name="UPDATING_POLICY" value="restart-server" />
+@@ -139,9 +181,7 @@
+       </ConfigurationWrapper>
+       <method v="2">
+         <option name="Make" enabled="true" />
+-        <option name="BuildArtifacts" enabled="true">
+-          <artifact name="Gradle : org.example : WebsiteKinhDoanhPC_Casestudy_Module3-1.0-SNAPSHOT.war" />
+-        </option>
++        <option name="BuildArtifacts" enabled="true" />
+       </method>
+     </configuration>
+   </component>
+@@ -160,4 +200,8 @@
+   <component name="TypeScriptGeneratedFilesManager">
+     <option name="version" value="3" />
+   </component>
++  <component name="VcsManagerConfiguration">
++    <MESSAGE value="Initial commit" />
++    <option name="LAST_COMMIT_MESSAGE" value="Initial commit" />
++  </component>
+ </project>
+\ No newline at end of file
+Index: .idea/compiler.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"CompilerConfiguration\">\r\n    <bytecodeTargetLevel target=\"11\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/compiler.xml b/.idea/compiler.xml
+--- a/.idea/compiler.xml	(revision a0e171b26d4d74e724e7cd856f262bf26b2dcfdb)
++++ b/.idea/compiler.xml	(date 1739686449698)
+@@ -1,6 +1,6 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="CompilerConfiguration">
+-    <bytecodeTargetLevel target="11" />
++    <bytecodeTargetLevel target="1.6" />
+   </component>
+ </project>
+\ No newline at end of file
