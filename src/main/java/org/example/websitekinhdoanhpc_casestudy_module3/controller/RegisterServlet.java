@@ -4,34 +4,41 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import org.example.websitekinhdoanhpc_casestudy_module3.utils.DatabaseUtil;
+import org.example.websitekinhdoanhpc_casestudy_module3.entity.User;
+import org.example.websitekinhdoanhpc_casestudy_module3.Dao.UserDao;
 
 @WebServlet(name = "RegisterServlet", value = "/register")
 public class RegisterServlet extends HttpServlet {
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        // Lấy thông tin từ form đăng ký
+        String name = req.getParameter("name");
         String email = req.getParameter("email");
         String password = req.getParameter("password");
+        String role = req.getParameter("role");
+        String phone_number = req.getParameter("phone_number");
+        String address = req.getParameter("address");
 
-        try (Connection conn = DatabaseUtil.getConnection()) {
-            String sql = "INSERT INTO users (email, password) VALUES (?, ?)";
-            PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setString(1, email);
-            stmt.setString(2, password);
+        // Tạo đối tượng User từ thông tin form
+        User newUser = new User(null, name, email, password, role, phone_number, address);
 
-            int rowsInserted = stmt.executeUpdate();
-            if (rowsInserted > 0) {
-                resp.sendRedirect("TrangChu.jsp?message=register_success");
-            } else {
-                req.setAttribute("error", "Đăng ký thất bại!");
-                req.getRequestDispatcher("/WEB-INF/view/product/TrangChu.jsp").forward(req, resp);
-            }
-        } catch (SQLException e) {
-            req.setAttribute("error", "Lỗi Database: " + e.getMessage());
-            req.getRequestDispatcher("/WEB-INF/view/product/TrangChu.jsp").forward(req, resp);
+        // Kiểm tra xem email đã tồn tại trong database chưa ?
+        UserDao userDao = new UserDao();
+        if (userDao.isEmailExist(email)) {
+            // Nếu email đã tồn tại, thông báo lỗi và trả về trang chủ
+            req.setAttribute("errorMessage", "Email đã tồn tại, vui lòng chọn email khác.");
+            req.getRequestDispatcher("/WEB-INF/view/home.jsp").forward(req, resp);
+        } else {
+            // Nếu email chưa tồn tại, tiến hành lưu thông tin người dùng vào database
+            userDao.registerUser(newUser);
+
+            // Lưu thông tin người dùng vào session
+            HttpSession session = req.getSession();
+            session.setAttribute("user", newUser);
+
+            // Chuyển hướng đến UserProfile.jsp
+            resp.sendRedirect(req.getContextPath() + "/userProfile");
         }
     }
 }

@@ -18,7 +18,58 @@
     <%--    <link rel="stylesheet" href="TrangChu.css"> &lt;%&ndash; Updated paths &ndash;%&gt;--%>
     <link rel="stylesheet" href="css/TrangChu.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Định dạng cho pop-up (Modal) */
+        #registerModal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            width: 400px;
+            border-radius: 8px;
+        }
 
+
+
+        /* Định dạng nút đóng */
+        .close {
+            font-size: 1.5em;
+            color: #aaa;
+            border: none;
+            background: none;
+            cursor: pointer;
+        }
+        .close:hover {
+            color: black;
+        }
+
+        /* Định dạng form */
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: #45a049;
+        }
+    </style>
 </head>
 <body>
 <header class="header">
@@ -81,8 +132,10 @@
                 </ul>
             </div>
             <div class="nav-icons d-flex justify-content-end gap-3">
-
-                <a href="#" class="icon" data-bs-toggle="tooltip" title="Messages">
+                <a href="javascript:void(0);" class="icon" data-bs-toggle="tooltip" title="Đăng Nhập" onclick="showLoginModal()">
+                    <i class="bi bi-person-fill"></i>
+                </a>
+                <a href="#" class="icon" data-  bs-toggle="tooltip" title="Messages">
                     <i class="bi bi-chat-left-text"></i>
                 </a>
                 <a class="cart-icon position-relative" data-bs-toggle="tooltip" title="Cart">
@@ -94,17 +147,11 @@
                 </a>
             </div>
         </div>
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginModal">
-            Đăng Nhập
-        </button>
-        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#registerModal">
-            Đăng Ký
-        </button>
     </nav>
 
 
 </header>
-<p>Danh sách sản phẩm: ${products}</p>
+<%--<p>Danh sách sản phẩm: ${products}</p>--%>
 <div class="container mt-4">
     <div id="productList" class="row">
         <c:forEach var="product" items="${products}">
@@ -126,15 +173,13 @@
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-
+<!-- Modal đăng nhập -->
 <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="loginModalLabel">Đăng Nhập</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form action="login" method="post">
@@ -148,29 +193,35 @@
                     </div>
                     <button type="submit" class="btn btn-primary">Đăng Nhập</button>
                 </form>
+                <!-- Nút đăng ký dưới form đăng nhập -->
+                <div class="text-center mt-3">
+                    <p>Chưa có tài khoản? <a href="#" onclick="switchToRegister()">Đăng ký</a></p>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
-
-<div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registerModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+<!-- Modal đăng ký -->
+<div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true" data-bs-backdrop="false">
+    <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="registerModalLabel">Đăng Ký</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="register" method="post">
+                <form id="registerForm" action="<%= request.getContextPath() %>/register" method="POST">
+                    <div class="form-group">
+                        <label for="registerName">Họ và Tên</label>
+                        <input type="text" class="form-control" id="registerName" name="name" required>
+                    </div>
                     <div class="form-group">
                         <label for="registerEmail">Email</label>
                         <input type="email" class="form-control" id="registerEmail" name="email" required>
                     </div>
                     <div class="form-group">
-                        <label for="registerPassword">Mật Khẩu</label>
+                        <label for="registerPassword">Mật khẩu</label>
                         <input type="password" class="form-control" id="registerPassword" name="password" required>
                     </div>
                     <button type="submit" class="btn btn-primary">Đăng Ký</button>
@@ -179,8 +230,31 @@
         </div>
     </div>
 </div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+    function showLoginModal() {
+        var loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
+        loginModal.show();
+    }
+
+    function showRegisterModal() {
+        var registerModal = new bootstrap.Modal(document.getElementById('registerModal'));
+        registerModal.show();
+    }
+    function switchToRegister() {
+        var loginModalEl = document.getElementById('loginModal');
+        var registerModalEl = document.getElementById('registerModal');
+
+        if (loginModalEl) {
+            var loginModal = bootstrap.Modal.getInstance(loginModalEl) || new bootstrap.Modal(loginModalEl);
+            loginModal.hide();
+        }
+
+        setTimeout(() => {
+            var registerModal = bootstrap.Modal.getInstance(registerModalEl) || new bootstrap.Modal(registerModalEl);
+            registerModal.show();
+        }, 300);
+    }
+</script>
 </body>
 </html>
