@@ -236,5 +236,7 @@ INSERT INTO Voucher (order_id, title, sale_amount, note, start_date, end_date) V
 (19, 'Voucher Tết - Giảm 15%', 15.00, 'Áp dụng trong dịp Tết Nguyên Đán', '2025-01-20', '2025-02-10'),
 (20, 'Miễn phí gói bảo hành mở rộng', 0.00, 'Áp dụng khi mua laptop hoặc PC', '2025-07-01', '2025-12-31');
 
+
+
 -- Dữ liệu mẫu
--- Dữ liệu mẫu
+
