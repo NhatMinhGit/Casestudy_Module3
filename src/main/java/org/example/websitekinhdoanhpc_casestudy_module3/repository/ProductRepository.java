@@ -15,7 +15,7 @@ public class ProductRepository {
     CategoryRepository categoryRepository = new CategoryRepository();
 
     public List<Product> findAll() {
-        List<Product> products = new ArrayList<>();
+        List<Product> products = new ArrayList<>();//Khởi tạo danh sách chứa products
         try {
             Statement statement = BaseRepository.getConnection().createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT * FROM product");

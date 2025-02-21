@@ -26,6 +26,8 @@ public class Product {
         this.stock_quantity = stock_quantity;
     }
 
+
+
     public String getImage_url() {
         return image_url;
     }
