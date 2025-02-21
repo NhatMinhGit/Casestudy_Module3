@@ -16,6 +16,31 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     <%--    <link rel="stylesheet" href="TrangChu.css"> &lt;%&ndash; Updated paths &ndash;%&gt;--%>
+<<<<<<< HEAD
+<%--    <link rel="stylesheet" href="/css/TrangChu.css">--%>
+    <style>
+        body {
+            background-color: #fff;
+            color: #000;
+        }
+        .header, .nav-menu, .navbar, .btn-primary {
+            background-color: rgb(227,0,25);
+        }
+        .header a, .nav-menu a, .navbar a, .btn-primary {
+            color: white !important;
+        }
+        .btn-primary:hover {
+            background-color: #b3001b;
+        }
+        .card img {
+            height: 416px;
+            width: 100%;
+            object-fit: cover;
+        }
+        .custom-red {
+            background-color: #ff4d4d; /* Màu đỏ tùy chỉnh */
+            color: white; /* Để chữ dễ nhìn hơn */
+=======
     <link rel="stylesheet" href="css/TrangChu.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
@@ -68,6 +93,7 @@
         }
         .btn:hover {
             background-color: #45a049;
+>>>>>>> origin/main
         }
     </style>
 </head>
@@ -77,7 +103,7 @@
         <img src="" alt="">
     </a>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid d-flex justify-content-between align-items-center">
+        <div class="container-fluid d-flex justify-content-between align-items-center custom-red">
             <a class="navbar-brand" href="#">PC MNhat</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -138,7 +164,7 @@
                 <a href="#" class="icon" data-  bs-toggle="tooltip" title="Messages">
                     <i class="bi bi-chat-left-text"></i>
                 </a>
-                <a class="cart-icon position-relative" data-bs-toggle="tooltip" title="Cart">
+                <a href="Cart" class="cart-icon position-relative" data-bs-toggle="tooltip" title="Cart">
                     <i class="bi bi-cart"></i>
                     <span class="cart-count position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">2</span>
                 </a>

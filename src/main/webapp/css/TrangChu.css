@@ -20,6 +20,12 @@
     align-items: center; /* Căn giữa theo chiều dọc */
 }
 
+.card img{
+    height: 416px;
+    width: 416px;
+    object-fit: cover;
+}
+
 .dropdown-menu {
     min-width: 300px;
 }
