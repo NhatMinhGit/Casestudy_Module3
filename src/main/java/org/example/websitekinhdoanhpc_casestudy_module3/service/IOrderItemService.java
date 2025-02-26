@@ -6,7 +6,7 @@ import org.example.websitekinhdoanhpc_casestudy_module3.entity.OrderItem;
 import java.util.List;
 
 public interface IOrderItemService {
-    List<OrderItem> getAll();
+    List<OrderItem> getAll(int order_id);
 
     void save(OrderItem t);
 
@@ -14,7 +14,9 @@ public interface IOrderItemService {
 
     void create(OrderItem t);
 
-    void update(int id, OrderItem t);
+    void updateItemInCart(int order_id, OrderItem t);
+
+    boolean addProductToOrder(int orderId, int productId);
 
     //Order findOrderById(int id);
 }

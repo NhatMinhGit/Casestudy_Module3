@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 public class Order {
-    private Integer order_id;
+    private int order_id;
     private User user;
     private LocalDate order_date;
     private Double total_price;
@@ -19,7 +19,7 @@ public class Order {
     public Order() {
     }
 
-    public Order(Integer order_id, User user, LocalDate order_date, Double total_price, String status, String shipping_address, String payment_method) {
+    public Order(int order_id, User user, LocalDate order_date, Double total_price, String status, String shipping_address, String payment_method) {
         this.order_id = order_id;
         this.user = user;
         this.order_date = order_date;
@@ -29,11 +29,11 @@ public class Order {
         this.payment_method = payment_method;
     }
 
-    public Integer getOrder_id() {
+    public int getOrder_id() {
         return order_id;
     }
 
-    public void setOrder_id(Integer order_id) {
+    public void setOrder_id(int order_id) {
         this.order_id = order_id;
     }
 

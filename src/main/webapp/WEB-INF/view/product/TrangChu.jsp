@@ -16,8 +16,12 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     <%--    <link rel="stylesheet" href="TrangChu.css"> &lt;%&ndash; Updated paths &ndash;%&gt;--%>
-<<<<<<< HEAD
+
 <%--    <link rel="stylesheet" href="/css/TrangChu.css">--%>
+
+
+    <link rel="stylesheet" href="css/TrangChu.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         body {
             background-color: #fff;
@@ -40,10 +44,7 @@
         .custom-red {
             background-color: #ff4d4d; /* Màu đỏ tùy chỉnh */
             color: white; /* Để chữ dễ nhìn hơn */
-=======
-    <link rel="stylesheet" href="css/TrangChu.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <style>
+        }
         /* Định dạng cho pop-up (Modal) */
         #registerModal {
             position: fixed;
@@ -93,7 +94,6 @@
         }
         .btn:hover {
             background-color: #45a049;
->>>>>>> origin/main
         }
     </style>
 </head>
@@ -104,7 +104,7 @@
     </a>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid d-flex justify-content-between align-items-center custom-red">
-            <a class="navbar-brand" href="#">PC MNhat</a>
+            <a class="navbar-brand" href="TrangChu">PC MNhat</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -189,15 +189,20 @@
                     <div class="card-body">
                         <h5 class="card-title">${product.name}</h5>
                         <h5 class="card-title">${product.description}</h5>
-                        <p class="card-text">Giá: ${product.price}</p>
-                        <button class="btn btn-primary" onclick="window.location.href='/TrangChu?action=addToCart&id=${product.product_id}';">Mua ngay</button>
+                        <p class="card-text">Giá: ${product.formattedPrice}</p>
+
+                        <button class="btn btn-primary add-to-cart" data-product-id="${product.product_id}"
+                                onclick="window.location.href='/Cart?product_id=${product.product_id}';">
+                            Mua ngay
+                        </button>
+
                     </div>
                 </div>
             </div>
         </c:forEach>
     </div>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 <!-- Modal đăng nhập -->
 <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
@@ -256,7 +261,8 @@
         </div>
     </div>
 </div>
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script>
     function showLoginModal() {
         var loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
@@ -267,6 +273,7 @@
         var registerModal = new bootstrap.Modal(document.getElementById('registerModal'));
         registerModal.show();
     }
+
     function switchToRegister() {
         var loginModalEl = document.getElementById('loginModal');
         var registerModalEl = document.getElementById('registerModal');
@@ -281,6 +288,25 @@
             registerModal.show();
         }, 300);
     }
+    // Ajax đọc dữ liệu
+    $(document).ready(function () {
+        $(".add-to-cart").click(function () {
+
+            var productId = $(this).data("product-id");
+            $.ajax({
+                url: "/Cart",
+                type: "POST",
+                data: {product_id: productId},
+                success: function (response) {
+                    alert(productId);
+                    alert(response.message); // Hiển thị thông báo
+                },
+                error: function () {
+                    alert("Có lỗi xảy ra!");
+                }
+            });
+        });
+    });
 </script>
 </body>
 </html>

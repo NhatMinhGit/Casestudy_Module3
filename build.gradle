@@ -29,6 +29,7 @@ dependencies {
     implementation 'org.glassfish.jaxb:jaxb-runtime:3.0.2'
     implementation 'mysql:mysql-connector-java:8.0.33'
     implementation 'org.glassfish.web:jakarta.servlet.jsp.jstl:2.0.0'
+    implementation group: 'com.google.code.gson', name: 'gson', version: '2.7'
 
 
 

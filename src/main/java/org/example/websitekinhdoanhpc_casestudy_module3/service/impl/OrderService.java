@@ -1,6 +1,7 @@
 package org.example.websitekinhdoanhpc_casestudy_module3.service.impl;
 
 import org.example.websitekinhdoanhpc_casestudy_module3.entity.Order;
+import org.example.websitekinhdoanhpc_casestudy_module3.entity.User;
 import org.example.websitekinhdoanhpc_casestudy_module3.repository.OrderRepository;
 import org.example.websitekinhdoanhpc_casestudy_module3.service.IOrderItemService;
 import org.example.websitekinhdoanhpc_casestudy_module3.service.IOrderService;
@@ -15,8 +16,8 @@ public class OrderService implements IOrderService {
     }
 
     @Override
-    public Order createOrder(String number) {
-        return null;
+    public Order createOrder(User user) {
+        return orderRepository.createOrder(user);
     }
 
     @Override
@@ -34,7 +35,7 @@ public class OrderService implements IOrderService {
 
     @Override
     public void update(int id, Order order) {
-
+        orderRepository.update(id, order);
     }
     @Override
     public Order findOrderById(int id) {
