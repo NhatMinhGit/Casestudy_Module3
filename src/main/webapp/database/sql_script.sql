@@ -238,7 +238,7 @@ INSERT INTO Voucher (order_id, title, sale_amount, note, start_date, end_date) V
 (20, 'Miễn phí gói bảo hành mở rộng', 0.00, 'Áp dụng khi mua laptop hoặc PC', '2025-07-01', '2025-12-31');
 
 INSERT INTO Users (name, email, password, role, phone_number, address) VALUES
-('Admin', 'Admin@example.com', 'password123', 'Admin', '000000000', 'CodeGym')
+('Admin', 'Admin@example.com', 'password123', 'Admin', '000000000', 'CodeGym');
 
 ALTER TABLE Users DROP COLUMN salt;
 ALTER TABLE Users MODIFY password VARCHAR(255)
