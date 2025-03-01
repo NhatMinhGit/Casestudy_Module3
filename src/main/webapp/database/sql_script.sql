@@ -2,14 +2,15 @@ CREATE DATABASE OnlinePcShop;
 USE OnlinePcShop;
 
 -- Bảng User
-CREATE TABLE User (
-    user_id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    email VARCHAR(255) UNIQUE NOT NULL,
-    password VARCHAR(255) NOT NULL,
-    role VARCHAR(50),
-    phone_number VARCHAR(20),
-    address TEXT
+CREATE TABLE Users (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  name VARCHAR(100),
+  email VARCHAR(100) UNIQUE,
+  password VARCHAR(64),
+  salt VARCHAR(24),
+  role VARCHAR(20),
+  phone_number VARCHAR(15),
+  address TEXT
 );
 
 -- Bảng Order
@@ -21,7 +22,7 @@ CREATE TABLE `Order` (
     status VARCHAR(50),
     shipping_address TEXT,
     payment_method VARCHAR(100),
-    FOREIGN KEY (user_id) REFERENCES User(user_id)
+    FOREIGN KEY (user_id) REFERENCES Users(id)
 );
 
 -- Bảng Category
@@ -76,7 +77,7 @@ CREATE TABLE Voucher (
 );
 
 -- Dữ liệu mẫu user
-INSERT INTO User (name, email, password, role, phone_number, address) VALUES
+INSERT INTO Users (name, email, password, role, phone_number, address) VALUES
 ('Nguyễn Văn A', 'nguyenvana@example.com', 'password123', 'customer', '0987654321', 'Hà Nội, Việt Nam'),
 ('Trần Thị B', 'tranthib@example.com', 'password123', 'customer', '0978123456', 'TP. Hồ Chí Minh, Việt Nam'),
 ('Lê Văn C', 'levanc@example.com', 'password123', 'admin', '0912345678', 'Đà Nẵng, Việt Nam'),
@@ -236,7 +237,8 @@ INSERT INTO Voucher (order_id, title, sale_amount, note, start_date, end_date) V
 (19, 'Voucher Tết - Giảm 15%', 15.00, 'Áp dụng trong dịp Tết Nguyên Đán', '2025-01-20', '2025-02-10'),
 (20, 'Miễn phí gói bảo hành mở rộng', 0.00, 'Áp dụng khi mua laptop hoặc PC', '2025-07-01', '2025-12-31');
 
+INSERT INTO Users (name, email, password, role, phone_number, address) VALUES
+('Admin', 'Admin@example.com', 'password123', 'Admin', '000000000', 'CodeGym');
 
-
--- Dữ liệu mẫu
-
+ALTER TABLE Users DROP COLUMN salt;
+ALTER TABLE Users MODIFY password VARCHAR(255)

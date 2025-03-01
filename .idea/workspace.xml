@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a5488dc3-a017-49d5-ac28-d05ef3f47cac" name="Changes" comment="">
+<<<<<<< HEAD
       <change afterPath="$PROJECT_DIR$/src/main/java/org/example/websitekinhdoanhpc_casestudy_module3/controller/CheckoutController.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/product/HoaDonCuaToi.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.2/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.2/executionHistory/executionHistory.bin" afterDir="false" />
@@ -34,6 +35,10 @@
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/product/Cart.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/product/Cart.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/product/TrangChu.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/product/TrangChu.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/css/TrangChu.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/css/TrangChu.css" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/826038da-c847-49e8-89ab-2f2e02975ec9.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/826038da-c847-49e8-89ab-2f2e02975ec9.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+>>>>>>> DangHoangLong
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,6 +74,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="JavaScript File" />
+        <option value="Jsp File" />
         <option value="Class" />
         <option value="Jsp File" />
       </list>
@@ -118,7 +124,12 @@
     &quot;TomEE Server.TomEE 9.0.98.executor&quot;: &quot;Run&quot;,
     &quot;TomEE Server.Unnamed.executor&quot;: &quot;Run&quot;,
     &quot;Tomcat Server.Tomcat 11.0.3.executor&quot;: &quot;Run&quot;,
+<<<<<<< HEAD
     &quot;git-widget-placeholder&quot;: &quot;NguyenTranNhatMinh&quot;,
+=======
+    &quot;deletionFromPopupRequiresConfirmation&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Rebasing DangHoangLong&quot;,
+>>>>>>> DangHoangLong
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;D:/Module3/apache-tomcat-9.0.98-windows-x64/apache-tomcat-9.0.98&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
@@ -138,11 +149,35 @@
     ]
   }
 }</component>
+  <component name="RunDashboard">
+    <option name="excludedTypes">
+      <set>
+        <option value="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" />
+        <option value="TomeeConfiguration" />
+      </set>
+    </option>
+  </component>
   <component name="RunManager" selected="Tomcat Server.Tomcat 11.0.3">
     <configuration name="UserProfile.jsp" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:8080/WEB-INF/view/User/UserProfile.jsp">
       <method v="2" />
     </configuration>
+<<<<<<< HEAD
     <configuration name="Tomcat 11.0.3" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 11.0.0" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
+=======
+    <configuration default="true" type="TomeeConfiguration" factoryName="Local" ALTERNATIVE_JRE_ENABLED="false">
+      <deployment />
+      <server-settings />
+      <predefined_log_file enabled="true" id="Tomcat" />
+      <predefined_log_file enabled="true" id="Tomcat Catalina" />
+      <predefined_log_file id="Tomcat Manager" />
+      <predefined_log_file id="Tomcat Host Manager" />
+      <predefined_log_file id="Tomcat Localhost Access" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Tomcat 11.0.3" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 11.0.3" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
+>>>>>>> DangHoangLong
       <option name="UPDATING_POLICY" value="restart-server" />
       <deployment>
         <artifact name="Gradle : org.example : WebsiteKinhDoanhPC_Casestudy_Module3-1.0-SNAPSHOT.war (exploded)">
@@ -152,7 +187,7 @@
         </artifact>
       </deployment>
       <server-settings>
-        <option name="BASE_DIRECTORY_NAME" value="6c69c6f1-ab5b-453b-b353-f0c1aaaad6f4" />
+        <option name="BASE_DIRECTORY_NAME" value="f7865a39-a0f7-41fc-bb8d-a679b7691a49" />
       </server-settings>
       <predefined_log_file enabled="true" id="Tomcat" />
       <predefined_log_file enabled="true" id="Tomcat Catalina" />
@@ -160,7 +195,7 @@
       <predefined_log_file id="Tomcat Host Manager" />
       <predefined_log_file id="Tomcat Localhost Access" />
       <RunnerSettings RunnerId="Debug">
-        <option name="DEBUG_PORT" value="51506" />
+        <option name="DEBUG_PORT" value="63038" />
       </RunnerSettings>
       <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
         <option name="USE_ENV_VARIABLES" value="true" />
@@ -251,6 +286,7 @@
       <workItem from="1740061578185" duration="48000" />
       <workItem from="1740061632875" duration="118000" />
       <workItem from="1740061757873" duration="94000" />
+<<<<<<< HEAD
       <workItem from="1740061861152" duration="13000" />
       <workItem from="1740139123091" duration="6694000" />
       <workItem from="1740224548670" duration="8092000" />
@@ -262,10 +298,29 @@
       <workItem from="1740810268862" duration="14894000" />
       <workItem from="1740825812502" duration="50000" />
       <workItem from="1740826180162" duration="21000" />
+=======
+      <workItem from="1740061861152" duration="313000" />
+      <workItem from="1740483559199" duration="2100000" />
+      <workItem from="1740485694727" duration="5491000" />
+      <workItem from="1740660699240" duration="2938000" />
+      <workItem from="1740663678899" duration="4354000" />
+      <workItem from="1740800264679" duration="972000" />
+>>>>>>> DangHoangLong
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/example/websitekinhdoanhpc_casestudy_module3/controller/LoginServlet.java</url>
+          <line>11</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

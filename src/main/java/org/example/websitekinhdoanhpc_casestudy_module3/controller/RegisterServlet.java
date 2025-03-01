@@ -5,40 +5,37 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 import java.io.IOException;
 import org.example.websitekinhdoanhpc_casestudy_module3.entity.User;
-import org.example.websitekinhdoanhpc_casestudy_module3.Dao.UserDao;
+import org.example.websitekinhdoanhpc_casestudy_module3.repository.BaseRepository;
 
 @WebServlet(name = "RegisterServlet", value = "/register")
 public class RegisterServlet extends HttpServlet {
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        // Lấy thông tin từ form đăng ký
         String name = req.getParameter("name");
         String email = req.getParameter("email");
         String password = req.getParameter("password");
-        String role = req.getParameter("role");
-        String phone_number = req.getParameter("phone_number");
-        String address = req.getParameter("address");
+        String role = "customer"; // Mặc định user đăng ký là khách hàng
 
-        // Tạo đối tượng User từ thông tin form
-        User newUser = new User(null, name, email, password, role, phone_number, address);
+        // Kiểm tra xem email đã tồn tại chưa
+        if (BaseRepository.getUserByEmail(email) != null) {
+            req.getSession().setAttribute("error", "Email đã được sử dụng!");
+            resp.sendRedirect(req.getContextPath() + "/register.jsp");
+            return;
+        }
 
-        // Kiểm tra xem email đã tồn tại trong database chưa ?
-        UserDao userDao = new UserDao();
-        if (userDao.isEmailExist(email)) {
-            // Nếu email đã tồn tại, thông báo lỗi và trả về trang chủ
-            req.setAttribute("errorMessage", "Email đã tồn tại, vui lòng chọn email khác.");
-            req.getRequestDispatcher("/WEB-INF/view/home.jsp").forward(req, resp);
-        } else {
-            // Nếu email chưa tồn tại, tiến hành lưu thông tin người dùng vào database
-            userDao.registerUser(newUser);
+        // Tạo user mới (KHÔNG mã hóa mật khẩu)
+        User newUser = new User(null, name, email, password, role, null, null);
+        boolean success = BaseRepository.registerUser(newUser);
 
-            // Lưu thông tin người dùng vào session
+        if (success) {
+            // Đăng ký thành công => Lưu user vào session và chuyển hướng đến /userProfile
             HttpSession session = req.getSession();
             session.setAttribute("user", newUser);
-
-            // Chuyển hướng đến UserProfile.jsp
+            session.setAttribute("message", "Đăng ký thành công!");
             resp.sendRedirect(req.getContextPath() + "/userProfile");
+        } else {
+            req.getSession().setAttribute("error", "Đăng ký thất bại, vui lòng thử lại!");
+            resp.sendRedirect(req.getContextPath() + "/register.jsp");
         }
     }
 }
