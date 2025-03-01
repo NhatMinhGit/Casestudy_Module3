@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface IOrderService {
     List<Order> getAll();
+    List<Order> findOrdersByUserId(int id);
     Order createOrder(User user);
     void save(Order t);
 
@@ -18,4 +19,8 @@ public interface IOrderService {
     void update(int id, Order t);
 
     Order findOrderById(int id);
+    boolean updateOrderStatus(int orderId, String status);
+    Order findLastInsertedOrder();
+
+    void updateTotalPrice(int orderId, double totalPrice);
 }

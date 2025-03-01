@@ -16,6 +16,11 @@ public class OrderService implements IOrderService {
     }
 
     @Override
+    public List<Order> findOrdersByUserId(int id) {
+        return orderRepository.findOrdersByUserId(id);
+    }
+
+    @Override
     public Order createOrder(User user) {
         return orderRepository.createOrder(user);
     }
@@ -40,6 +45,21 @@ public class OrderService implements IOrderService {
     @Override
     public Order findOrderById(int id) {
         return orderRepository.findOrderById(id);
+    }
+
+    @Override
+    public boolean updateOrderStatus(int orderId, String status) {
+        return orderRepository.updateOrderStatus(orderId, status);
+    }
+
+    @Override
+    public Order findLastInsertedOrder() {
+        return orderRepository.findLastInsertedOrder();
+    }
+
+    @Override
+    public void updateTotalPrice(int orderId, double totalPrice) {
+        orderRepository.updateTotalPrice(orderId, totalPrice);
     }
 
 }

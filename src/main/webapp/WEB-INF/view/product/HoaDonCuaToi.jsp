@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: PC
-  Date: 12/02/2025
-  Time: 1:56 pm
+  Date: 27/02/2025
+  Time: 7:35 pm
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     <%--    <link rel="stylesheet" href="TrangChu.css"> &lt;%&ndash; Updated paths &ndash;%&gt;--%>
 
-<%--    <link rel="stylesheet" href="/css/TrangChu.css">--%>
+    <%--    <link rel="stylesheet" href="/css/TrangChu.css">--%>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         body {
@@ -274,32 +274,23 @@
 
 
 </header>
-<%--<p>Danh sách sản phẩm: ${products}</p>--%>
+<p>Danh sách sản phẩm: ${order}</p>
 <div class="container mt-4">
-    <div id="productList" class="row">
-        <c:forEach var="product" items="${products}">
-            <div class="col-md-4 mb-4">
-                <div class="card">
-                    <img src="${product.image_url}" class="card-img-top" alt="${product.description}">
-<%--                    <img src="/assets/img/products/laptop_dell_id01.webp" class="card-img-top" alt="${product.description}">--%>
-
-                    <div class="card-body">
-                        <h5 class="card-title">${product.name}</h5>
-                        <h5 class="card-title">${product.description}</h5>
-                        <p class="card-text">Giá: ${product.formattedPrice}</p>
-                    </div>
-<%--                    <button class="btn btn-primary add-to-cart" data-product-id="${product.product_id}"--%>
-<%--                            onclick="window.location.href='/Cart?product_id=${product.product_id}';">--%>
-<%--                        Mua ngay--%>
-<%--                    </button>--%>
-                    <button class="btn btn-primary add-to-cart" data-product-id="${product.product_id}">
-                        Mua ngay
-                    </button>
-
-                </div>
-            </div>
-        </c:forEach>
-    </div>
+    <h2 class="text-center mb-4">Danh Sách Hóa Đơn</h2>
+    <table class="table table-hover table-bordered text-center">
+        <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Khách Hàng</th>
+            <th>Ngày Mua</th>
+            <th>Tổng Tiền</th>
+            <th>Trạng Thái</th>
+            <th>Hành Động</th>
+        </tr>
+        </thead>
+        <tbody id="orderTable">
+        </tbody>
+    </table>
 </div>
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
@@ -387,47 +378,83 @@
             registerModal.show();
         }, 300);
     }
+
     // Ajax đọc dữ liệu
-    // $(document).ready(function () {
-    //     $(".add-to-cart").click(function () {
-    //
-    //         var productId = $(this).data("product-id");
-    //         $.ajax({
-    //             url: "/Cart",
-    //             type: "POST",
-    //             data: {product_id: productId},
-    //             success: function (response) {
-    //                 alert(productId);
-    //                 alert(response.message); // Hiển thị thông báo
-    //             },
-    //             error: function () {
-    //                 alert("Có lỗi xảy ra!");
-    //             }
-    //         });
-    //     });
-    // });
     $(document).ready(function () {
         $(".add-to-cart").click(function () {
-            var productId = $(this).data("product-id");
-            var quantity = 1; // Mặc định 1 nếu không chọn số lượng
 
+            var productId = $(this).data("product-id");
             $.ajax({
                 url: "/Cart",
                 type: "POST",
-                data: { product_id: productId, quantity: quantity }, // Gửi đầy đủ dữ liệu
-                dataType: "json",  // Nhận phản hồi JSON
+                data: {product_id: productId},
                 success: function (response) {
-                    alert("Sản phẩm ID: " + productId + " đã được thêm vào giỏ hàng!");
-                    console.log(response); // Kiểm tra phản hồi từ server
+                    alert(productId);
+                    alert(response.message); // Hiển thị thông báo
                 },
-                error: function (xhr, status, error) {
-                    console.log("Lỗi: " + error);
-                    alert("Có lỗi xảy ra! Vui lòng thử lại.");
+                error: function () {
+                    alert("Có lỗi xảy ra!");
                 }
             });
         });
     });
+    <%--document.addEventListener("DOMContentLoaded", function () {--%>
+    <%--    fetch("/orders")--%>
+    <%--        .then(response => response.json())--%>
+    <%--        .then(orders => {--%>
+    <%--            let tableBody = document.getElementById("orderTable");--%>
+    <%--            orders.forEach(order => {--%>
+    <%--                let row = `<tr>--%>
+    <%--                    <td>${order.orderId}</td>--%>
+    <%--                    <td>${order.user.fullName}</td>--%>
+    <%--                    <td>${order.orderDate}</td>--%>
+    <%--                    <td>${order.totalPrice.toLocaleString()} VNĐ</td>--%>
+    <%--                    <td>${order.status}</td>--%>
+    <%--                    <td>--%>
+    <%--                        <button class="btn btn-primary btn-sm">Xem</button>--%>
+    <%--                        <button class="btn btn-danger btn-sm">Xóa</button>--%>
+    <%--                    </td>--%>
+    <%--                </tr>`;--%>
+    <%--                tableBody.innerHTML += row;--%>
+    <%--            });--%>
+    <%--        })--%>
+    <%--        .catch(error => console.error("Lỗi tải dữ liệu:", error));--%>
+    <%--});--%>
+    document.addEventListener("DOMContentLoaded", function () {
+        fetch("/orders")
+            .then(response => response.json()) // Chuyển đổi JSON
+            .then(data => {
+                console.log("Dữ liệu API trả về:", data); // Kiểm tra dữ liệu
 
+                // Kiểm tra xem `data` có phải là mảng không
+                let orders = Array.isArray(data) ? data : data.data;
+
+                if (!Array.isArray(orders)) {
+                    console.error("API không trả về danh sách hóa đơn hợp lệ.");
+                    return;
+                }
+
+                let tableBody = document.getElementById("orderTable");
+                let rows = orders.map(order => {
+                    return `<tr>
+                    <td>${order.order_id}</td>
+                    <td>${order.user ? order.user.name : "N/A"}</td>
+                    <td>${order.order_date}</td>
+                    <td>${parseFloat(order.total_price).toLocaleString()} VNĐ</td>
+                    <td>${order.status}</td>
+                    <td>
+                        <button class="btn btn-primary btn-sm">Xem</button>
+                        <button class="btn btn-danger btn-sm">Xóa</button>
+                    </td>
+                </tr>`;
+                }).join("");
+
+                tableBody.innerHTML = rows;
+            })
+            .catch(error => console.error("Lỗi tải dữ liệu:", error));
+    });
+
+</script>
 </script>
 </body>
 </html>

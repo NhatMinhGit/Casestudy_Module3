@@ -1,11 +1,9 @@
 package org.example.websitekinhdoanhpc_casestudy_module3.repository;
 
-import org.example.websitekinhdoanhpc_casestudy_module3.entity.Category;
-import org.example.websitekinhdoanhpc_casestudy_module3.entity.Order;
-import org.example.websitekinhdoanhpc_casestudy_module3.entity.OrderItem;
-import org.example.websitekinhdoanhpc_casestudy_module3.entity.Product;
+import org.example.websitekinhdoanhpc_casestudy_module3.entity.*;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,6 +43,79 @@ public class OrderItemRepository {
         return orderItemList;
 
     }
+    public List<OrderItem> findOrderItemsByOrderId(int order_id) {
+        List<OrderItem> orderItemList = new ArrayList<>();
+
+        String query = "SELECT oi.order_item_id, oi.quantity, oi.price_per_unit, "
+                + "o.order_id, o.user_id, o.order_date, o.total_price, o.status, o.shipping_address, o.payment_method, "
+                + "p.product_id, p.name AS product_name, p.price, p.image_url, p.description, p.stock_quantity, p.category_id, "
+                + "c.category_id, c.category_name AS category_name, c.description AS category_description, "
+                + "u.user_id, u.name AS user_name, u.email, u.phone_number, u.address, u.password, u.role "
+                + "FROM `orderitem` oi "
+                + "JOIN `order` o ON oi.order_id = o.order_id "
+                + "JOIN `product` p ON oi.product_id = p.product_id "
+                + "JOIN `category` c ON p.category_id = c.category_id "
+                + "JOIN `user` u ON o.user_id = u.user_id "
+                + "WHERE oi.order_id = ?";
+
+        try (Connection connection = BaseRepository.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setInt(1, order_id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                int orderItemId = resultSet.getInt("order_item_id");
+                int quantity = resultSet.getInt("quantity");
+                double pricePerUnit = resultSet.getDouble("price_per_unit");
+
+                // Lấy thông tin User
+                int userId = resultSet.getInt("user_id");
+                String userName = resultSet.getString("user_name");
+                String email = resultSet.getString("email");
+                String phoneNumber = resultSet.getString("phone_number");
+                String address = resultSet.getString("address");
+                String password = resultSet.getString("password");
+                String role = resultSet.getString("role");
+                User user = new User(userId, userName, email, phoneNumber, address, password, role);
+
+                // Lấy thông tin Order
+                int fetchedOrderId = resultSet.getInt("order_id");
+                LocalDate orderDate = resultSet.getDate("order_date") != null
+                        ? resultSet.getDate("order_date").toLocalDate()
+                        : null;
+                double totalPrice = resultSet.getDouble("total_price");
+                String status = resultSet.getString("status");
+                String shippingAddress = resultSet.getString("shipping_address");
+                String paymentMethod = resultSet.getString("payment_method");
+                Order order = new Order(fetchedOrderId, user, orderDate, totalPrice, status, shippingAddress, paymentMethod);
+
+                // Lấy thông tin Category
+                int categoryId = resultSet.getInt("category_id");
+                String categoryName = resultSet.getString("category_name");
+                String categoryDescription = resultSet.getString("category_description");
+                Category category = new Category(categoryId, categoryName, categoryDescription);
+
+                // Lấy thông tin Product
+                int productId = resultSet.getInt("product_id");
+                String productName = resultSet.getString("product_name");
+                double productPrice = resultSet.getDouble("price");
+                String imageUrl = resultSet.getString("image_url");
+                String productDescription = resultSet.getString("description");
+                int stockQuantity = resultSet.getInt("stock_quantity");
+                Product product = new Product(productId, category, productName, productPrice, imageUrl, productDescription, stockQuantity);
+
+                // Tạo OrderItem và thêm vào danh sách
+                orderItemList.add(new OrderItem(orderItemId, order, product, quantity, pricePerUnit));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return orderItemList;
+    }
+
+
+
 
     public void remove(int id) {
         String sql = "DELETE FROM orderitem WHERE product_id = ?";
@@ -70,21 +141,57 @@ public class OrderItemRepository {
             throw new RuntimeException("Lỗi khi cập nhật số lượng OrderItem vào giỏ hàng", e);
         }
     }
-    public void save(OrderItem orderItem) {
-        String sql = "INSERT INTO orderitem (order_id, product_id, quantity, price_per_unit) VALUES (?, ?, ?, ?)";
+    public double calculateTotalPrice(int orderId) {
+        double total = 0.0;
+
+        String sql = "SELECT SUM(quantity * price_per_unit) AS total_price FROM orderitem WHERE order_id = ?";
+
         try (Connection connection = BaseRepository.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+
+            preparedStatement.setInt(1, orderId);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    total = resultSet.getDouble("total_price");
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Lỗi khi tính tổng tiền đơn hàng", e);
+        }
+
+        return total;
+    }
+    public void save(OrderItem orderItem) {
+        String sql = "INSERT INTO orderitem (order_id, product_id, quantity, price_per_unit) VALUES (?, ?, ?, ?)";
+
+        try (Connection connection = BaseRepository.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+
+            // Kiểm tra Order và Product không null
+            if (orderItem.getOrder() == null || orderItem.getProduct() == null) {
+                throw new IllegalArgumentException("Order hoặc Product không được null");
+            }
 
             preparedStatement.setInt(1, orderItem.getOrder().getOrder_id()); // Lấy ID của Order
             preparedStatement.setInt(2, orderItem.getProduct().getProduct_id()); // Lấy ID của Product
             preparedStatement.setInt(3, orderItem.getQuantity());
             preparedStatement.setDouble(4, orderItem.getPrice_per_unit());
 
-            preparedStatement.executeUpdate();
+            int affectedRows = preparedStatement.executeUpdate();
+
+            // Lấy ID tự động tạo (nếu có)
+            if (affectedRows > 0) {
+                try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
+                    if (generatedKeys.next()) {
+                        orderItem.setOrder_item_id(generatedKeys.getInt(1));
+                    }
+                }
+            }
         } catch (SQLException e) {
-            throw new RuntimeException("Lỗi khi thêm OrderItem vào cơ sở dữ liệu", e);
+            throw new RuntimeException("Lỗi khi thêm OrderItem vào cơ sở dữ liệu: " + e.getMessage(), e);
         }
     }
+
 
     public boolean addProductToOrder(int orderId, int productId) {
         try {
@@ -101,5 +208,8 @@ public class OrderItemRepository {
             e.printStackTrace();
             return false;
         }
+    }
+
+    public void update(OrderItem item) {
     }
 }

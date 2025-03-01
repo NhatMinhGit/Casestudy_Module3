@@ -38,4 +38,19 @@ public class OrderItemService implements IOrderItemService {
         }
         return orderItemRepository.addProductToOrder(orderId, productId);
     }
+
+    @Override
+    public List<OrderItem> findOrderItemsByOrderId(int order_id) {
+        return orderItemRepository.findOrderItemsByOrderId(order_id);
+    }
+
+    @Override
+    public double calculateTotalPrice(int orderId) {
+        return orderItemRepository.calculateTotalPrice(orderId);
+    }
+
+//    @Override
+//    public void update(OrderItem item) {
+//        return orderItemRepository.update(item);
+//    }
 }
