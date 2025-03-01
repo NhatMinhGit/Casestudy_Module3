@@ -5,8 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a5488dc3-a017-49d5-ac28-d05ef3f47cac" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/websitekinhdoanhpc_casestudy_module3/controller/CheckoutController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/product/HoaDonCuaToi.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.2/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.2/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.2/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.2/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.2/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.2/fileHashes/fileHashes.bin" afterDir="false" />
@@ -16,24 +14,18 @@
       <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/org/example/websitekinhdoanhpc_casestudy_module3/controller/TrangChuController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/org/example/websitekinhdoanhpc_casestudy_module3/controller/TrangChuController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/org/example/websitekinhdoanhpc_casestudy_module3/repository/BaseRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/org/example/websitekinhdoanhpc_casestudy_module3/repository/BaseRepository.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/libs/exploded/WebsiteKinhDoanhPC_Casestudy_Module3-1.0-SNAPSHOT.war/WEB-INF/classes/org/example/websitekinhdoanhpc_casestudy_module3/controller/TrangChuController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/exploded/WebsiteKinhDoanhPC_Casestudy_Module3-1.0-SNAPSHOT.war/WEB-INF/classes/org/example/websitekinhdoanhpc_casestudy_module3/controller/TrangChuController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/libs/exploded/WebsiteKinhDoanhPC_Casestudy_Module3-1.0-SNAPSHOT.war/WEB-INF/classes/org/example/websitekinhdoanhpc_casestudy_module3/repository/BaseRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/exploded/WebsiteKinhDoanhPC_Casestudy_Module3-1.0-SNAPSHOT.war/WEB-INF/classes/org/example/websitekinhdoanhpc_casestudy_module3/repository/BaseRepository.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/websitekinhdoanhpc_casestudy_module3/Dao/UserDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/websitekinhdoanhpc_casestudy_module3/Dao/UserDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/websitekinhdoanhpc_casestudy_module3/controller/CartController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/websitekinhdoanhpc_casestudy_module3/controller/CartController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/websitekinhdoanhpc_casestudy_module3/controller/OrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/websitekinhdoanhpc_casestudy_module3/controller/OrderController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/websitekinhdoanhpc_casestudy_module3/controller/CartRemoveServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/websitekinhdoanhpc_casestudy_module3/controller/CartRemoveServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/websitekinhdoanhpc_casestudy_module3/controller/CheckoutController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/websitekinhdoanhpc_casestudy_module3/controller/CheckoutController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/websitekinhdoanhpc_casestudy_module3/controller/TrangChuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/websitekinhdoanhpc_casestudy_module3/controller/TrangChuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/websitekinhdoanhpc_casestudy_module3/repository/BaseRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/websitekinhdoanhpc_casestudy_module3/repository/BaseRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/websitekinhdoanhpc_casestudy_module3/repository/OrderItemRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/websitekinhdoanhpc_casestudy_module3/repository/OrderItemRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/websitekinhdoanhpc_casestudy_module3/entity/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/websitekinhdoanhpc_casestudy_module3/entity/Order.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/websitekinhdoanhpc_casestudy_module3/repository/OrderRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/websitekinhdoanhpc_casestudy_module3/repository/OrderRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/websitekinhdoanhpc_casestudy_module3/service/IOrderItemService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/websitekinhdoanhpc_casestudy_module3/service/IOrderItemService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/websitekinhdoanhpc_casestudy_module3/service/IOrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/websitekinhdoanhpc_casestudy_module3/service/IOrderService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/websitekinhdoanhpc_casestudy_module3/service/impl/OrderItemService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/websitekinhdoanhpc_casestudy_module3/service/impl/OrderItemService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/websitekinhdoanhpc_casestudy_module3/service/impl/OrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/websitekinhdoanhpc_casestudy_module3/service/impl/OrderService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/product/Cart.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/product/Cart.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/product/TrangChu.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/product/TrangChu.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/css/TrangChu.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/css/TrangChu.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/product/HoaDonCuaToi.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/product/HoaDonCuaToi.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -262,10 +254,22 @@
       <workItem from="1740810268862" duration="14894000" />
       <workItem from="1740825812502" duration="50000" />
       <workItem from="1740826180162" duration="21000" />
+      <workItem from="1740826521610" duration="8321000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
