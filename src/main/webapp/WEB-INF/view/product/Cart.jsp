@@ -287,59 +287,54 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr data-product-id="${item.product_id}">
-                            <c:forEach var="item" items="${cart}">
-                                <tr>
-                                    <th scope="row">
-                                        <div class="d-flex align-items-center">
-                                            <img src="${item.product.image_url}" class="img-fluid rounded-3"
-                                                 alt="${item.product.name}" style="width: 120px;" />
-                                            <div class="flex-column ms-4">
-                                                <p class="mb-2">${item.product.name}</p>
-                                            </div>
+                        <c:forEach var="item" items="${cart}">
+                            <tr data-product-id="${item.product.product_id}">
+                                <th scope="row">
+                                    <div class="d-flex align-items-center">
+                                        <img src="${item.product.image_url}" class="img-fluid rounded-3"
+                                             alt="${item.product.name}" style="width: 120px;" />
+                                        <div class="flex-column ms-4">
+                                            <p class="mb-2">${item.product.name}</p>
                                         </div>
-                                    </th>
-                                    <td class="align-middle">
-                                        <p class="mb-0" style="font-weight: 500;">${item.product.category.category_name}</p>
-                                    </td>
-<%--                                    <td>${item.quantity}</td>--%>
-                                    <td class="align-middle">
-                                        <div class="d-flex flex-row">
-                                            <!-- Nút Giảm (-) -->
-                                            <button data-mdb-button-init data-mdb-ripple-init class="btn btn-link px-2"
-                                                    onclick="this.parentNode.querySelector('input[type=number]').stepDown(); handleUpdateQuantity(this)">
-                                                <i class="fas fa-minus"></i>
-                                            </button>
+                                    </div>
+                                </th>
+                                <td class="align-middle">
+                                    <p class="mb-0" style="font-weight: 500;">${item.product.category.category_name}</p>
+                                </td>
+                                <td class="align-middle">
+                                    <div class="d-flex flex-row">
+                                        <!-- Nút Giảm (-) -->
+                                        <button class="btn btn-link px-2"
+                                                onclick="let input = this.parentNode.querySelector('input[type=number]'); input.stepDown(); handleUpdateQuantity(input, '${item.product.product_id}')">
+                                            <i class="fas fa-minus"></i>
+                                        </button>
 
-                                            <!-- Ô nhập số lượng -->
-                                            <input id="form1" min="1" name="quantity" value="${item.quantity}" type="number"
-                                                   class="form-control form-control-sm quantity" style="width: 50px;"
-                                                   oninput="handleUpdateQuantity(this, '${item.product.product_id}')" />
+                                        <!-- Ô nhập số lượng -->
+                                        <input min="1" name="quantity" value="${item.quantity}" type="number"
+                                               class="form-control form-control-sm quantity" style="width: 50px;"
+                                               oninput="handleUpdateQuantity(this, '${item.product.product_id}')" />
 
-
-                                            <!-- Nút Tăng (+) -->
-                                            <button data-mdb-button-init data-mdb-ripple-init class="btn btn-link px-2"
-                                                    onclick="this.parentNode.querySelector('input[type=number]').stepUp(); handleUpdateQuantity(this)">
-                                                <i class="fas fa-plus"></i>
-                                            </button>
-                                        </div>
-                                    </td>
-                                    <td class="align-middle">
-                                        <p class="mb-0" style="font-weight: 500;">${item.product.formattedPrice}</p>
-                                    </td>
-                                    <td class="align-middle">
-                                        <fmt:setLocale value="vi_VN"/>
-                                        <fmt:formatNumber value="${item.product.price * item.quantity}" type="currency" currencySymbol="₫"/>
-                                    </td>
-                                    <td class="align-middle">
-                                        <i class="bi bi-trash" style="cursor: pointer;" onclick="deleteItem('${item.product.product_id}', this)"></i>
-                                    </td>
-
-                                </tr>
-                            </c:forEach>
-                        </tr>
-
+                                        <!-- Nút Tăng (+) -->
+                                        <button class="btn btn-link px-2"
+                                                onclick="let input = this.parentNode.querySelector('input[type=number]'); input.stepUp(); handleUpdateQuantity(input, '${item.product.product_id}')">
+                                            <i class="fas fa-plus"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                                <td class="align-middle">
+                                    <p class="mb-0" style="font-weight: 500;">${item.product.formattedPrice}</p>
+                                </td>
+                                <td class="align-middle">
+                                    <fmt:setLocale value="vi_VN"/>
+                                    <fmt:formatNumber value="${item.product.price * item.quantity}" type="currency" currencySymbol="₫"/>
+                                </td>
+                                <td class="align-middle">
+                                    <i class="bi bi-trash" style="cursor: pointer;" onclick="deleteItem('${item.product.product_id}', this)"></i>
+                                </td>
+                            </tr>
+                        </c:forEach>
                         </tbody>
+
                     </table>
                 </div>
 
@@ -519,40 +514,129 @@
 <%--<script src="../../../javascript/TrangChu.js"></script>--%>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
  <%--get cart từ session--%>
+<%--<script>--%>
+<%--    function handleUpdateQuantity(inputElement, productId) {--%>
+<%--        let newQuantity = parseInt(inputElement.value);--%>
+
+<%--        if (!productId) {--%>
+<%--            console.error(" Lỗi: Không tìm thấy productId!");--%>
+<%--            return;--%>
+<%--        }--%>
+
+<%--        console.log(" Updating product:", productId, "with quantity:", newQuantity);--%>
+
+<%--        // Kiểm tra nếu số lượng nhỏ hơn 1 thì đặt lại thành 1--%>
+<%--        if (newQuantity < 1) {--%>
+<%--            newQuantity = 1;--%>
+<%--            inputElement.value = 1;--%>
+<%--        }--%>
+
+<%--        // Gửi AJAX đến Servlet để cập nhật giỏ hàng--%>
+<%--        let xhr = new XMLHttpRequest();--%>
+<%--        xhr.open("POST", "Cart", true);--%>
+<%--        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");--%>
+
+<%--        xhr.onreadystatechange = function () {--%>
+<%--            if (xhr.readyState === 4) {--%>
+<%--                if (xhr.status === 200) {--%>
+<%--                    let response = JSON.parse(xhr.responseText);--%>
+<%--                    if (response.success) {--%>
+<%--                        console.log(" Cập nhật giỏ hàng thành công!");--%>
+<%--                    } else {--%>
+<%--                        console.error(" Lỗi cập nhật:", response.message);--%>
+<%--                    }--%>
+<%--                } else {--%>
+<%--                    console.error(" Lỗi HTTP:", xhr.status);--%>
+<%--                }--%>
+<%--            }--%>
+<%--        };--%>
+
+<%--        xhr.send("product_id=" + productId + "&quantity=" + newQuantity);--%>
+<%--    }--%>
+
+<%--    function deleteItem(productId, element) {--%>
+<%--        console.log("🛒 Đang xóa sản phẩm với ID:", productId); // Debug ID--%>
+
+<%--        if (confirm("Bạn có chắc chắn muốn xóa sản phẩm này?")) {--%>
+<%--            fetch('/Cart/remove', {--%>
+<%--                method: 'POST',--%>
+<%--                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },--%>
+<%--                body: 'product_id=' + encodeURIComponent(productId) // Đảm bảo tham số trùng với Servlet--%>
+<%--            }).then(response => {--%>
+<%--                console.log("Phản hồi từ server:", response);--%>
+<%--                return response.text(); // Đọc nội dung phản hồi--%>
+<%--            }).then(text => {--%>
+<%--                console.log("Nội dung trả về:", text);--%>
+<%--                let data = JSON.parse(text);--%>
+<%--                if (data.success) {--%>
+<%--                    let row = element.closest("tr");--%>
+<%--                    if (row) row.remove();--%>
+<%--                } else {--%>
+<%--                    alert("Xóa thất bại!");--%>
+<%--                }--%>
+<%--            }).catch(error => console.error("Lỗi:", error));--%>
+<%--        }--%>
+<%--    }--%>
+<%--    <%--%>
+<%--      Integer order_id = (Integer) session.getAttribute("order_id");--%>
+<%--    %>--%>
+<%--        var orderId = "<%= order_id != null ? order_id : "" %>";--%>
+<%--        console.log("Order ID in JSP:", orderId);--%>
+
+<%--        document.getElementById('btnThanhToan').addEventListener('click', function() {--%>
+<%--        if (!confirm('Bạn có chắc chắn muốn thanh toán?')) return;--%>
+
+<%--        fetch(`/Cart/ThanhToan`, {--%>
+<%--        method: 'POST',--%>
+<%--        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },--%>
+<%--        body: `order_id=${orderId}` // ✅ Đặt đúng tên tham số--%>
+<%--    })--%>
+<%--        .then(response => response.text())--%>
+<%--        .then(data => {--%>
+<%--        alert(data);--%>
+<%--        window.location.href = "/Cart/ThanhToan";--%>
+<%--    })--%>
+<%--        .catch(error => {--%>
+<%--        alert('Có lỗi xảy ra! Vui lòng thử lại.');--%>
+<%--        console.error('Lỗi:', error);--%>
+<%--    });--%>
+<%--    });--%>
+<%--</script>--%>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
 <script>
     function handleUpdateQuantity(inputElement, productId) {
         let newQuantity = parseInt(inputElement.value);
-        alert("Product id:"+ productId);
-        alert("Quantity:"+ newQuantity);
-        // Kiểm tra nếu số lượng nhỏ hơn 1 thì đặt lại thành 1
+        console.log("Updating product:", productId, "with quantity:", newQuantity);
+
         if (newQuantity < 1) {
-            newQuantity = 1;
             inputElement.value = 1;
+            newQuantity = 1;
         }
 
-        // Gửi AJAX đến Servlet để cập nhật giỏ hàng
         let xhr = new XMLHttpRequest();
-        xhr.open("POST", "Cart", true); // Gửi request đến Servlet
+        xhr.open("POST", "Cart?ts=" + new Date().getTime(), true);
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
         xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                let response = JSON.parse(xhr.responseText);
-                if (!response.success) {
-                    alert('Cập nhật giỏ hàng thành công');
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    console.log("Cập nhật giỏ hàng thành công!");
+                } else {
+                    console.error("Lỗi HTTP:", xhr.status);
                 }
             }
         };
 
         xhr.send("product_id=" + productId + "&quantity=" + newQuantity);
-
     }
+
 
     function deleteItem(productId, element) {
         console.log("🛒 Đang xóa sản phẩm với ID:", productId); // Debug ID
 
         if (confirm("Bạn có chắc chắn muốn xóa sản phẩm này?")) {
-            fetch('/cart/remove', {
+            fetch('/Cart/remove', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                 body: 'product_id=' + encodeURIComponent(productId) // Đảm bảo tham số trùng với Servlet
@@ -571,29 +655,36 @@
             }).catch(error => console.error("Lỗi:", error));
         }
     }
-    <%
-      Integer order_id = (Integer) session.getAttribute("order_id");
-    %>
-        var orderId = "<%= order_id != null ? order_id : "" %>";
-        console.log("Order ID in JSP:", orderId);
 
-        document.getElementById('btnThanhToan').addEventListener('click', function() {
-        if (!confirm('Bạn có chắc chắn muốn thanh toán?')) return;
+    // Lấy order_id từ session và truyền vào JavaScript
+    var orderId = "<%= session.getAttribute("order_id") != null ? session.getAttribute("order_id") : "" %>";
+    console.log("Order ID in JSP:", orderId);
 
-        fetch(`/Cart/ThanhToan`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: `order_id=${orderId}` // ✅ Đặt đúng tên tham số
-    })
-        .then(response => response.text())
-        .then(data => {
-        alert(data);
-        window.location.href = "/Cart/ThanhToan";
-    })
-        .catch(error => {
-        alert('Có lỗi xảy ra! Vui lòng thử lại.');
-        console.error('Lỗi:', error);
-    });
+    // Chờ DOM load xong rồi mới gắn sự kiện
+    document.addEventListener("DOMContentLoaded", function () {
+        var btnThanhToan = document.getElementById('btnThanhToan');
+        if (btnThanhToan) {
+            btnThanhToan.addEventListener('click', function() {
+                if (!confirm('Bạn có chắc chắn muốn thanh toán?')) return;
+
+                fetch('/Cart/ThanhToan', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: `order_id=${orderId}` // Đặt đúng tên tham số
+                })
+                    .then(response => response.text())
+                    .then(data => {
+                        alert(data);
+                        window.location.href = "/Cart/ThanhToan";
+                    })
+                    .catch(error => {
+                        alert('Có lỗi xảy ra! Vui lòng thử lại.');
+                        console.error('Lỗi:', error);
+                    });
+            });
+        } else {
+            console.warn(" Không tìm thấy nút Thanh Toán!");
+        }
     });
 </script>
 

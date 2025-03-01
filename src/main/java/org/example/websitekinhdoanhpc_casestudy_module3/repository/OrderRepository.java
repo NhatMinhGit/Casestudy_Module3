@@ -15,7 +15,26 @@ public class OrderRepository {
 
 
     public List<Order> findAll() {
-        return null;
+        List<Order> orders = new ArrayList<>();
+        String sql = "SELECT order_id, total_price, status, order_date FROM `order`";
+//        String sql = "SELECT order_id, user_id, total_price, status, order_date FROM `order`";
+        try (Connection conn = BaseRepository.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                Order order = new Order();
+                order.setOrder_id(rs.getInt("order_id"));
+//                order.getUser().setUser_id(rs.getInt("user_id"));
+                order.setTotal_price(rs.getDouble("total_price"));
+                order.setStatus(rs.getString("status"));
+                order.setOrder_date(rs.getDate("order_date").toLocalDate());
+                orders.add(order);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return orders;
     }
 
     public Order findOrderById(int id) {
@@ -205,7 +224,7 @@ public class OrderRepository {
         Order order = null;
 
         try (Connection conn = BaseRepository.getConnection()) {
-            if (conn.isClosed()) { // 🔴 Kiểm tra nếu kết nối đã đóng
+            if (conn.isClosed()) { // Kiểm tra nếu kết nối đã đóng
                 System.out.println("Kết nối đã bị đóng!");
                 return null;
             }

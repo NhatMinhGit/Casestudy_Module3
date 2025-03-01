@@ -60,7 +60,55 @@ public class TrangChuController extends HttpServlet {
         }
 
     }
-@Override
+//@Override
+//protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//    req.setCharacterEncoding("UTF-8");
+//    HttpSession session = req.getSession();
+//    //User user = (User) session.getAttribute("user"); //Lấy user
+//    User user = new User();
+//    user.setUser_id(1);
+//    user.setName("Nguyễn Văn A");
+//    user.setEmail("nguyenvana@example.com");
+//    user.setPassword("password123"); // Chú ý: Mật khẩu nên được mã hóa trong thực tế
+//    user.setRole("CUSTOMER");
+//    user.setPhone_number("0987654321");
+//    user.setAddress("123 Đường ABC, Quận 1, TP.HCM");
+//
+//    // Luôn tạo đơn hàng mới cho mỗi lần vào trang nếu user đã đăng nhập
+//    if (user != null) {
+//        Order newOrder = orderService.createOrder(user);
+//        System.out.println("Đã tạo đơn hàng mới cho user: " + user.getUser_id() + " - Order ID: " + newOrder.getOrder_id());
+//    }
+//
+//    String action = req.getParameter("action");
+//    if (action == null) {
+//        action = "";
+//    }
+//
+//    switch (action) {
+//        default:
+//            String message = req.getParameter("message");
+//            if (message != null) {
+//                switch (message) {
+//                    case "created":
+//                        req.setAttribute("message", "Thêm mới thành công");
+//                        break;
+//                    case "updated":
+//                        req.setAttribute("message", "Cập nhật thành công");
+//                        break;
+//                    case "deleted":
+//                        req.setAttribute("message", "Xóa thành công");
+//                        break;
+//                }
+//            }
+//            List<Product> products = productService.getAll();
+//            req.setAttribute("products", products);
+//            req.getRequestDispatcher("/WEB-INF/view/product/TrangChu.jsp").forward(req, resp);
+//    }
+//}
+//
+
+    @Override
 protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
     req.setCharacterEncoding("UTF-8");
     String action = req.getParameter("action");

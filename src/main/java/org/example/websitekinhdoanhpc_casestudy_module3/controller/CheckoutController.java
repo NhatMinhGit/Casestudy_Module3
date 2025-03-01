@@ -5,10 +5,13 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.example.websitekinhdoanhpc_casestudy_module3.entity.Order;
+import org.example.websitekinhdoanhpc_casestudy_module3.entity.Product;
 import org.example.websitekinhdoanhpc_casestudy_module3.service.impl.OrderService;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 @WebServlet(name = "CheckoutController", value = "/Cart/ThanhToan")
 public class CheckoutController extends HttpServlet {
@@ -23,6 +26,7 @@ public class CheckoutController extends HttpServlet {
             // Lấy order_id từ request hoặc session
             String orderIdParam = request.getParameter("order_id");
             int orderId = 0;
+
 
             if (orderIdParam != null && !orderIdParam.isEmpty()) {
                 try {
@@ -60,6 +64,9 @@ public class CheckoutController extends HttpServlet {
     }
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/plain; charset=UTF-8");
+        List<Order> orders = orderService.getAll();
+        request.setAttribute("orders", orders);
+
         request.getRequestDispatcher("/WEB-INF/view/product/HoaDonCuaToi.jsp").forward(request, response);
     }
 }
