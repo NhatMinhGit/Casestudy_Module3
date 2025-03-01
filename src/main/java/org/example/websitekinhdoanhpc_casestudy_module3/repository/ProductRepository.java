@@ -100,4 +100,7 @@ public class ProductRepository {
             throw new RuntimeException(e);
         }
     }
+
+    public void update(int id, Product product) {
+    }
 }

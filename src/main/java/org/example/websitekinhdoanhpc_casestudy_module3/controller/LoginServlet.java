@@ -44,11 +44,11 @@ public class LoginServlet extends HttpServlet {
                     resp.sendRedirect(req.getContextPath() + "/userProfile");
                 } else {
                     req.setAttribute("error", "Sai mật khẩu!");
-                    req.getRequestDispatcher("/WEB-INF/view/User/UserProfile.jsp").forward(req, resp);
+                    req.getRequestDispatcher("/WEB-INF/view/user/UserProfile.jsp").forward(req, resp);
                 }
             } else {
                 req.setAttribute("error", "Email không tồn tại!");
-                req.getRequestDispatcher("/WEB-INF/view/User/UserProfile.jsp").forward(req, resp);
+                req.getRequestDispatcher("/WEB-INF/view/user/UserProfile.jsp").forward(req, resp);
             }
         } catch (SQLException e) {
             req.setAttribute("error", "Lỗi Database: " + e.getMessage());

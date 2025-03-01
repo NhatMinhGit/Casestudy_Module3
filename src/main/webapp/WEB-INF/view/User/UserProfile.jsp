@@ -7,7 +7,7 @@
     <title>User Profile</title>
 </head>
 <body>
-<h1>Welcome, ${user.name}!</h1>
+<h1 item=${user}>Welcome, ${user.name}!</h1>
 <p>Email: ${user.email}</p>
 <p>Role: ${user.role}</p>
 <p>Phone Number: ${user.phone_number}</p>

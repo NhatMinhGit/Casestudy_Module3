@@ -7,6 +7,11 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page import="com.google.gson.Gson" %>
+<%@ page import="org.example.websitekinhdoanhpc_casestudy_module3.entity.OrderItem" %>
+<%@ page import="java.util.List" %>
+<%--<% int cart = (Integer) request.getAttribute("cart"); %>--%>
 
 <html lang="vi">
 <head>
@@ -25,7 +30,7 @@
     </a>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid d-flex justify-content-between align-items-center">
-            <a class="navbar-brand" href="#">PC MNhat</a>
+            <a class="navbar-brand" href="TrangChu">PC MNhat</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -100,8 +105,7 @@
 </header>
 <section class="h-100 h-custom">
     <div class="container h-100 py-5">
-        <p>Danh sách giỏ hàng: ${cart}</p>
-        <p>Danh sách giỏ hàng: ${orderItemList}</p>
+<%--        <p>Danh sách giỏ hàng: ${cart}</p>--%>
 
         <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col">
@@ -118,89 +122,65 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
+                        <tr data-product-id="${item.product_id}">
                             <c:forEach var="item" items="${cart}">
                                 <tr>
                                     <th scope="row">
                                         <div class="d-flex align-items-center">
-                                            <img src=${item.product.image_url} class="img-fluid rounded-3"
-                                                 style="width: 120px;" alt=${item.product.name}>
+                                            <img src="${item.product.image_url}" class="img-fluid rounded-3"
+                                                 alt="${item.product.name}" style="width: 120px;" />
                                             <div class="flex-column ms-4">
                                                 <p class="mb-2">${item.product.name}</p>
                                             </div>
                                         </div>
                                     </th>
                                     <td class="align-middle">
-                                        <p class="mb-0" style="font-weight: 500;">${item.product.price}</p>
+                                        <p class="mb-0" style="font-weight: 500;">${item.product.category.category_name}</p>
                                     </td>
 <%--                                    <td>${item.quantity}</td>--%>
                                     <td class="align-middle">
                                         <div class="d-flex flex-row">
+                                            <!-- Nút Giảm (-) -->
                                             <button data-mdb-button-init data-mdb-ripple-init class="btn btn-link px-2"
-                                                    onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+                                                    onclick="this.parentNode.querySelector('input[type=number]').stepDown(); handleUpdateQuantity(this)">
                                                 <i class="fas fa-minus"></i>
                                             </button>
 
-                                            <input id="form1" min="0" name="quantity" value="2" type="number"
-                                                   class="form-control form-control-sm" style="width: 50px;" />
+                                            <!-- Ô nhập số lượng -->
+                                            <input id="form1" min="1" name="quantity" value="${item.quantity}" type="number"
+                                                   class="form-control form-control-sm quantity" style="width: 50px;"
+                                                   oninput="handleUpdateQuantity(this, '${item.product.product_id}')" />
 
+
+                                            <!-- Nút Tăng (+) -->
                                             <button data-mdb-button-init data-mdb-ripple-init class="btn btn-link px-2"
-                                                    onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+                                                    onclick="this.parentNode.querySelector('input[type=number]').stepUp(); handleUpdateQuantity(this)">
                                                 <i class="fas fa-plus"></i>
                                             </button>
                                         </div>
                                     </td>
                                     <td class="align-middle">
-                                        <p class="mb-0" style="font-weight: 500;">${item.product.price * item.quantity}</p>
+                                        <p class="mb-0" style="font-weight: 500;">${item.product.formattedPrice}</p>
                                     </td>
+                                    <td class="align-middle">
+                                        <fmt:setLocale value="vi_VN"/>
+                                        <fmt:formatNumber value="${item.product.price * item.quantity}" type="currency" currencySymbol="₫"/>
+                                    </td>
+                                    <td class="align-middle">
+                                        <i class="bi bi-trash" style="cursor: pointer;" onclick="deleteItem('${item.product.product_id}', this)"></i>
+                                    </td>
+
                                 </tr>
                             </c:forEach>
                         </tr>
 
-
-
-<%--                        <tr>--%>
-<%--                            <th scope="row" class="border-bottom-0">--%>
-<%--                                <div class="d-flex align-items-center">--%>
-<%--                                    <img src="https://i.imgur.com/Oj1iQUX.webp" class="img-fluid rounded-3"--%>
-<%--                                         style="width: 120px;" alt="Book">--%>
-<%--                                    <div class="flex-column ms-4">--%>
-<%--                                        <p class="mb-2">Homo Deus: A Brief History of Tomorrow</p>--%>
-<%--                                        <p class="mb-0">Yuval Noah Harari</p>--%>
-<%--                                    </div>--%>
-<%--                                </div>--%>
-<%--                            </th>--%>
-<%--                            <td class="align-middle border-bottom-0">--%>
-<%--                                <p class="mb-0" style="font-weight: 500;">Paperback</p>--%>
-<%--                            </td>--%>
-<%--                            <td class="align-middle border-bottom-0">--%>
-<%--                                <div class="d-flex flex-row">--%>
-<%--                                    <button data-mdb-button-init data-mdb-ripple-init class="btn btn-link px-2"--%>
-<%--                                            onclick="this.parentNode.querySelector('input[type=number]').stepDown()">--%>
-<%--                                        <i class="fas fa-minus"></i>--%>
-<%--                                    </button>--%>
-
-<%--                                    <input id="form1" min="0" name="quantity" value="1" type="number"--%>
-<%--                                           class="form-control form-control-sm" style="width: 50px;" />--%>
-
-<%--                                    <button data-mdb-button-init data-mdb-ripple-init class="btn btn-link px-2"--%>
-<%--                                            onclick="this.parentNode.querySelector('input[type=number]').stepUp()">--%>
-<%--                                        <i class="fas fa-plus"></i>--%>
-<%--                                    </button>--%>
-<%--                                </div>--%>
-<%--                            </td>--%>
-<%--                            <td class="align-middle border-bottom-0">--%>
-<%--                                <p class="mb-0" style="font-weight: 500;">$13.50</p>--%>
-<%--                            </td>--%>
-<%--                        </tr>--%>
                         </tbody>
                     </table>
                 </div>
 
                 <div class="card shadow-2-strong mb-5 mb-lg-0" style="border-radius: 16px;">
                     <div class="card-body p-4">
-
-                        <div class="row">
+                        <div class="row gap-4"> <!-- Thêm khoảng cách giữa hai phần -->
                             <div class="col-md-6 col-lg-4 col-xl-3 mb-4 mb-md-0">
                                 <form>
                                     <div class="d-flex flex-row pb-3">
@@ -210,8 +190,7 @@
                                         </div>
                                         <div class="rounded border w-100 p-3">
                                             <p class="d-flex align-items-center mb-0">
-                                                <i class="fab fa-cc-mastercard fa-2x text-body pe-2"></i>Credit
-                                                Card
+                                                <i class="fab fa-cc-mastercard fa-2x text-body pe-2"></i>Chuyển khoản
                                             </p>
                                         </div>
                                     </div>
@@ -222,83 +201,61 @@
                                         </div>
                                         <div class="rounded border w-100 p-3">
                                             <p class="d-flex align-items-center mb-0">
-                                                <i class="fab fa-cc-visa fa-2x fa-lg text-body pe-2"></i>Debit Card
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex flex-row">
-                                        <div class="d-flex align-items-center pe-2">
-                                            <input class="form-check-input" type="radio" name="radioNoLabel" id="radioNoLabel3v"
-                                                   value="" aria-label="..." />
-                                        </div>
-                                        <div class="rounded border w-100 p-3">
-                                            <p class="d-flex align-items-center mb-0">
-                                                <i class="fab fa-cc-paypal fa-2x fa-lg text-body pe-2"></i>PayPal
+                                                <i class="fab fa-cc-visa fa-2x fa-lg text-body pe-2"></i>Thanh toán trực tiếp
                                             </p>
                                         </div>
                                     </div>
                                 </form>
                             </div>
-                            <div class="col-md-6 col-lg-4 col-xl-6">
-                                <div class="row">
-                                    <div class="col-12 col-xl-6">
-                                        <div data-mdb-input-init class="form-outline mb-4 mb-xl-5">
-                                            <input type="text" id="typeName" class="form-control form-control-lg" siez="17"
-                                                   placeholder="John Smith" />
-                                            <label class="form-label" for="typeName">Name on card</label>
-                                        </div>
 
-                                        <div data-mdb-input-init class="form-outline mb-4 mb-xl-5">
-                                            <input type="text" id="typeExp" class="form-control form-control-lg" placeholder="MM/YY"
-                                                   size="7" id="exp" minlength="7" maxlength="7" />
-                                            <label class="form-label" for="typeExp">Expiration</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-xl-6">
-                                        <div data-mdb-input-init class="form-outline mb-4 mb-xl-5">
-                                            <input type="text" id="typeText" class="form-control form-control-lg" siez="17"
-                                                   placeholder="1111 2222 3333 4444" minlength="19" maxlength="19" />
-                                            <label class="form-label" for="typeText">Card Number</label>
-                                        </div>
-
-                                        <div data-mdb-input-init class="form-outline mb-4 mb-xl-5">
-                                            <input type="password" id="typeText" class="form-control form-control-lg"
-                                                   placeholder="&#9679;&#9679;&#9679;" size="1" minlength="3" maxlength="3" />
-                                            <label class="form-label" for="typeText">Cvv</label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-xl-3">
+                            <!-- Thêm lớp flex-grow-1 để đẩy nội dung bên phải sang cạnh phải -->
+                            <div class="col-lg-4 col-xl-3 flex-grow-1">
                                 <div class="d-flex justify-content-between" style="font-weight: 500;">
                                     <p class="mb-2">Subtotal</p>
-                                    <p class="mb-2">$23.49</p>
+
+
+                                    <!-- Tạo biến `totalPrice` tạm thời chỉ để hiển thị -->
+                                    <c:set var="subTotalPrice" value="0" />
+
+                                    <!-- Lặp qua danh sách orderItems để tính tổng -->
+                                    <c:forEach var="item" items="${cart}">
+                                        <c:set var="subTotalPrice" value="${subTotalPrice + (item.product.price * item.quantity)}" />
+                                    </c:forEach>
+
+
+                                    <!-- Hiển thị tổng tiền đã định dạng -->
+                                    <p class="mb-2">
+                                        <fmt:setLocale value="vi_VN"/>
+                                        Tổng cộng:
+                                        <fmt:formatNumber value="${subTotalPrice}" type="currency" currencySymbol="₫"/>
+                                    </p>
                                 </div>
 
                                 <div class="d-flex justify-content-between" style="font-weight: 500;">
                                     <p class="mb-0">Shipping</p>
-                                    <p class="mb-0">$2.99</p>
+                                    <p class="mb-0">100.000đ</p>
                                 </div>
 
                                 <hr class="my-4">
-
+                                <c:set var="totalPrice" value="${subTotalPrice - 100000}" />
                                 <div class="d-flex justify-content-between mb-4" style="font-weight: 500;">
                                     <p class="mb-2">Total (tax included)</p>
-                                    <p class="mb-2">$26.48</p>
+                                    <p class="mb-2">
+                                        <fmt:formatNumber value="${totalPrice}" type="currency" currencySymbol="₫"/>
+                                    </p>
                                 </div>
 
-                                <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block btn-lg">
+                                <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block btn-lg">
                                     <div class="d-flex justify-content-between">
                                         <span>Checkout</span>
                                         <span>$26.48</span>
                                     </div>
                                 </button>
-
                             </div>
                         </div>
-
                     </div>
                 </div>
+
 
             </div>
         </div>
@@ -307,7 +264,63 @@
 
 <%--<script src="../../../javascript/TrangChu.js"></script>--%>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+ <%--get cart từ session--%>
+<script>
+    function handleUpdateQuantity(inputElement, productId) {
+        let newQuantity = parseInt(inputElement.value);
+        alert("Product id:"+ productId);
+        alert("Quantity:"+ newQuantity);
+        // Kiểm tra nếu số lượng nhỏ hơn 1 thì đặt lại thành 1
+        if (newQuantity < 1) {
+            newQuantity = 1;
+            inputElement.value = 1;
+        }
 
+        // Gửi AJAX đến Servlet để cập nhật giỏ hàng
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST", "Cart", true); // Gửi request đến Servlet
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                let response = JSON.parse(xhr.responseText);
+                if (!response.success) {
+                    alert('Cập nhật giỏ hàng thành công');
+                }
+            }
+        };
+
+        xhr.send("product_id=" + productId + "&quantity=" + newQuantity);
+
+    }
+
+    function deleteItem(productId, element) {
+        console.log("🛒 Đang xóa sản phẩm với ID:", productId); // Debug ID
+
+        if (confirm("Bạn có chắc chắn muốn xóa sản phẩm này?")) {
+            fetch('/cart/remove', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: 'product_id=' + encodeURIComponent(productId) // Đảm bảo tham số trùng với Servlet
+            }).then(response => {
+                console.log("Phản hồi từ server:", response);
+                return response.text(); // Đọc nội dung phản hồi
+            }).then(text => {
+                console.log("Nội dung trả về:", text);
+                let data = JSON.parse(text);
+                if (data.success) {
+                    let row = element.closest("tr");
+                    if (row) row.remove();
+                } else {
+                    alert("Xóa thất bại!");
+                }
+            }).catch(error => console.error("Lỗi:", error));
+        }
+    }
+
+
+
+</script>
 
 
 </body>

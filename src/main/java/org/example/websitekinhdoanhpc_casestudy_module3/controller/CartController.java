@@ -17,79 +17,100 @@ import org.example.websitekinhdoanhpc_casestudy_module3.service.impl.ProductServ
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
 
 @WebServlet(name = "CartController", value = "/Cart")
-public class CartController extends HttpServlet{
-    private IOrderItemService orderItemService = new OrderItemService();
+public class CartController extends HttpServlet {
+    private final IOrderItemService orderItemService = new OrderItemService();
+    private final IProductService productService = new ProductService();
+
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        // Lấy giỏ hàng từ Session
-        HttpSession session = req.getSession();
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession(true);
+        resp.setContentType("application/json");
+        resp.setCharacterEncoding("UTF-8");
 
-        Category laptopCategory = new Category(1,"Laptop Gaming", "Laptop hiệu suất cao dành cho game thủ");
-        User user = new User(1,"Nguyễn Văn A", "nguyenvana@example.com", "password123", "customer", "0987654321", "Hà Nội, Việt Nam");
-        LocalDate orderDate = LocalDate.parse("2025-02-01");
-        Product product = new Product(1, laptopCategory, "Laptop Dell XPS 13", 32000000.0,"/assets/img/products/laptop_dell_id01.webp","Laptop Dell XPS 13, màn hình 13.4 inch, chip Intel Core i7, RAM 16GB, SSD 512GB", 10);
-        Order order = new Order(1,user, orderDate, 15000000.0, "Processing", "123 Lê Lợi, Hà Nội", "Credit Card");
+        try {
+            // Lấy product_id và quantity từ request
+            String productIdParam = req.getParameter("product_id");
+            String quantityParam = req.getParameter("quantity");
+            System.out.println("Received product_id: " + productIdParam);
+            System.out.println("Received quantity: " + quantityParam);
 
-        // Lấy giỏ hàng từ session, nếu null thì tạo mới
-        List<OrderItem> cart = (List<OrderItem>) session.getAttribute("cart");
+            if (productIdParam == null) {
+                throw new IllegalArgumentException("Thiếu product_id");
+            }
 
-        if (cart == null) {
-            cart = new ArrayList<>(); // Tạo danh sách rỗng nếu chưa có trong session
-            session.setAttribute("cart", cart); // Lưu vào session
+            int productId = Integer.parseInt(productIdParam);
+            int quantity = (quantityParam != null) ? Integer.parseInt(quantityParam) : 1;
+            if (quantityParam != null) {
+                try {
+                    quantity = Integer.parseInt(quantityParam);
+                    if (quantity <= 0) {
+                        throw new IllegalArgumentException("Số lượng phải lớn hơn 0");
+                    }
+                } catch (NumberFormatException e) {
+                    throw new IllegalArgumentException("Số lượng không hợp lệ");
+                }
+            }
+
+            System.out.println("Product ID: " + productId + ", Quantity: " + quantity);
+
+            Product product = productService.findById(productId);
+            if (product == null) {
+                System.out.println("Lỗi: Không tìm thấy sản phẩm với ID: " + productId);
+            } else {
+                System.out.println("Sản phẩm tìm thấy: " + product.getName());
+            }
+
+
+            // Xử lý giỏ hàng
+            List<OrderItem> cart = (List<OrderItem>) session.getAttribute("cart");
+            if (cart == null) {
+                cart = new ArrayList<>();
+                session.setAttribute("cart", cart);
+            }
+
+            boolean exists = false;
+            for (OrderItem item : cart) {
+                System.out.println("So sánh: item ID " + item.getProduct().getProduct_id() + " với " + productId);
+                if (item.getProduct().getProduct_id() == productId) {
+                    item.setQuantity(quantity);
+                    System.out.println("Cập nhật số lượng sản phẩm ID " + productId + " thành: " + quantity);
+                    exists = true;
+                    break;
+                }
+            }
+            if (!exists) {
+                System.out.println("Sản phẩm chưa có trong giỏ hàng, thêm mới.");
+            }
+
+
+            if (!exists) {
+                OrderItem newItem = new OrderItem(cart.size() + 1, null, product, quantity, product.getPrice());
+                cart.add(newItem);
+            }
+
+            session.setAttribute("cart", cart);
+            resp.getWriter().write("{\"status\": \"success\", \"message\": \"Sản phẩm đã được thêm vào giỏ hàng\"}");
+
+        } catch (Exception e) {
+            e.printStackTrace(); // In lỗi ra console server
+            resp.getWriter().write("{\"status\": \"error\", \"message\": \"" + e.getMessage() + "\"}");
         }
-//
-        // Lấy thông tin sản phẩm từ request
-        //int orderItemId = Integer.parseInt(request.getParameter("order_item_id"));
-        //int orderId = Integer.parseInt(request.getParameter("order_id"));
-        //int productId = Integer.parseInt(request.getParameter("product_id"));
-//        int quantity = Integer.parseInt(request.getParameter("quantity"));
-//        double price_per_unit = Double.parseDouble(request.getParameter("price_per_unit"));
-
-//
-//        // Kiểm tra xem sản phẩm đã có trong giỏ chưa
-//        boolean exists = false;
-//        for (OrderItem item : cart) {
-//            if (item.getOrder_item_id() == orderItemId) {
-//                item.setQuantity(item.getQuantity() + 1);
-//                exists = true;
-//                break;
-//            }
-//        }
-//
-//        // Nếu chưa có thì thêm mới
-//        if (!exists) {
-//            cart.add(new OrderItem(orderItemId,order, product, quantity, price_per_unit));
-//        }
-
-        List<OrderItem> orderItemList = orderItemService.getAll();
-        req.setAttribute("orderItemList", orderItemList);
-        System.out.println(orderItemList);
-        System.out.println("Số lượng sản phẩm: " + orderItemList.size());
-        for (OrderItem oi : orderItemList) {
-            System.out.println(oi.getProduct().getName() + " - " + oi.getProduct().getPrice());
+        // Kiểm tra tất cả tham số gửi đến
+        Enumeration<String> parameterNames = req.getParameterNames();
+        while (parameterNames.hasMoreElements()) {
+            String paramName = parameterNames.nextElement();
+            System.out.println("Received parameter: " + paramName + " = " + req.getParameter(paramName));
         }
-
-//        // Đưa giỏ hàng vào request attribute để hiển thị trong JSP
-//        req.setAttribute("cart", cart);
-//
-//        //demo
-//        cart.add(new OrderItem(1,new Order(1,user, orderDate, 15000000.0, "Processing", "123 Lê Lợi, Hà Nội", "Credit Card"),new Product(1, laptopCategory, "Laptop Dell XPS 13", 32000000.0,"/assets/img/products/laptop_dell_id01.webp", "Laptop Dell XPS 13, màn hình 13.4 inch, chip Intel Core i7, RAM 16GB, SSD 512GB", 10), 1, 9.89));
-//        cart.add(new OrderItem(2,new Order(1,user, orderDate, 15000000.0, "Processing", "123 Lê Lợi, Hà Nội", "Credit Card"),new Product(1, laptopCategory, "Laptop Dell XPS 13", 32000000.0,"/assets/img/products/laptop_dell_id01.webp", "Laptop Dell XPS 13, màn hình 13.4 inch, chip Intel Core i7, RAM 16GB, SSD 512GB", 10), 1, 9.89));
-//
-//
-//
-//
-//        // Đưa giỏ hàng vào request attribute để hiển thị trong JSP
-//        req.setAttribute("cart", cart);
-
-        // Chuyển hướng đến cart.jsp
-        req.getRequestDispatcher("/WEB-INF/view/product/Cart.jsp").forward(req, resp);
 
     }
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-
+        // Chuyển hướng đến trang giỏ hàng
+        req.getRequestDispatcher("/WEB-INF/view/product/Cart.jsp").forward(req, resp);
+    }
 }
-

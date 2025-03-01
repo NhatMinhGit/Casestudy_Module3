@@ -46,4 +46,6 @@ public class CategoryRepository {
     }
 
 
+    public void update(int id, Category category) {
+    }
 }

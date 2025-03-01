@@ -25,7 +25,7 @@ public class CategoryService implements ICategoryService {
 
     @Override
     public void update(int id, Category category) {
-
+        categoryRepository.update(id, category);
     }
 
     @Override

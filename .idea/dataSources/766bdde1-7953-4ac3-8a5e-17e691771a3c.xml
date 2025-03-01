@@ -1046,7 +1046,7 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
     <schema id="294" parent="1" name="onlinepcshop">
-      <LastIntrospectionLocalTimestamp>2025-02-15.12:22:27</LastIntrospectionLocalTimestamp>
+      <LastIntrospectionLocalTimestamp>2025-02-21.12:08:43</LastIntrospectionLocalTimestamp>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
     <user id="295" parent="1" name="sa">
@@ -1121,7 +1121,7 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
     <column id="311" parent="301" name="order_id">
-      <AutoIncrement>21</AutoIncrement>
+      <AutoIncrement>20</AutoIncrement>
       <DasType>int|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
@@ -1325,7 +1325,7 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <UnderlyingIndexName>email</UnderlyingIndexName>
     </key>
     <column id="355" parent="305" name="voucher_id">
-      <AutoIncrement>21</AutoIncrement>
+      <AutoIncrement>20</AutoIncrement>
       <DasType>int|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>

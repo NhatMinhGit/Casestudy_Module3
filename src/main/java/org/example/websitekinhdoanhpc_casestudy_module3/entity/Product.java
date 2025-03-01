@@ -1,5 +1,7 @@
 package org.example.websitekinhdoanhpc_casestudy_module3.entity;
 
+import java.text.NumberFormat;
+import java.util.Locale;
 import java.util.Objects;
 
 public class Product {
@@ -26,7 +28,13 @@ public class Product {
         this.stock_quantity = stock_quantity;
     }
 
-
+    public String getFormattedPrice() {
+        if (price == null) {
+            return "0 đ";
+        }
+        NumberFormat formatter = NumberFormat.getNumberInstance(new Locale("vi", "VN"));
+        return formatter.format(price) + " đ";
+    }
 
     public String getImage_url() {
         return image_url;
