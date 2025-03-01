@@ -19,10 +19,7 @@ import java.util.List;
 
 @WebServlet(name = "TrangChuController", value = "/TrangChu")
 public class TrangChuController extends HttpServlet {
-//    @Override
-//    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        req.getRequestDispatcher("/WEB-INF/view/product/TrangChu.jsp").forward(req, resp);
-//    }
+
 
     private IProductService productService = new ProductService();
     private IOrderService orderService = new OrderService();
@@ -63,43 +60,6 @@ public class TrangChuController extends HttpServlet {
         }
 
     }
-
-//    @Override
-//    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-//        req.setCharacterEncoding("UTF-8");
-//        String action = req.getParameter("action");
-//        if (action == null) {
-//            action = "";
-//        }
-//        switch (action) {
-//            case "addToCart":
-////                String titleProduct = req.getParameter("titleProduct");
-////                Double priceProduct = Double.parseDouble(req.getParameter("priceProduct"));
-////                String imgProduct = req.getParameter("imgProduct");
-////                Product product = new Product(titleProduct, priceProduct, imgProduct);
-////                productService.save(product);
-////                resp.sendRedirect("/students?message=addedToCart");
-////                break;
-//                HttpSession session = req.getSession();
-//                User user = (User) session.getAttribute("user"); // Lấy thông tin người dùng đăng nhập
-//                int productId = Integer.parseInt(req.getParameter("product_id"));
-//
-//                if (user == null) {
-//                    resp.getWriter().write("{\"success\": false, \"message\": \"Chưa đăng nhập!\"}");
-//                    return;
-//                }
-//
-//                //Order order = OrderRepository.createOrder(user.getUser_id()); // Tạo đơn hàng mới
-//                //boolean success = OrderItemRepository.addProductToOrder(order.getOrder_id(), productId);
-//
-//                OrderRepository repository = new OrderRepository();
-//                Order order = repository.createOrder(456);
-//
-//                resp.setContentType("application/json");
-//                resp.getWriter().write("{\"success\": " + success + "}");
-//        }
-//    }
-//}
 @Override
 protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
     req.setCharacterEncoding("UTF-8");
@@ -135,7 +95,7 @@ protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws I
                 resp.getWriter().write("{\"success\": false, \"message\": \"Không thể tạo đơn hàng!\"}");
                 return;
             }
-
+            System.out.println("Người dùng đăng nhập"+user.getUser_id());
             boolean success = orderItemService.addProductToOrder(order.getOrder_id(), productId);
 
             resp.setContentType("application/json");

@@ -19,4 +19,10 @@ public interface IOrderItemService {
     boolean addProductToOrder(int orderId, int productId);
 
     //Order findOrderById(int id);
+
+    List<OrderItem> findOrderItemsByOrderId(int order_id);
+
+    double calculateTotalPrice(int orderId);
+
+//    void update(OrderItem item);
 }

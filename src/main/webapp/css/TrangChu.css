@@ -26,6 +26,41 @@
     object-fit: cover;
 }
 
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.card-body{
+    height: 230px;
+}
+
+.card {
+    position: relative; /* Để phần tử con có thể dùng absolute */
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    padding: 20px;
+}
+
+.add-to-cart {
+    position: absolute;
+    bottom: 50px; /* Cách đáy 10px */
+    right: 40px; /* Cách phải 10px */
+    padding: 8px 12px;
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.add-to-cart:hover {
+    background-color: #ff4d4d;
+}
+
 .dropdown-menu {
     min-width: 300px;
 }
@@ -45,4 +80,5 @@
 .dropdown-item {
     padding: 8px 12px;
     text-decoration: none;
+    color: black;
 }

@@ -40,4 +40,30 @@ public class UserDao {
             e.printStackTrace();
         }
     }
+
+    public User findUserById(int userId) {
+        User user = null;
+        Connection conn = BaseRepository.getConnection();
+        String sql = "SELECT * FROM users WHERE user_id = ?";
+
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, userId);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                user = new User();
+                user.setUser_id(rs.getInt("user_id"));
+                user.setName(rs.getString("user_name"));
+                user.setEmail(rs.getString("email"));
+            }
+
+            rs.close();
+            ps.close();
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return user;
+    }
 }
