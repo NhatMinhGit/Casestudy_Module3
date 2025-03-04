@@ -36,7 +36,7 @@ public class LoginServlet extends HttpServlet {
         } else if ("admin".equalsIgnoreCase(user.getRole())) {
             resp.sendRedirect(req.getContextPath() + "/admin");
         } else {
-            resp.sendRedirect(req.getContextPath() + "/TrangChu.jsp"); // Chuyển về trang chủ
+            resp.sendRedirect(req.getContextPath() + "/userProfile"); // Chuyển về trang chủ
         }
     }
 }
