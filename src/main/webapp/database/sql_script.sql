@@ -241,4 +241,10 @@ INSERT INTO Users (name, email, password, role, phone_number, address) VALUES
 ('Admin', 'Admin@example.com', 'password123', 'Admin', '000000000', 'CodeGym');
 
 ALTER TABLE Users DROP COLUMN salt;
-ALTER TABLE Users MODIFY password VARCHAR(255)
+ALTER TABLE Users MODIFY password VARCHAR(255);
+
+SELECT * FROM users WHERE email = 'nguyenvana@example.com';
+USE onlinepcshop;
+SHOW TABLES;
+DESC users;
+ALTER TABLE Users ADD CONSTRAINT unique_email UNIQUE (email);

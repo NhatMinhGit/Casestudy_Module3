@@ -23,4 +23,5 @@ public interface IOrderService {
     Order findLastInsertedOrder();
 
     void updateTotalPrice(int orderId, double totalPrice);
+
 }

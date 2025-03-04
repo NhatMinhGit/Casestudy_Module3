@@ -26,7 +26,7 @@ public class CartController extends HttpServlet {
     private final IProductService productService = new ProductService();
     private final IOrderService orderService = new OrderService();
 
-//    @Override
+    //    @Override
 //    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 //        HttpSession session = req.getSession(true);
 //        resp.setContentType("application/json");
@@ -144,110 +144,274 @@ public class CartController extends HttpServlet {
 //
 //        resp.getWriter().write("{\"status\": \"success\", \"message\": \"Sản phẩm đã được thêm vào giỏ hàng\"}");
 //    }
-@Override
-protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-    HttpSession session = req.getSession(true);
-    resp.setContentType("application/json");
-    resp.setCharacterEncoding("UTF-8");
-
-    try {
-        // Nhận tham số từ request
-        String productIdParam = req.getParameter("product_id");
-        String quantityParam = req.getParameter("quantity");
-        String orderIdParam = req.getParameter("order_id"); // Nhận order_id nếu có
-
-        if (productIdParam == null) {
-            throw new IllegalArgumentException("Thiếu product_id");
-        }
-
-        int productId = Integer.parseInt(productIdParam);
-        int quantity = (quantityParam != null) ? Integer.parseInt(quantityParam) : 1;
-        if (quantity <= 0) {
-            throw new IllegalArgumentException("Số lượng phải lớn hơn 0");
-        }
-
-        // Tìm sản phẩm từ productService
-        Product product = productService.findById(productId);
-        if (product == null) {
-            throw new IllegalArgumentException("Sản phẩm không tồn tại");
-        }
-
-        // Lấy đơn hàng từ session hoặc từ DB
-        Order order = (Order) session.getAttribute("order");
-        int orderId = (orderIdParam != null) ? Integer.parseInt(orderIdParam) : 0;
-
-        if (order == null && orderId > 0) {
-            order = orderService.findOrderById(orderId);
-        }
-
-        if (order == null) {
-            order = new Order();
-            order.setOrder_date(LocalDate.now());
-            order.setStatus("pending");
-            order.setTotal_price(0.0); // Khởi tạo tổng tiền
-            orderService.save(order);
-
-            // Lấy lại order từ database để đảm bảo có order_id
-            order = orderService.findLastInsertedOrder();
-            System.out.println("DEBUG: Order vừa tạo có ID = " + order.getOrder_id());
-        }
-
-        // Cập nhật lại order_id
-        orderId = order.getOrder_id();
-        session.setAttribute("order", order);
-        System.out.println("DEBUG 2: Order vừa tạo có ID = " + order.getOrder_id());
-
-        // Lấy danh sách OrderItems từ DB
-        List<OrderItem> orderItems = orderItemService.findOrderItemsByOrderId(orderId);
-
-        // Kiểm tra nếu sản phẩm đã có trong giỏ hàng
-        boolean existsInOrder = false;
-        for (OrderItem item : orderItems) {
-            if (item.getProduct().getProduct_id() == productId) {
-                item.setQuantity(quantity);
-                orderItemService.updateItemInCart(orderId, item); // Cập nhật số lượng trong DB
-                existsInOrder = true;
-                break;
-            }
-        }
-
-        // Nếu chưa có sản phẩm trong OrderItem, thêm mới
-        if (!existsInOrder) {
-            OrderItem newItem = new OrderItem(order, product, quantity, product.getPrice());
-            orderItemService.save(newItem); // Lưu vào DB
-        }
-        // 🔥 **Tính tổng tiền của đơn hàng**
-        double totalPrice = orderItemService.calculateTotalPrice(orderId); // Hàm này sẽ cộng dồn quantity * price
-        order.setTotal_price(totalPrice);
-        orderService.updateTotalPrice(orderId, totalPrice); // Cập nhật vào database
-        System.out.println("Order in doPost"+order);
-        System.out.println("OrderItems in doPost"+orderItems);
-
-        // Trả về JSON phản hồi
-        resp.getWriter().write("{\"status\": \"success\", \"message\": \"Sản phẩm đã được thêm vào đơn hàng\"}");
-
-    } catch (Exception e) {
-        e.printStackTrace();
-        String errorMessage = e.getMessage().replace("\"", "\\\""); // Xử lý dấu " trong chuỗi
-        resp.getWriter().write("{\"status\": \"error\", \"message\": \"" + errorMessage + "\"}");
-
-    }
-}
-
-
-    //            @Override
-//            protected void doGet (HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
-//            {
+//@Override
+//protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//    HttpSession session = req.getSession(true);
+//    resp.setContentType("application/json");
+//    resp.setCharacterEncoding("UTF-8");
 //
-////        HttpSession session = req.getSession();
-////        Order order = (Order) session.getAttribute("cart");
-////
-////        // Gửi orderId sang JSP
-////        req.setAttribute("cart", order);
-////        System.out.println(order);
-//                // Chuyển hướng đến trang giỏ hàng
-//                req.getRequestDispatcher("/WEB-INF/view/product/Cart.jsp").forward(req, resp);
+//    try {
+//        // Nhận tham số từ request
+//        String productIdParam = req.getParameter("product_id");
+//        String quantityParam = req.getParameter("quantity");
+//        String orderIdParam = req.getParameter("order_id"); // Nhận order_id nếu có
+//
+//        if (productIdParam == null) {
+//            throw new IllegalArgumentException("Thiếu product_id");
+//        }
+//
+//        int productId = Integer.parseInt(productIdParam);
+//        int quantity = (quantityParam != null) ? Integer.parseInt(quantityParam) : 1;
+//        if (quantity <= 0) {
+//            throw new IllegalArgumentException("Số lượng phải lớn hơn 0");
+//        }
+//
+//        // Tìm sản phẩm từ productService
+//        Product product = productService.findById(productId);
+//        if (product == null) {
+//            throw new IllegalArgumentException("Sản phẩm không tồn tại");
+//        }
+//
+//        // Lấy đơn hàng từ session hoặc từ DB
+//        Order order = (Order) session.getAttribute("order");
+//        int orderId = (orderIdParam != null) ? Integer.parseInt(orderIdParam) : 0;
+//
+//        if (order == null && orderId > 0) {
+//            order = orderService.findOrderById(orderId);
+//        }
+//
+//        if (order == null) {
+//            order = new Order();
+//            order.setOrder_date(LocalDate.now());
+//            order.setStatus("pending");
+//            order.setTotal_price(0.0); // Khởi tạo tổng tiền
+//            orderService.save(order);
+//
+//            // Lấy lại order từ database để đảm bảo có order_id
+//            order = orderService.findLastInsertedOrder();
+//            System.out.println("DEBUG: Order vừa tạo có ID = " + order.getOrder_id());
+//        }
+//
+//        // Cập nhật lại order_id
+//        orderId = order.getOrder_id();
+//        session.setAttribute("order", order);
+//        System.out.println("DEBUG 2: Order vừa tạo có ID = " + order.getOrder_id());
+//
+//        // Lấy danh sách OrderItems từ DB
+//        List<OrderItem> orderItems = orderItemService.findOrderItemsByOrderId(orderId);
+//
+//        // Kiểm tra nếu sản phẩm đã có trong giỏ hàng
+//        boolean existsInOrder = false;
+//        for (OrderItem item : orderItems) {
+//            if (item.getProduct().getProduct_id() == productId) {
+//                item.setQuantity(quantity);
+//                orderItemService.updateItemInCart(orderId, item); // Cập nhật số lượng trong DB
+//                existsInOrder = true;
+//                break;
 //            }
+//        }
+//
+//        // Nếu chưa có sản phẩm trong OrderItem, thêm mới
+//        if (!existsInOrder) {
+//            OrderItem newItem = new OrderItem(order, product, quantity, product.getPrice());
+//            orderItemService.save(newItem); // Lưu vào DB
+//        }
+//        // 🔥 **Tính tổng tiền của đơn hàng**
+//        double totalPrice = orderItemService.calculateTotalPrice(orderId); // Hàm này sẽ cộng dồn quantity * price
+//        order.setTotal_price(totalPrice);
+//        orderService.updateTotalPrice(orderId, totalPrice); // Cập nhật vào database
+//        System.out.println("Order in doPost"+order);
+//        System.out.println("OrderItems in doPost"+orderItems);
+//
+//        // Trả về JSON phản hồi
+//        resp.getWriter().write("{\"status\": \"success\", \"message\": \"Sản phẩm đã được thêm vào đơn hàng\"}");
+//
+//    } catch (Exception e) {
+//        e.printStackTrace();
+//        String errorMessage = e.getMessage().replace("\"", "\\\""); // Xử lý dấu " trong chuỗi
+//        resp.getWriter().write("{\"status\": \"error\", \"message\": \"" + errorMessage + "\"}");
+//
+//    }
+//}
+//@Override
+//protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//    HttpSession session = req.getSession(true);
+//    resp.setContentType("application/json");
+//    resp.setCharacterEncoding("UTF-8");
+//
+//    try {
+//        String productIdParam = req.getParameter("product_id");
+//        String quantityParam = req.getParameter("quantity");
+//        String orderIdParam = req.getParameter("order_id");
+//
+//        if (productIdParam == null) {
+//            throw new IllegalArgumentException("Thiếu product_id");
+//        }
+//
+//        int productId = Integer.parseInt(productIdParam);
+//        int quantity = (quantityParam != null) ? Integer.parseInt(quantityParam) : 1;
+//        if (quantity <= 0) {
+//            throw new IllegalArgumentException("Số lượng phải lớn hơn 0");
+//        }
+//
+//        Product product = productService.findById(productId);
+//        if (product == null) {
+//            throw new IllegalArgumentException("Sản phẩm không tồn tại");
+//        }
+//
+//        Order order = (Order) session.getAttribute("order");
+//        int orderId = (orderIdParam != null) ? Integer.parseInt(orderIdParam) : 0;
+//
+//        if (order == null && orderId > 0) {
+//            order = orderService.findOrderById(orderId);
+//        }
+//
+//        if (order == null) {
+//            order = new Order();
+//            order.setOrder_date(LocalDate.now());
+//            order.setStatus("pending");
+//            order.setTotal_price(0.0);
+//            orderService.save(order);
+//
+//            order = orderService.findLastInsertedOrder();
+//            orderId = order.getOrder_id();
+//            session.setAttribute("order", order);
+//        } else {
+//            orderId = order.getOrder_id();
+//        }
+//
+//        // Lấy danh sách OrderItems từ DB
+//        List<OrderItem> orderItems = orderItemService.findOrderItemsByOrderId(orderId);
+//
+//        boolean existsInOrder = false;
+//        for (OrderItem item : orderItems) {
+//            if (item.getProduct().getProduct_id() == productId) {
+//                item.setQuantity(quantity);
+//                orderItemService.updateItemInCart(orderId, item); // Cập nhật số lượng trong DB
+//                existsInOrder = true;
+//                break;
+//            }
+//        }
+//
+//        if (!existsInOrder) {
+//            OrderItem newItem = new OrderItem(order, product, quantity, product.getPrice());
+//            orderItemService.save(newItem); // Lưu vào DB
+//        }
+//
+//        // **Cập nhật lại tổng giá đơn hàng**
+//        double totalPrice = orderItemService.calculateTotalPrice(orderId);
+//        order.setTotal_price(totalPrice);
+//        orderService.updateTotalPrice(orderId, totalPrice);
+//
+//        // **Cập nhật giỏ hàng trong session để phản ánh thay đổi ngay lập tức**
+//        List<OrderItem> updatedCart = orderItemService.findOrderItemsByOrderId(orderId);
+//        session.setAttribute("cart", updatedCart); // Giỏ hàng sẽ được cập nhật lại
+//
+//        System.out.println("Order in doPost: " + order);
+//        System.out.println("Updated Cart: " + updatedCart);
+//
+//        resp.getWriter().write("{\"status\": \"success\", \"message\": \"Sản phẩm đã được cập nhật trong đơn hàng\"}");
+//
+//    } catch (Exception e) {
+//        e.printStackTrace();
+//        String errorMessage = e.getMessage().replace("\"", "\\\"");
+//        resp.getWriter().write("{\"status\": \"error\", \"message\": \"" + errorMessage + "\"}");
+//    }
+//}
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession(true);
+        resp.setContentType("application/json");
+        resp.setCharacterEncoding("UTF-8");
+
+        try {
+            String productIdParam = req.getParameter("product_id");
+            String quantityParam = req.getParameter("quantity");
+            String orderIdParam = req.getParameter("order_id");
+
+            if (productIdParam == null) {
+                throw new IllegalArgumentException("Thiếu product_id");
+            }
+
+            int productId = Integer.parseInt(productIdParam);
+            int quantity = (quantityParam != null) ? Integer.parseInt(quantityParam) : 1;
+            if (quantity <= 0) {
+                throw new IllegalArgumentException("Số lượng phải lớn hơn 0");
+            }
+
+            Product product = productService.findById(productId);
+            if (product == null) {
+                throw new IllegalArgumentException("Sản phẩm không tồn tại");
+            }
+
+            Order order = (Order) session.getAttribute("order");
+            int orderId = (orderIdParam != null) ? Integer.parseInt(orderIdParam) : 0;
+
+            if (order == null && orderId > 0) {
+                order = orderService.findOrderById(orderId);
+            }
+
+            if (order == null) {
+                order = new Order();
+                order.setOrder_date(LocalDate.now());
+                order.setStatus("pending");
+                order.setTotal_price(0.0);
+                orderService.save(order);
+
+                order = orderService.findLastInsertedOrder();
+                orderId = order.getOrder_id();
+                session.setAttribute("order", order);
+            } else {
+                orderId = order.getOrder_id();
+            }
+
+            // Lấy danh sách OrderItems từ DB
+            List<OrderItem> orderItems = orderItemService.findOrderItemsByOrderId(orderId);
+
+            boolean existsInOrder = false;
+            for (OrderItem item : orderItems) {
+                if (item.getProduct().getProduct_id() == productId) {
+                    item.setQuantity(quantity);
+                    orderItemService.updateItemInCart(orderId, item); // Cập nhật số lượng trong DB
+                    existsInOrder = true;
+
+                    // Cập nhật lại danh sách giỏ hàng sau mỗi lần cập nhật số lượng
+                    List<OrderItem> updatedCart = orderItemService.findOrderItemsByOrderId(orderId);
+                    session.setAttribute("cart", updatedCart);
+                    session.setAttribute("order", orderService.findOrderById(orderId));
+
+                    System.out.println("Cập nhật giỏ hàng sau khi thay đổi số lượng: " + updatedCart);
+                    break;
+                }
+            }
+
+
+            if (!existsInOrder) {
+                OrderItem newItem = new OrderItem(order, product, quantity, product.getPrice());
+                orderItemService.save(newItem); // Lưu vào DB
+            }
+
+            // **Cập nhật lại tổng giá đơn hàng**
+            double totalPrice = orderItemService.calculateTotalPrice(orderId);
+            order.setTotal_price(totalPrice);
+            orderService.updateTotalPrice(orderId, totalPrice);
+
+            // **Cập nhật giỏ hàng trong session để phản ánh thay đổi ngay lập tức**
+            List<OrderItem> updatedCart = orderItemService.findOrderItemsByOrderId(orderId);
+            session.setAttribute("cart", updatedCart); // Giỏ hàng sẽ được cập nhật lại
+
+            System.out.println("Order in doPost: " + order);
+            System.out.println("Updated Cart: " + updatedCart);
+
+            resp.getWriter().write("{\"status\": \"success\", \"message\": \"Sản phẩm đã được cập nhật trong đơn hàng\"}");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            String errorMessage = e.getMessage().replace("\"", "\\\"");
+            resp.getWriter().write("{\"status\": \"error\", \"message\": \"" + errorMessage + "\"}");
+        }
+    }
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
@@ -258,7 +422,7 @@ protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws S
 
         if (order != null) {
             int orderId = order.getOrder_id();
-            session.setAttribute("order_id", orderId); // ✅ Lưu order_id vào session
+            session.setAttribute("order_id", orderId); // Lưu order_id vào session
             System.out.println("doGet orderId cart "+orderId);
             cart = orderItemService.findOrderItemsByOrderId(orderId);
             session.setAttribute("cart", cart);
@@ -275,6 +439,4 @@ protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws S
         // Chuyển đến trang giỏ hàng
         req.getRequestDispatcher("/WEB-INF/view/product/Cart.jsp").forward(req, resp);
     }
-
-
 }

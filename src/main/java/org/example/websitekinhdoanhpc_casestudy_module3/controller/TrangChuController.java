@@ -24,6 +24,7 @@ public class TrangChuController extends HttpServlet {
     private IProductService productService = new ProductService();
     private IOrderService orderService = new OrderService();
     private IOrderItemService orderItemService = new OrderItemService();
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
@@ -60,47 +61,51 @@ public class TrangChuController extends HttpServlet {
         }
 
     }
-@Override
-protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-    req.setCharacterEncoding("UTF-8");
-    String action = req.getParameter("action");
-    if (action == null) {
-        action = "";
-    }
-    switch (action) {
-        case "addToCart":
-            HttpSession session = req.getSession();
-            User user = (User) session.getAttribute("user"); // Đảm bảo cùng tên với session khi login
 
-            if (user == null) {
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        req.setCharacterEncoding("UTF-8");
+        String action = req.getParameter("action");
+        if (action == null) {
+            action = "";
+        }
+        switch (action) {
+            case "addToCart":
+                HttpSession session = req.getSession();
+                User user = (User) session.getAttribute("user"); // Đảm bảo cùng tên với session khi login
+
+                if (user == null) {
+                    resp.setContentType("application/json");
+                    resp.getWriter().write("{\"success\": false, \"message\": \"Chưa đăng nhập!\"}");
+                    return;
+                }
+
+                int productId;
+                try {
+                    productId = Integer.parseInt(req.getParameter("product_id"));
+                } catch (NumberFormatException e) {
+                    resp.setContentType("application/json");
+                    resp.getWriter().write("{\"success\": false, \"message\": \"ID sản phẩm không hợp lệ!\"}");
+                    return;
+                }
+
+                // Tạo đơn hàng mới cho user
+                Order order = orderService.createOrder(user);
+                resp.getWriter().write("\"order\":" + order.getOrder_id() + ",");
+                if (order == null) {
+                    resp.setContentType("application/json");
+                    resp.getWriter().write("{\"success\": false, \"message\": \"Không thể tạo đơn hàng!\"}");
+                    return;
+                }
+                System.out.println("Người dùng đăng nhập" + user.getUser_id());
+                boolean success = orderItemService.addProductToOrder(order.getOrder_id(), productId);
+
                 resp.setContentType("application/json");
-                resp.getWriter().write("{\"success\": false, \"message\": \"Chưa đăng nhập!\"}");
-                return;
-            }
-
-            int productId;
-            try {
-                productId = Integer.parseInt(req.getParameter("product_id"));
-            } catch (NumberFormatException e) {
-                resp.setContentType("application/json");
-                resp.getWriter().write("{\"success\": false, \"message\": \"ID sản phẩm không hợp lệ!\"}");
-                return;
-            }
-
-            // Tạo đơn hàng mới cho user
-            Order order = orderService.createOrder(user);
-            resp.getWriter().write("\"order\":" + order.getOrder_id() + ",");
-            if (order == null) {
-                resp.setContentType("application/json");
-                resp.getWriter().write("{\"success\": false, \"message\": \"Không thể tạo đơn hàng!\"}");
-                return;
-            }
-            System.out.println("Người dùng đăng nhập"+user.getUser_id());
-            boolean success = orderItemService.addProductToOrder(order.getOrder_id(), productId);
-
-            resp.setContentType("application/json");
-            resp.getWriter().write("{\"success\": " + success + "}");
+                resp.getWriter().write("{\"success\": " + success + "}");
+        }
     }
 }
-}
+
+
+
 

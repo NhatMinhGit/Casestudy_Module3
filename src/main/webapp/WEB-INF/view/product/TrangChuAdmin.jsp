@@ -6,9 +6,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: white !important;
+            color: red !important;
+        }
+
+        .header, .btn, .modal-header {
+            background-color: red !important;
+            color: white !important;
+        }
+
+        .table th, .table td {
+            color: black !important;
+        }
+
+        .btn-warning {
+            background-color: darkorange !important;
+            border-color: darkorange !important;
+        }
+
+        .btn-danger {
+            background-color: darkred !important;
+            border-color: darkred !important;
+        }
+
+        .btn-success {
+            background-color: red !important;
+            border-color: red !important;
+        }
+    </style>
 </head>
 <body>
-<header class="header bg-dark text-white p-3 text-center">
+<header class="header p-3 text-center">
     <h1>Admin Dashboard</h1>
 </header>
 <div class="container mt-4">
@@ -86,7 +116,6 @@
     }
 
     function editProduct(id) {
-        // Gửi request lấy thông tin sản phẩm và hiển thị trong form
         fetch(`/admin?action=get&id=${id}`)
             .then(response => response.json())
             .then(product => {
@@ -105,6 +134,32 @@
             window.location.href = `/admin?action=delete&id=${id}`;
         }
     }
+
+    document.getElementById("productForm").onsubmit = function(event) {
+        event.preventDefault(); // Ngăn form submit mặc định
+        let formData = new FormData(this);
+
+        fetch("/admin?action=save", {
+            method: "POST",
+            body: formData
+        }).then(response => {
+            if (response.ok) {
+                return response.text();  // Đọc phản hồi từ server nếu thành công
+            } else {
+                throw new Error('Lỗi server: ' + response.status);  // Xử lý lỗi nếu server trả về lỗi
+            }
+        })
+            .then(data => {
+                console.log("Server response:", data);  // Kiểm tra phản hồi từ server
+                alert("Lưu thành công!");
+                window.location.href = "/admin"; // Chuyển về trang admin chính
+            })
+            .catch(error => {
+                console.error("Lỗi khi lưu:", error);
+                alert("Lưu thất bại! Vui lòng thử lại.");
+            });
+
+    };
 </script>
 </body>
 </html>

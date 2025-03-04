@@ -6,6 +6,7 @@ import jakarta.servlet.http.*;
 import java.io.IOException;
 import org.example.websitekinhdoanhpc_casestudy_module3.entity.User;
 import org.example.websitekinhdoanhpc_casestudy_module3.repository.BaseRepository;
+import org.example.websitekinhdoanhpc_casestudy_module3.repository.UserRepository;
 
 @WebServlet(name = "LoginServlet", value = "/login")
 public class LoginServlet extends HttpServlet {
@@ -15,41 +16,28 @@ public class LoginServlet extends HttpServlet {
         String password = req.getParameter("password");
 
         // Lấy user từ database
-        User user = BaseRepository.getUserByEmail(email);
+        User user = UserRepository.getUserByEmail(email);
 
-        // Kiểm tra user có tồn tại không
-        if (user == null || user.getPassword() == null) {
-            req.getSession().setAttribute("error", "Sai email hoặc mật khẩu!");
-            resp.sendRedirect(req.getContextPath() + "/TrangChu");
+        if (user == null || !password.equals(user.getPassword())) {
+            req.setAttribute("error", "Sai email hoặc mật khẩu!");
+            req.getRequestDispatcher("/userProfile").forward(req, resp);
             return;
         }
 
+        // Lưu user vào session
+        HttpSession session = req.getSession();
+        session.setAttribute("user", user);
 
-
-                    // Chuyển hướng đến UserProfileServlet để hiển thị thông tin người dùng
-                    resp.sendRedirect(req.getContextPath() + "/userProfile");
-                } else {
-                    req.setAttribute("error", "Sai mật khẩu!");
-                    req.getRequestDispatcher("/WEB-INF/view/user/UserProfile.jsp").forward(req, resp);
-                }
-            } else {
-                req.setAttribute("error", "Email không tồn tại!");
-                req.getRequestDispatcher("/WEB-INF/view/user/UserProfile.jsp").forward(req, resp);
-=======
-        if (password.equals(user.getPassword())) {
-            HttpSession session = req.getSession();
-            session.setAttribute("user", user);
-
-            // Điều hướng theo vai trò
-            if ("admin".equalsIgnoreCase(user.getRole())) {
-                resp.sendRedirect(req.getContextPath() + "/admin");
-            } else {
-                resp.sendRedirect(req.getContextPath() + "/userProfile");
->>>>>>> DangHoangLong
-            }
+        // Kiểm tra xem có trang nào cần quay lại không (VD: checkout)
+        String redirectUrl = (String) session.getAttribute("redirectAfterLogin");
+        if (redirectUrl != null) {
+            session.removeAttribute("redirectAfterLogin");
+            resp.sendRedirect(redirectUrl);
+        } else if ("admin".equalsIgnoreCase(user.getRole())) {
+            resp.sendRedirect(req.getContextPath() + "/admin");
         } else {
-            req.getSession().setAttribute("error", "Sai email hoặc mật khẩu!");
-            resp.sendRedirect(req.getContextPath() + "/TrangChu");
+            resp.sendRedirect(req.getContextPath() + "/TrangChu.jsp"); // Chuyển về trang chủ
         }
     }
 }
+

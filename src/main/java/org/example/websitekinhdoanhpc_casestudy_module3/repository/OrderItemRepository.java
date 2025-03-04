@@ -50,12 +50,12 @@ public class OrderItemRepository {
                 + "o.order_id, o.user_id, o.order_date, o.total_price, o.status, o.shipping_address, o.payment_method, "
                 + "p.product_id, p.name AS product_name, p.price, p.image_url, p.description, p.stock_quantity, p.category_id, "
                 + "c.category_id, c.category_name AS category_name, c.description AS category_description, "
-                + "u.user_id, u.name AS user_name, u.email, u.phone_number, u.address, u.password, u.role "
+                + "u.id, u.name AS user_name, u.email, u.phone_number, u.address, u.password, u.role "
                 + "FROM `orderitem` oi "
                 + "JOIN `order` o ON oi.order_id = o.order_id "
                 + "JOIN `product` p ON oi.product_id = p.product_id "
                 + "JOIN `category` c ON p.category_id = c.category_id "
-                + "JOIN `user` u ON o.user_id = u.user_id "
+                + "JOIN `Users` u ON o.user_id = u.id "
                 + "WHERE oi.order_id = ?";
 
         try (Connection connection = BaseRepository.getConnection();
@@ -70,7 +70,7 @@ public class OrderItemRepository {
                 double pricePerUnit = resultSet.getDouble("price_per_unit");
 
                 // Lấy thông tin User
-                int userId = resultSet.getInt("user_id");
+                int userId = resultSet.getInt("id");
                 String userName = resultSet.getString("user_name");
                 String email = resultSet.getString("email");
                 String phoneNumber = resultSet.getString("phone_number");
@@ -120,7 +120,7 @@ public class OrderItemRepository {
     public void remove(int id) {
         String sql = "DELETE FROM orderitem WHERE product_id = ?";
         try (Connection connection = BaseRepository.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(sql) ) {
+             PreparedStatement preparedStatement = connection.prepareStatement(sql) ) {
             preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();
 
@@ -212,4 +212,65 @@ public class OrderItemRepository {
 
     public void update(OrderItem item) {
     }
+
+    public List<OrderItem> getCartItemsByUserId(int userId) {
+        List<OrderItem> cartItems = new ArrayList<>();
+
+        String query = "SELECT oi.order_item_id, oi.quantity, oi.price_per_unit, " +
+                "o.order_id, o.order_date, o.total_price, o.status, o.shipping_address, o.payment_method, " +
+                "p.product_id, p.name AS product_name, p.price, p.image_url, p.description, p.stock_quantity, p.category_id, " +
+                "c.category_id, c.category_name AS category_name, c.description AS category_description " +
+                "FROM orderitem oi " +
+                "JOIN `order` o ON oi.order_id = o.order_id " +
+                "JOIN product p ON oi.product_id = p.product_id " +
+                "JOIN category c ON p.category_id = c.category_id " +
+                "WHERE o.user_id = ? AND o.status = 'cart'";
+
+        try (Connection connection = BaseRepository.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setInt(1, userId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                int orderItemId = resultSet.getInt("order_item_id");
+                int quantity = resultSet.getInt("quantity");
+                double pricePerUnit = resultSet.getDouble("price_per_unit");
+
+                // Lấy thông tin Order
+                int orderId = resultSet.getInt("order_id");
+                LocalDate orderDate = resultSet.getDate("order_date") != null
+                        ? resultSet.getDate("order_date").toLocalDate()
+                        : null;
+                double totalPrice = resultSet.getDouble("total_price");
+                String status = resultSet.getString("status");
+                String shippingAddress = resultSet.getString("shipping_address");
+                String paymentMethod = resultSet.getString("payment_method");
+                Order order = new Order(orderId, null, orderDate, totalPrice, status, shippingAddress, paymentMethod);
+
+                // Lấy thông tin Category
+                int categoryId = resultSet.getInt("category_id");
+                String categoryName = resultSet.getString("category_name");
+                String categoryDescription = resultSet.getString("category_description");
+                Category category = new Category(categoryId, categoryName, categoryDescription);
+
+                // Lấy thông tin Product
+                int productId = resultSet.getInt("product_id");
+                String productName = resultSet.getString("product_name");
+                double productPrice = resultSet.getDouble("price");
+                String imageUrl = resultSet.getString("image_url");
+                String productDescription = resultSet.getString("description");
+                int stockQuantity = resultSet.getInt("stock_quantity");
+                Product product = new Product(productId, category, productName, productPrice, imageUrl, productDescription, stockQuantity);
+
+                // Tạo OrderItem và thêm vào danh sách
+                cartItems.add(new OrderItem(orderItemId, order, product, quantity, pricePerUnit));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Lỗi khi lấy giỏ hàng của người dùng", e);
+        }
+
+        return cartItems;
+    }
+
 }

@@ -1,0 +1,1113 @@
+Index: src/main/java/org/example/websitekinhdoanhpc_casestudy_module3/controller/LoginServlet.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package org.example.websitekinhdoanhpc_casestudy_module3.controller;\r\n\r\nimport jakarta.servlet.ServletException;\r\nimport jakarta.servlet.annotation.WebServlet;\r\nimport jakarta.servlet.http.*;\r\nimport java.io.IOException;\r\nimport org.example.websitekinhdoanhpc_casestudy_module3.entity.User;\r\nimport org.example.websitekinhdoanhpc_casestudy_module3.repository.BaseRepository;\r\n\r\n@WebServlet(name = \"LoginServlet\", value = \"/login\")\r\npublic class LoginServlet extends HttpServlet {\r\n    @Override\r\n    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {\r\n        String email = req.getParameter(\"email\");\r\n        String password = req.getParameter(\"password\");\r\n\r\n        // Lấy user từ database\r\n        User user = BaseRepository.getUserByEmail(email);\r\n\r\n        // Kiểm tra user có tồn tại không\r\n        if (user == null || user.getPassword() == null) {\r\n            req.getSession().setAttribute(\"error\", \"Sai email hoặc mật khẩu!\");\r\n            resp.sendRedirect(req.getContextPath() + \"/TrangChu\");\r\n            return;\r\n        }\r\n\r\n\r\n\r\n                    // Chuyển hướng đến UserProfileServlet để hiển thị thông tin người dùng\r\n                    resp.sendRedirect(req.getContextPath() + \"/userProfile\");\r\n                } else {\r\n                    req.setAttribute(\"error\", \"Sai mật khẩu!\");\r\n                    req.getRequestDispatcher(\"/WEB-INF/view/user/UserProfile.jsp\").forward(req, resp);\r\n                }\r\n            } else {\r\n                req.setAttribute(\"error\", \"Email không tồn tại!\");\r\n                req.getRequestDispatcher(\"/WEB-INF/view/user/UserProfile.jsp\").forward(req, resp);\r\n=======\r\n        if (password.equals(user.getPassword())) {\r\n            HttpSession session = req.getSession();\r\n            session.setAttribute(\"user\", user);\r\n\r\n            // Điều hướng theo vai trò\r\n            if (\"admin\".equalsIgnoreCase(user.getRole())) {\r\n                resp.sendRedirect(req.getContextPath() + \"/admin\");\r\n            } else {\r\n                resp.sendRedirect(req.getContextPath() + \"/userProfile\");\r\n>>>>>>> DangHoangLong\r\n            }\r\n        } else {\r\n            req.getSession().setAttribute(\"error\", \"Sai email hoặc mật khẩu!\");\r\n            resp.sendRedirect(req.getContextPath() + \"/TrangChu\");\r\n        }\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/org/example/websitekinhdoanhpc_casestudy_module3/controller/LoginServlet.java b/src/main/java/org/example/websitekinhdoanhpc_casestudy_module3/controller/LoginServlet.java
+--- a/src/main/java/org/example/websitekinhdoanhpc_casestudy_module3/controller/LoginServlet.java	
++++ b/src/main/java/org/example/websitekinhdoanhpc_casestudy_module3/controller/LoginServlet.java	
+@@ -17,39 +17,29 @@
+         // Lấy user từ database
+         User user = BaseRepository.getUserByEmail(email);
+ 
+-        // Kiểm tra user có tồn tại không
+-        if (user == null || user.getPassword() == null) {
++        // Kiểm tra nếu user không tồn tại hoặc sai mật khẩu
++        if (user == null || user.getPassword() == null || !password.equals(user.getPassword())) {
+             req.getSession().setAttribute("error", "Sai email hoặc mật khẩu!");
++            System.out.println("⚠️ Đăng nhập thất bại: " + email);
+             resp.sendRedirect(req.getContextPath() + "/TrangChu");
+             return;
+         }
+ 
+-
+-
+-                    // Chuyển hướng đến UserProfileServlet để hiển thị thông tin người dùng
+-                    resp.sendRedirect(req.getContextPath() + "/userProfile");
+-                } else {
+-                    req.setAttribute("error", "Sai mật khẩu!");
+-                    req.getRequestDispatcher("/WEB-INF/view/user/UserProfile.jsp").forward(req, resp);
+-                }
+-            } else {
+-                req.setAttribute("error", "Email không tồn tại!");
+-                req.getRequestDispatcher("/WEB-INF/view/user/UserProfile.jsp").forward(req, resp);
+-=======
+-        if (password.equals(user.getPassword())) {
+-            HttpSession session = req.getSession();
+-            session.setAttribute("user", user);
++        // Nếu đăng nhập thành công
++        HttpSession session = req.getSession();
++        session.setAttribute("user", user);
++        session.setAttribute("message", "Đăng nhập thành công!");
++
++        System.out.println("✅ Đăng nhập thành công: " + user.getEmail());
++        System.out.println("🔹 Vai trò của user: " + user.getRole());
+ 
+-            // Điều hướng theo vai trò
+-            if ("admin".equalsIgnoreCase(user.getRole())) {
+-                resp.sendRedirect(req.getContextPath() + "/admin");
+-            } else {
+-                resp.sendRedirect(req.getContextPath() + "/userProfile");
+->>>>>>> DangHoangLong
+-            }
++        // Điều hướng theo vai trò
++        if ("admin".equalsIgnoreCase(user.getRole())) {
++            System.out.println("🔄 Chuyển hướng đến /admin");
++            resp.sendRedirect(req.getContextPath() + "/admin");
+         } else {
+-            req.getSession().setAttribute("error", "Sai email hoặc mật khẩu!");
+-            resp.sendRedirect(req.getContextPath() + "/TrangChu");
++            System.out.println("🔄 Chuyển hướng đến /userProfile");
++            resp.sendRedirect(req.getContextPath() + "@WebServlet(\"/userProfile\")");
+         }
+     }
+ }
+Index: src/main/webapp/WEB-INF/view/User/Register.jsp
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><%-- Register.jsp --%>\r\n<!DOCTYPE html>\r\n<html lang=\"vi\">\r\n<head>\r\n    <meta charset=\"UTF-8\">\r\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\r\n    <title>Đăng Ký</title>\r\n\r\n    <style>\r\n        body {\r\n            font-family: Arial, sans-serif; /* Đặt phông chữ cho toàn bộ trang */\r\n            background-color: #f4f4f9;\r\n            margin: 0;\r\n            padding: 0;\r\n            text-align: center;\r\n        }\r\n\r\n        h2 {\r\n            color: #333;\r\n        }\r\n\r\n        form {\r\n            margin: 30px auto;\r\n            padding: 20px;\r\n            background-color: #fff;\r\n            border-radius: 8px;\r\n            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);\r\n            width: 300px;\r\n        }\r\n\r\n        label {\r\n            display: block;\r\n            margin-bottom: 8px;\r\n            font-weight: bold;\r\n        }\r\n\r\n        input[type=\"text\"], input[type=\"email\"], input[type=\"password\"] {\r\n            width: 100%;\r\n            padding: 10px;\r\n            margin-bottom: 20px;\r\n            border: 1px solid #ddd;\r\n            border-radius: 4px;\r\n            font-size: 16px;\r\n        }\r\n\r\n        input[type=\"submit\"] {\r\n            width: 100%;\r\n            padding: 10px;\r\n            background-color: #4CAF50;\r\n            color: white;\r\n            border: none;\r\n            border-radius: 4px;\r\n            font-size: 16px;\r\n            cursor: pointer;\r\n        }\r\n\r\n        input[type=\"submit\"]:hover {\r\n            background-color: #45a049;\r\n        }\r\n\r\n        .error-message {\r\n            color: red;\r\n            font-weight: bold;\r\n            margin-bottom: 20px;\r\n        }\r\n    </style>\r\n    <link href=\"https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap\" rel=\"stylesheet\">\r\n    <style>\r\n        body {\r\n            font-family: 'Roboto', sans-serif; /* Sử dụng phông chữ Roboto từ Google Fonts */\r\n        }\r\n    </style>\r\n</head>\r\n<body>\r\n<h2>Đăng Ký</h2>\r\n\r\n<%-- Hiển thị thông báo lỗi nếu có --%>\r\n<c:if test=\"${not empty error}\">\r\n    <div class=\"error-message\">\r\n            ${error}\r\n    </div>\r\n</c:if>\r\n\r\n<form action=\"${pageContext.request.contextPath}/register\" method=\"post\">\r\n    <label for=\"name\">Tên:</label>\r\n    <input type=\"text\" id=\"name\" name=\"name\" required><br>\r\n\r\n    <label for=\"email\">Email:</label>\r\n    <input type=\"email\" id=\"email\" name=\"email\" required><br>\r\n\r\n    <label for=\"password\">Mật khẩu:</label>\r\n    <input type=\"password\" id=\"password\" name=\"password\" required><br>\r\n\r\n    <input type=\"submit\" value=\"Đăng Ký\">\r\n</form>\r\n</body>\r\n</html>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/webapp/WEB-INF/view/User/Register.jsp b/src/main/webapp/WEB-INF/view/User/Register.jsp
+--- a/src/main/webapp/WEB-INF/view/User/Register.jsp	
++++ b/src/main/webapp/WEB-INF/view/User/Register.jsp	
+@@ -1,57 +1,69 @@
+-<%-- Register.jsp --%>
++<%@ page contentType="text/html;charset=UTF-8" language="java" %>
++<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+ <!DOCTYPE html>
+ <html lang="vi">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Đăng Ký</title>
++    <link rel="preconnect" href="https://fonts.googleapis.com">
++    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
++    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+ 
+     <style>
+-        body {
+-            font-family: Arial, sans-serif; /* Đặt phông chữ cho toàn bộ trang */
+-            background-color: #f4f4f9;
++        * {
+             margin: 0;
+             padding: 0;
++            box-sizing: border-box;
++        }
++
++        body {
++            font-family: 'Roboto', Arial, sans-serif;
++            background-color: #f4f4f9;
+             text-align: center;
++            padding-top: 50px;
+         }
+ 
+         h2 {
+             color: #333;
++            margin-bottom: 20px;
+         }
+ 
+-        form {
+-            margin: 30px auto;
++        .container {
++            width: 350px;
++            margin: auto;
++            background: white;
+             padding: 20px;
+-            background-color: #fff;
+             border-radius: 8px;
+-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+-            width: 300px;
++            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+         }
+ 
+         label {
+             display: block;
+-            margin-bottom: 8px;
++            text-align: left;
+             font-weight: bold;
++            margin-bottom: 5px;
+         }
+ 
+         input[type="text"], input[type="email"], input[type="password"] {
+             width: 100%;
+             padding: 10px;
+-            margin-bottom: 20px;
++            margin-bottom: 15px;
+             border: 1px solid #ddd;
+             border-radius: 4px;
+-            font-size: 16px;
++            font-size: 14px;
+         }
+ 
+         input[type="submit"] {
+             width: 100%;
+-            padding: 10px;
++            padding: 12px;
+             background-color: #4CAF50;
+             color: white;
+             border: none;
+             border-radius: 4px;
+             font-size: 16px;
+             cursor: pointer;
++            transition: 0.3s;
+         }
+ 
+         input[type="submit"]:hover {
+@@ -61,37 +73,53 @@
+         .error-message {
+             color: red;
+             font-weight: bold;
+-            margin-bottom: 20px;
++            margin-bottom: 15px;
++        }
++
++        .login-link {
++            margin-top: 15px;
++            font-size: 14px;
+         }
+-    </style>
+-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+-    <style>
+-        body {
+-            font-family: 'Roboto', sans-serif; /* Sử dụng phông chữ Roboto từ Google Fonts */
++
++        .login-link a {
++            color: #007bff;
++            text-decoration: none;
++        }
++
++        .login-link a:hover {
++            text-decoration: underline;
+         }
+     </style>
+ </head>
+ <body>
++
+ <h2>Đăng Ký</h2>
+ 
+-<%-- Hiển thị thông báo lỗi nếu có --%>
+-<c:if test="${not empty error}">
+-    <div class="error-message">
+-            ${error}
+-    </div>
+-</c:if>
++<div class="container">
++    <%-- Hiển thị thông báo lỗi nếu có --%>
++    <c:if test="${not empty error}">
++        <div class="error-message">
++                ${error}
++        </div>
++    </c:if>
+ 
+-<form action="${pageContext.request.contextPath}/register" method="post">
+-    <label for="name">Tên:</label>
+-    <input type="text" id="name" name="name" required><br>
++    <form action="${pageContext.request.contextPath}/register" method="post">
++        <label for="name">Tên:</label>
++        <input type="text" id="name" name="name" required>
+ 
+-    <label for="email">Email:</label>
+-    <input type="email" id="email" name="email" required><br>
++        <label for="email">Email:</label>
++        <input type="email" id="email" name="email" required>
+ 
+-    <label for="password">Mật khẩu:</label>
+-    <input type="password" id="password" name="password" required><br>
++        <label for="password">Mật khẩu:</label>
++        <input type="password" id="password" name="password" required>
+ 
+-    <input type="submit" value="Đăng Ký">
+-</form>
++        <input type="submit" value="Đăng Ký">
++    </form>
++
++    <div class="login-link">
++        Đã có tài khoản? <a href="${pageContext.request.contextPath}/login">Đăng nhập</a>
++    </div>
++</div>
++
+ </body>
+ </html>
+Index: .idea/dataSources.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><<<<<<< HEAD\n<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"DataSourceManagerImpl\" format=\"xml\" multifile-model=\"true\">\r\n    <data-source source=\"LOCAL\" name=\"@localhost\" uuid=\"766bdde1-7953-4ac3-8a5e-17e691771a3c\">\r\n      <driver-ref>mysql.8</driver-ref>\r\n      <synchronize>true</synchronize>\r\n      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>\r\n      <jdbc-url>jdbc:mysql://localhost:3306</jdbc-url>\r\n      <jdbc-additional-properties>\r\n        <property name=\"com.intellij.clouds.kubernetes.db.host.port\" />\r\n        <property name=\"com.intellij.clouds.kubernetes.db.enabled\" value=\"false\" />\r\n        <property name=\"com.intellij.clouds.kubernetes.db.container.port\" />\r\n      </jdbc-additional-properties>\r\n      <working-dir>$ProjectFileDir$</working-dir>\r\n    </data-source>\r\n  </component>\r\n=======\n<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"DataSourceManagerImpl\" format=\"xml\" multifile-model=\"true\">\n    <data-source source=\"LOCAL\" name=\"@localhost\" uuid=\"826038da-c847-49e8-89ab-2f2e02975ec9\">\n      <driver-ref>mysql.8</driver-ref>\n      <synchronize>true</synchronize>\n      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>\n      <jdbc-url>jdbc:mysql://localhost:3306</jdbc-url>\n      <jdbc-additional-properties>\n        <property name=\"com.intellij.clouds.kubernetes.db.host.port\" />\n        <property name=\"com.intellij.clouds.kubernetes.db.enabled\" value=\"false\" />\n        <property name=\"com.intellij.clouds.kubernetes.db.resource.type\" value=\"Deployment\" />\n        <property name=\"com.intellij.clouds.kubernetes.db.container.port\" />\n      </jdbc-additional-properties>\n      <working-dir>$ProjectFileDir$</working-dir>\n    </data-source>\n  </component>\n>>>>>>> DangHoangLong\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/dataSources.xml b/.idea/dataSources.xml
+--- a/.idea/dataSources.xml	
++++ b/.idea/dataSources.xml	
+@@ -1,25 +1,7 @@
+-<<<<<<< HEAD
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+-    <data-source source="LOCAL" name="@localhost" uuid="766bdde1-7953-4ac3-8a5e-17e691771a3c">
+-      <driver-ref>mysql.8</driver-ref>
+-      <synchronize>true</synchronize>
+-      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+-      <jdbc-url>jdbc:mysql://localhost:3306</jdbc-url>
+-      <jdbc-additional-properties>
+-        <property name="com.intellij.clouds.kubernetes.db.host.port" />
+-        <property name="com.intellij.clouds.kubernetes.db.enabled" value="false" />
+-        <property name="com.intellij.clouds.kubernetes.db.container.port" />
+-      </jdbc-additional-properties>
+-      <working-dir>$ProjectFileDir$</working-dir>
+-    </data-source>
+-  </component>
+-=======
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+-    <data-source source="LOCAL" name="@localhost" uuid="826038da-c847-49e8-89ab-2f2e02975ec9">
++    <data-source source="LOCAL" name="@localhost" uuid="f6c16034-ebda-4cef-8d30-4d223bd20b17">
+       <driver-ref>mysql.8</driver-ref>
+       <synchronize>true</synchronize>
+       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+@@ -33,5 +15,4 @@
+       <working-dir>$ProjectFileDir$</working-dir>
+     </data-source>
+   </component>
+->>>>>>> DangHoangLong
+ </project>
+\ No newline at end of file
+Index: src/main/java/org/example/websitekinhdoanhpc_casestudy_module3/repository/BaseRepository.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package org.example.websitekinhdoanhpc_casestudy_module3.repository;\r\n\r\nimport org.example.websitekinhdoanhpc_casestudy_module3.entity.User;\r\n\r\nimport java.sql.*;\r\n\r\npublic class BaseRepository {\r\n    private static final String jdbcURL = \"jdbc:mysql://localhost:3307/OnlinePcShop?useSSL=false\";\r\n    private static final String jdbcUsername = \"root\";\r\n    private static final String jdbcPassword = \"123456789\";\r\n\r\n    static {\r\n        try {\r\n            Class.forName(\"com.mysql.cj.jdbc.Driver\");\r\n        } catch (ClassNotFoundException e) {\r\n            throw new RuntimeException(\"Lỗi khi tải MySQL Driver\", e);\r\n        }\r\n    }\r\n\r\n<<<<<<< HEAD\r\n//    public static Connection getConnection() {\r\n//        return connection;\r\n//    }\r\n\r\n    public static Connection getConnection() {\r\n        try {\r\n            if (connection == null || connection.isClosed()) { // \uD83D\uDD34 Đảm bảo kết nối còn mở\r\n                connection = DriverManager.getConnection(\"jdbc:mysql://localhost:3306/onlinepcshop\", \"root\", \"123456789\");\r\n=======\r\n    public static Connection getConnection() throws SQLException {\r\n        return DriverManager.getConnection(jdbcURL, jdbcUsername, jdbcPassword);\r\n    }\r\n\r\n    // ✅ Kiểm tra email đã tồn tại chưa\r\n    public static boolean isEmailExist(String email) {\r\n        String query = \"SELECT 1 FROM Users WHERE email = ?\";\r\n        try (Connection connection = getConnection();\r\n             PreparedStatement statement = connection.prepareStatement(query)) {\r\n            statement.setString(1, email);\r\n            try (ResultSet resultSet = statement.executeQuery()) {\r\n                return resultSet.next();\r\n>>>>>>> DangHoangLong\r\n            }\r\n        } catch (SQLException e) {\r\n            e.printStackTrace();\r\n        }\r\n<<<<<<< HEAD\r\n        return connection;\r\n=======\r\n        return false;\r\n    }\r\n\r\n    // ✅ Đăng ký người dùng vào database (KHÔNG mã hóa mật khẩu)\r\n    public static boolean registerUser(User user) {\r\n        String query = \"INSERT INTO Users (name, email, password, role, phone_number, address) VALUES (?, ?, ?, ?, ?, ?)\";\r\n        try (Connection connection = getConnection();\r\n             PreparedStatement statement = connection.prepareStatement(query)) {\r\n            statement.setString(1, user.getName());\r\n            statement.setString(2, user.getEmail());\r\n            statement.setString(3, user.getPassword());\r\n            statement.setString(4, user.getRole());\r\n            statement.setString(5, user.getPhone_number());\r\n            statement.setString(6, user.getAddress());\r\n            int rowsInserted = statement.executeUpdate();\r\n            return rowsInserted > 0; // Trả về true nếu đăng ký thành công\r\n        } catch (SQLException e) {\r\n            e.printStackTrace();\r\n            return false;\r\n        }\r\n    }\r\n\r\n    // ✅ Lấy thông tin người dùng theo email\r\n    public static User getUserByEmail(String email) {\r\n        User user = null;\r\n        String sql = \"SELECT email, password, role FROM users WHERE email = ?\";\r\n\r\n        try (Connection conn = getConnection();\r\n             PreparedStatement stmt = conn.prepareStatement(sql)) {\r\n            stmt.setString(1, email);\r\n            ResultSet rs = stmt.executeQuery();\r\n\r\n            if (rs.next()) {\r\n                user = new User();\r\n                user.setEmail(rs.getString(\"email\"));\r\n                user.setPassword(rs.getString(\"password\")); // Lấy mật khẩu thô\r\n                user.setRole(rs.getString(\"role\"));\r\n            }\r\n        } catch (SQLException e) {\r\n            e.printStackTrace();\r\n        }\r\n        return user;\r\n>>>>>>> DangHoangLong\r\n    }\r\n}\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/org/example/websitekinhdoanhpc_casestudy_module3/repository/BaseRepository.java b/src/main/java/org/example/websitekinhdoanhpc_casestudy_module3/repository/BaseRepository.java
+--- a/src/main/java/org/example/websitekinhdoanhpc_casestudy_module3/repository/BaseRepository.java	
++++ b/src/main/java/org/example/websitekinhdoanhpc_casestudy_module3/repository/BaseRepository.java	
+@@ -1,95 +1,126 @@
+-package org.example.websitekinhdoanhpc_casestudy_module3.repository;
++    package org.example.websitekinhdoanhpc_casestudy_module3.repository;
+ 
+-import org.example.websitekinhdoanhpc_casestudy_module3.entity.User;
++    import org.example.websitekinhdoanhpc_casestudy_module3.entity.User;
+ 
+-import java.sql.*;
++    import java.sql.*;
+ 
+-public class BaseRepository {
+-    private static final String jdbcURL = "jdbc:mysql://localhost:3307/OnlinePcShop?useSSL=false";
+-    private static final String jdbcUsername = "root";
+-    private static final String jdbcPassword = "123456789";
++    public class BaseRepository {
++        private static final String jdbcURL = "jdbc:mysql://localhost:3306/OnlinePcShop?useSSL=false";
++        private static final String jdbcUsername = "root";
++        private static final String jdbcPassword = "123456789";
+ 
+-    static {
+-        try {
+-            Class.forName("com.mysql.cj.jdbc.Driver");
+-        } catch (ClassNotFoundException e) {
+-            throw new RuntimeException("Lỗi khi tải MySQL Driver", e);
+-        }
+-    }
++        static {
++            try {
++                Class.forName("com.mysql.cj.jdbc.Driver");
++            } catch (ClassNotFoundException e) {
++                throw new RuntimeException("Lỗi khi tải MySQL Driver", e);
++            }
++        }
+ 
+-<<<<<<< HEAD
+-//    public static Connection getConnection() {
+-//        return connection;
+-//    }
+-
+-    public static Connection getConnection() {
+-        try {
+-            if (connection == null || connection.isClosed()) { // 🔴 Đảm bảo kết nối còn mở
+-                connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/onlinepcshop", "root", "123456789");
+-=======
+-    public static Connection getConnection() throws SQLException {
+-        return DriverManager.getConnection(jdbcURL, jdbcUsername, jdbcPassword);
+-    }
++        public static Connection getConnection() throws SQLException {
++            return DriverManager.getConnection(jdbcURL, jdbcUsername, jdbcPassword);
++        }
+ 
+-    // ✅ Kiểm tra email đã tồn tại chưa
+-    public static boolean isEmailExist(String email) {
+-        String query = "SELECT 1 FROM Users WHERE email = ?";
+-        try (Connection connection = getConnection();
+-             PreparedStatement statement = connection.prepareStatement(query)) {
+-            statement.setString(1, email);
+-            try (ResultSet resultSet = statement.executeQuery()) {
+-                return resultSet.next();
+->>>>>>> DangHoangLong
+-            }
+-        } catch (SQLException e) {
+-            e.printStackTrace();
+-        }
+-<<<<<<< HEAD
+-        return connection;
+-=======
+-        return false;
+-    }
++        // ✅ Kiểm tra email đã tồn tại chưa
++    //    public static boolean isEmailExist(String email) {
++    //        String query = "SELECT 1 FROM Users WHERE email = ?";
++    //        try (Connection connection = getConnection();
++    //             PreparedStatement statement = connection.prepareStatement(query)) {
++    //            statement.setString(1, email);
++    //            try (ResultSet resultSet = statement.executeQuery()) {
++    //                return resultSet.next();
++    //            }
++    //        } catch (SQLException e) {
++    //            e.printStackTrace();
++    //        }
++    //        return false;
++    //    }
+ 
+-    // ✅ Đăng ký người dùng vào database (KHÔNG mã hóa mật khẩu)
+-    public static boolean registerUser(User user) {
+-        String query = "INSERT INTO Users (name, email, password, role, phone_number, address) VALUES (?, ?, ?, ?, ?, ?)";
+-        try (Connection connection = getConnection();
+-             PreparedStatement statement = connection.prepareStatement(query)) {
+-            statement.setString(1, user.getName());
+-            statement.setString(2, user.getEmail());
+-            statement.setString(3, user.getPassword());
+-            statement.setString(4, user.getRole());
+-            statement.setString(5, user.getPhone_number());
+-            statement.setString(6, user.getAddress());
+-            int rowsInserted = statement.executeUpdate();
+-            return rowsInserted > 0; // Trả về true nếu đăng ký thành công
+-        } catch (SQLException e) {
+-            e.printStackTrace();
+-            return false;
+-        }
+-    }
++        // ✅ Đăng ký người dùng vào database (KHÔNG mã hóa mật khẩu)
++        public static boolean registerUser(User user) {
++            String query = "INSERT INTO Users (name, email, password, role, phone_number, address) VALUES (?, ?, ?, ?, ?, ?)";
++            try (Connection connection = getConnection();
++                 PreparedStatement statement = connection.prepareStatement(query)) {
++                statement.setString(1, user.getName());
++                statement.setString(2, user.getEmail());
++                statement.setString(3, user.getPassword());
++                statement.setString(4, user.getRole());
++                statement.setString(5, user.getPhone_number());
++                statement.setString(6, user.getAddress());
++                int rowsInserted = statement.executeUpdate();
++                return rowsInserted > 0; // Trả về true nếu đăng ký thành công
++            } catch (SQLException e) {
++                e.printStackTrace();
++                return false;
++            }
++        }
+ 
+-    // ✅ Lấy thông tin người dùng theo email
+-    public static User getUserByEmail(String email) {
+-        User user = null;
+-        String sql = "SELECT email, password, role FROM users WHERE email = ?";
++        // ✅ Lấy thông tin người dùng theo email
++        public static User getUserByEmail(String email) {
++            User user = null;
++            String sql = "SELECT * FROM users WHERE LOWER(email) = LOWER(?)";
++
++            try (Connection conn = getConnection();
++                 PreparedStatement stmt = conn.prepareStatement(sql)) {
++                stmt.setString(1, email.toLowerCase()); // Ép email về chữ thường
++                ResultSet rs = stmt.executeQuery();
++
++                if (rs.next()) {
++                    System.out.println("Đã tìm thấy email trong database: " + email); // Debug
++                    user = new User();
++                    user.setUser_id(rs.getInt("user_id"));
++                    user.setName(rs.getString("name"));
++                    user.setEmail(rs.getString("email"));
++                    user.setPassword(rs.getString("password"));
++                    user.setRole(rs.getString("role"));
++                    user.setPhone_number(rs.getString("phone_number"));
++                    user.setAddress(rs.getString("address"));
++                } else {
++                    System.out.println("Email chưa tồn tại: " + email); // Debug
++                }
++            } catch (SQLException e) {
++                e.printStackTrace();
++            }
++            return user;
++        }
++
++        public boolean isEmailExist(String email) {
++            boolean exists = false;
++            String query = "SELECT * FROM users WHERE email = ?";
++
++            try (Connection connection = BaseRepository.getConnection();
++                 PreparedStatement statement = connection.prepareStatement(query)) {
++                statement.setString(1, email);
++                ResultSet resultSet = statement.executeQuery();
++                exists = resultSet.next(); // Nếu có kết quả, email đã tồn tại
++            } catch (SQLException e) {
++                e.printStackTrace();
++            }
++
++            return exists;
++        }
++        public static User getUserById(int userId) {
++            User user = null;
++            String sql = "SELECT * FROM users WHERE user_id = ?";
+ 
+-        try (Connection conn = getConnection();
+-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+-            stmt.setString(1, email);
+-            ResultSet rs = stmt.executeQuery();
++            try (Connection conn = getConnection();
++                 PreparedStatement stmt = conn.prepareStatement(sql)) {
++                stmt.setInt(1, userId);
++                ResultSet rs = stmt.executeQuery();
+ 
+-            if (rs.next()) {
+-                user = new User();
+-                user.setEmail(rs.getString("email"));
+-                user.setPassword(rs.getString("password")); // Lấy mật khẩu thô
+-                user.setRole(rs.getString("role"));
+-            }
+-        } catch (SQLException e) {
+-            e.printStackTrace();
+-        }
+-        return user;
+->>>>>>> DangHoangLong
+-    }
+-}
+-
++                if (rs.next()) {
++                    user = new User();
++                    user.setUser_id(rs.getInt("user_id"));
++                    user.setName(rs.getString("name"));
++                    user.setEmail(rs.getString("email"));
++                    user.setPassword(rs.getString("password"));
++                    user.setRole(rs.getString("role"));
++                    user.setPhone_number(rs.getString("phone_number"));
++                    user.setAddress(rs.getString("address"));
++                }
++            } catch (SQLException e) {
++                e.printStackTrace();
++            }
++            return user;
++        }
++    }
+\ No newline at end of file
+Index: .idea/dataSources.local.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><<<<<<< HEAD\n<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"dataSourceStorageLocal\" created-in=\"IU-233.15026.9\">\r\n    <data-source name=\"@localhost\" uuid=\"766bdde1-7953-4ac3-8a5e-17e691771a3c\">\r\n      <database-info product=\"MySQL\" version=\"8.4.0\" jdbc-version=\"4.2\" driver-name=\"MySQL Connector/J\" driver-version=\"mysql-connector-j-8.2.0 (Revision: 06a1f724497fd81c6a659131fda822c9e5085b6c)\" dbms=\"MYSQL\" exact-version=\"8.4.0\" exact-driver-version=\"8.2\">\r\n        <extra-name-characters>#@</extra-name-characters>\r\n        <identifier-quote-string>`</identifier-quote-string>\r\n      </database-info>\r\n      <case-sensitivity plain-identifiers=\"lower\" quoted-identifiers=\"lower\" />\r\n      <secret-storage>master_key</secret-storage>\r\n      <user-name>root</user-name>\r\n      <schema-mapping>\r\n        <introspection-scope>\r\n          <node kind=\"schema\">\r\n            <name qname=\"@\" />\r\n            <name qname=\"onlinepcshop\" />\r\n          </node>\r\n        </introspection-scope>\r\n      </schema-mapping>\r\n    </data-source>\r\n  </component>\r\n=======\n<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"dataSourceStorageLocal\" created-in=\"IU-233.15325.26\">\n    <data-source name=\"@localhost\" uuid=\"826038da-c847-49e8-89ab-2f2e02975ec9\">\n      <database-info product=\"MySQL\" version=\"8.0.40\" jdbc-version=\"4.2\" driver-name=\"MySQL Connector/J\" driver-version=\"mysql-connector-j-8.2.0 (Revision: 06a1f724497fd81c6a659131fda822c9e5085b6c)\" dbms=\"MYSQL\" exact-version=\"8.0.40\" exact-driver-version=\"8.2\">\n        <extra-name-characters>#@</extra-name-characters>\n        <identifier-quote-string>`</identifier-quote-string>\n      </database-info>\n      <case-sensitivity plain-identifiers=\"lower\" quoted-identifiers=\"lower\" />\n      <secret-storage>master_key</secret-storage>\n      <user-name>root</user-name>\n      <schema-mapping>\n        <introspection-scope>\n          <node kind=\"schema\">\n            <name qname=\"@\" />\n            <name qname=\"onlinepcshop\" />\n          </node>\n        </introspection-scope>\n      </schema-mapping>\n    </data-source>\n  </component>\n>>>>>>> DangHoangLong\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/dataSources.local.xml b/.idea/dataSources.local.xml
+--- a/.idea/dataSources.local.xml	
++++ b/.idea/dataSources.local.xml	
+@@ -1,46 +1,20 @@
+-<<<<<<< HEAD
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="dataSourceStorageLocal" created-in="IU-233.15026.9">
+-    <data-source name="@localhost" uuid="766bdde1-7953-4ac3-8a5e-17e691771a3c">
+-      <database-info product="MySQL" version="8.4.0" jdbc-version="4.2" driver-name="MySQL Connector/J" driver-version="mysql-connector-j-8.2.0 (Revision: 06a1f724497fd81c6a659131fda822c9e5085b6c)" dbms="MYSQL" exact-version="8.4.0" exact-driver-version="8.2">
+-        <extra-name-characters>#@</extra-name-characters>
+-        <identifier-quote-string>`</identifier-quote-string>
+-      </database-info>
+-      <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower" />
+-      <secret-storage>master_key</secret-storage>
+-      <user-name>root</user-name>
+-      <schema-mapping>
+-        <introspection-scope>
+-          <node kind="schema">
+-            <name qname="@" />
+-            <name qname="onlinepcshop" />
+-          </node>
+-        </introspection-scope>
+-      </schema-mapping>
+-    </data-source>
+-  </component>
+-=======
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="dataSourceStorageLocal" created-in="IU-233.15325.26">
+-    <data-source name="@localhost" uuid="826038da-c847-49e8-89ab-2f2e02975ec9">
++    <data-source name="@localhost" uuid="f6c16034-ebda-4cef-8d30-4d223bd20b17">
+       <database-info product="MySQL" version="8.0.40" jdbc-version="4.2" driver-name="MySQL Connector/J" driver-version="mysql-connector-j-8.2.0 (Revision: 06a1f724497fd81c6a659131fda822c9e5085b6c)" dbms="MYSQL" exact-version="8.0.40" exact-driver-version="8.2">
+         <extra-name-characters>#@</extra-name-characters>
+         <identifier-quote-string>`</identifier-quote-string>
++        <jdbc-catalog-is-schema>true</jdbc-catalog-is-schema>
+       </database-info>
+       <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower" />
+       <secret-storage>master_key</secret-storage>
+       <user-name>root</user-name>
+       <schema-mapping>
+         <introspection-scope>
+-          <node kind="schema">
+-            <name qname="@" />
+-            <name qname="onlinepcshop" />
+-          </node>
++          <node kind="schema" qname="@" />
+         </introspection-scope>
+       </schema-mapping>
+     </data-source>
+   </component>
+->>>>>>> DangHoangLong
+ </project>
+\ No newline at end of file
+Index: src/main/webapp/WEB-INF/view/product/TrangChu.jsp
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>    <%--\r\n      Created by IntelliJ IDEA.\r\n      User: PC\r\n      Date: 12/02/2025\r\n      Time: 1:56 pm\r\n      To change this template use File | Settings | File Templates.\r\n    --%>\r\n    <%@ page contentType=\"text/html;charset=UTF-8\" language=\"java\" %>\r\n    <%@ taglib uri=\"http://java.sun.com/jsp/jstl/core\" prefix=\"c\" %>\r\n\r\n    <html lang=\"vi\">\r\n    <head>\r\n        <meta charset=\"UTF-8\">\r\n        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\r\n        <title>PC codegym</title>\r\n        <link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css\">\r\n        <link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css\">\r\n        <%--    <link rel=\"stylesheet\" href=\"TrangChu.css\"> &lt;%&ndash; Updated paths &ndash;%&gt;--%>\r\n        <link rel=\"stylesheet\" href=\"css/TrangChu.css\">\r\n        <link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css\">\r\n        <style>\r\n            /* Định dạng cho pop-up (Modal) */\r\n            #registerModal {\r\n                position: fixed;\r\n                top: 50%;\r\n                left: 50%;\r\n                transform: translate(-50%, -50%);\r\n                background-color: white;\r\n                padding: 20px;\r\n                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);\r\n                z-index: 1000;\r\n                width: 400px;\r\n                border-radius: 8px;\r\n            }\r\n\r\n\r\n\r\n            /* Định dạng nút đóng */\r\n            .close {\r\n                font-size: 1.5em;\r\n                color: #aaa;\r\n                border: none;\r\n                background: none;\r\n                cursor: pointer;\r\n            }\r\n            .close:hover {\r\n                color: black;\r\n            }\r\n\r\n            /* Định dạng form */\r\n            .form-group {\r\n                margin-bottom: 15px;\r\n            }\r\n            .form-control {\r\n                width: 100%;\r\n                padding: 10px;\r\n                margin: 5px 0;\r\n                border-radius: 5px;\r\n                border: 1px solid #ccc;\r\n            }\r\n            .btn {\r\n                background-color: #4CAF50;\r\n                color: white;\r\n                padding: 10px 15px;\r\n                border: none;\r\n                border-radius: 5px;\r\n                cursor: pointer;\r\n            }\r\n            .btn:hover {\r\n                background-color: #45a049;\r\n            }\r\n        </style>\r\n    </head>\r\n    <body>\r\n    <header class=\"header\">\r\n        <a href=\"\">\r\n            <img src=\"\" alt=\"\">\r\n        </a>\r\n        <nav class=\"navbar navbar-expand-lg navbar-light bg-light\">\r\n            <div class=\"container-fluid d-flex justify-content-between align-items-center\">\r\n                <a class=\"navbar-brand\" href=\"#\">PC MNhat</a>\r\n                <button class=\"navbar-toggler\" type=\"button\" data-bs-toggle=\"collapse\" data-bs-target=\"#navbarNavDropdown\" aria-controls=\"navbarNavDropdown\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\r\n                    <span class=\"navbar-toggler-icon\"></span>\r\n                </button>\r\n                <div class=\"collapse navbar-collapse\" id=\"navbarNavDropdown\">\r\n                    <ul class=\"navbar-nav\">\r\n                        <li class=\"nav-item\">\r\n                            <a class=\"nav-link active\" aria-current=\"page\" href=\"#\">Trang chủ</a>\r\n                        </li>\r\n                        <li class=\"nav-item dropdown\">\r\n                            <a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"navbarDropdownMenuLaptop\" role=\"button\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\">\r\n                                Build PC\r\n                            </a>\r\n                            <ul class=\"dropdown-menu\" aria-labelledby=\"navbarDropdownMenuLaptop\">\r\n                                <li><a class=\"dropdown-item\" href=\"#\">Thương hiệu</a></li>\r\n                                <li><a class=\"dropdown-item\" href=\"#\">Giá bán</a></li>\r\n                                <li><a class=\"dropdown-item\" href=\"#\">Nhu cầu sử dụng</a></li>\r\n                            </ul>\r\n                        </li>\r\n                        <li class=\"nav-item dropdown\">\r\n                            <a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"navbarDropdownMenuPC\" role=\"button\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\">\r\n                                Laptop\r\n                            </a>\r\n                            <ul class=\"dropdown-menu\" aria-labelledby=\"navbarDropdownMenuPC\">\r\n                                <li><a class=\"dropdown-item\" href=\"#\">Thương hiệu</a></li>\r\n                                <li><a class=\"dropdown-item\" href=\"#\">Giá bán</a></li>\r\n                                <li><a class=\"dropdown-item\" href=\"#\">Nhu cầu sử dụng</a></li>\r\n                            </ul>\r\n                        </li>\r\n                        <li class=\"nav-item dropdown\">\r\n                            <a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"navbarDropdownMenuPhuKien\" role=\"button\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\">\r\n                                Phụ kiện\r\n                            </a>\r\n                            <ul class=\"dropdown-menu\" aria-labelledby=\"navbarDropdownMenuPhuKien\">\r\n                                <li><a class=\"dropdown-item\" href=\"#\">Tai nghe</a></li>\r\n                                <li><a class=\"dropdown-item\" href=\"#\">Chuột</a></li>\r\n                                <li><a class=\"dropdown-item\" href=\"#\">Bàn phím</a></li>\r\n                                <li><a class=\"dropdown-item\" href=\"#\">Ghế</a></li>\r\n                                <li><a class=\"dropdown-item\" href=\"#\">Tay cầm</a></li>\r\n                            </ul>\r\n                        </li>\r\n                        <%--                    <li class=\"nav-item dropdown\">--%>\r\n                        <%--                        <a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"navbarDropdownMenuKhuyenMai\" role=\"button\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\">--%>\r\n                        <%--                            Khuyến mãi--%>\r\n                        <%--                        </a>--%>\r\n                        <%--                        <ul class=\"dropdown-menu\" aria-labelledby=\"navbarDropdownMenuKhuyenMai\">--%>\r\n                        <%--                            <li><a class=\"dropdown-item\" href=\"#\">Action</a></li>--%>\r\n                        <%--                            <li><a class=\"dropdown-item\" href=\"#\">Another action</a></li>--%>\r\n                        <%--                            <li><a class=\"dropdown-item\" href=\"#\">Something else here</a></li>--%>\r\n                        <%--                        </ul>--%>\r\n                        <%--                    </li>--%>\r\n                    </ul>\r\n                </div>\r\n                <div class=\"nav-icons d-flex justify-content-end gap-3\">\r\n                    <a href=\"javascript:void(0);\" class=\"icon\" data-bs-toggle=\"tooltip\" title=\"Đăng Nhập\" onclick=\"showLoginModal()\">\r\n                        <i class=\"bi bi-person-fill\"></i>\r\n                    </a>\r\n                    <a href=\"#\" class=\"icon\" data-  bs-toggle=\"tooltip\" title=\"Messages\">\r\n                        <i class=\"bi bi-chat-left-text\"></i>\r\n                    </a>\r\n                    <a class=\"cart-icon position-relative\" data-bs-toggle=\"tooltip\" title=\"Cart\">\r\n                        <i class=\"bi bi-cart\"></i>\r\n                        <span class=\"cart-count position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger\">2</span>\r\n                    </a>\r\n                    <a href=\"#\" class=\"icon\" data-bs-toggle=\"tooltip\" title=\"More\">\r\n                        <i class=\"bi bi-three-dots-vertical\"></i>\r\n                    </a>\r\n                </div>\r\n            </div>\r\n        </nav>\r\n\r\n\r\n    </header>\r\n    <%--<p>Danh sách sản phẩm: ${products}</p>--%>\r\n    <div class=\"container mt-4\">\r\n        <div id=\"productList\" class=\"row\">\r\n            <c:forEach var=\"product\" items=\"${products}\">\r\n                <div class=\"col-md-4 mb-4\">\r\n                    <div class=\"card\">\r\n                        <img src=\"${product.image_url}\" class=\"card-img-top\" alt=\"${product.description}\">\r\n    <%--                    <img src=\"/assets/img/products/laptop_dell_id01.webp\" class=\"card-img-top\" alt=\"${product.description}\">--%>\r\n\r\n                        <div class=\"card-body\">\r\n                            <h5 class=\"card-title\">${product.name}</h5>\r\n                            <h5 class=\"card-title\">${product.description}</h5>\r\n                            <p class=\"card-text\">Giá: ${product.price}</p>\r\n                            <button class=\"btn btn-primary\" onclick=\"window.location.href='/TrangChu?action=addToCart&id=${product.product_id}';\">Mua ngay</button>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </c:forEach>\r\n        </div>\r\n    </div>\r\n    <link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css\">\r\n\r\n    <link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css\">\r\n    <%--    <link rel=\"stylesheet\" href=\"TrangChu.css\"> &lt;%&ndash; Updated paths &ndash;%&gt;--%>\r\n\r\n<%--    <link rel=\"stylesheet\" href=\"/css/TrangChu.css\">--%>\r\n    <link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css\">\r\n    <style>\r\n        body {\r\n            background-color: #fff;\r\n            color: #000;\r\n        }\r\n        html .navbar {\r\n            background-color: rgb(227, 0, 25) !important;\r\n        }\r\n\r\n        /* ===== Header & Navigation ===== */\r\n        .header, .nav-menu, .navbar, .btn-primary {\r\n            background-color: rgb(227,0,25);\r\n        }\r\n\r\n        .header {\r\n            display: flex;\r\n            justify-content: center;\r\n            padding: 10px;\r\n        }\r\n\r\n        .nav-menu {\r\n            display: flex;\r\n            gap: 20px;\r\n            align-items: center;\r\n        }\r\n\r\n        .nav-menu a, .navbar a, .btn-primary {\r\n            text-decoration: none;\r\n            color: white !important;\r\n            font-weight: 500;\r\n            padding: 8px 12px;\r\n        }\r\n\r\n        .nav-icons {\r\n            height: 100%;\r\n            display: flex;\r\n            align-items: center;\r\n        }\r\n\r\n        .btn-primary:hover {\r\n            background-color: #b3001b;\r\n        }\r\n\r\n        /* ===== Card Styles ===== */\r\n        .card-container {\r\n            display: grid;\r\n            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));\r\n            gap: 20px;\r\n        }\r\n\r\n        .card {\r\n            position: relative;\r\n            border-radius: 12px;\r\n            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);\r\n            overflow: hidden;\r\n            padding: 20px;\r\n        }\r\n\r\n        .card img {\r\n            height: 416px;\r\n            width: 100%;\r\n            object-fit: cover;\r\n        }\r\n\r\n        .card-body {\r\n            height: 230px;\r\n        }\r\n\r\n        /* ===== Add to Cart Button ===== */\r\n        .add-to-cart {\r\n            position: absolute;\r\n            bottom: 50px;\r\n            right: 40px;\r\n            padding: 8px 12px;\r\n            background-color: #ff4d4d;\r\n            color: white;\r\n            border: none;\r\n            border-radius: 6px;\r\n            cursor: pointer;\r\n            transition: background 0.3s;\r\n        }\r\n\r\n        .add-to-cart:hover {\r\n            background-color: #b3001b;\r\n        }\r\n\r\n\r\n        /* ===== Dropdown Menu ===== */\r\n        .dropdown-menu {\r\n            min-width: 300px;\r\n        }\r\n\r\n        .dropdown-menu table {\r\n            width: 100%;\r\n            margin: 0;\r\n        }\r\n\r\n        .dropdown-menu th,\r\n        .dropdown-menu td {\r\n            padding: 10px;\r\n            text-align: left;\r\n        }\r\n\r\n        .dropdown-menu th {\r\n            background-color: #f8f9fa;\r\n            font-weight: bold;\r\n        }\r\n\r\n        /* Đổi màu chữ của dropdown menu */\r\n        .dropdown-menu .dropdown-item {\r\n            color: red !important; /* Màu đỏ */\r\n            font-weight: bold;\r\n        }\r\n\r\n        /* Khi hover vào menu item */\r\n        .dropdown-menu .dropdown-item:hover {\r\n            background-color: #f8d7da; /* Màu nền nhạt để dễ nhìn */\r\n            color: darkred !important; /* Đậm hơn khi hover */\r\n        }\r\n\r\n        /* ===== Modal (Popup) Styles ===== */\r\n        #registerModal {\r\n            position: fixed;\r\n            top: 50%;\r\n            left: 50%;\r\n            transform: translate(-50%, -50%);\r\n            background-color: white;\r\n            padding: 20px;\r\n            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);\r\n            z-index: 1000;\r\n            width: 400px;\r\n            border-radius: 8px;\r\n        }\r\n\r\n        /* ===== Close Button ===== */\r\n        .close {\r\n            font-size: 1.5em;\r\n            color: #aaa;\r\n            border: none;\r\n            background: none;\r\n            cursor: pointer;\r\n        }\r\n\r\n        .close:hover {\r\n            color: black;\r\n        }\r\n\r\n        /* ===== Form Styles ===== */\r\n        .form-group {\r\n            margin-bottom: 15px;\r\n        }\r\n\r\n        .form-control {\r\n            width: 100%;\r\n            padding: 10px;\r\n            margin: 5px 0;\r\n            border-radius: 5px;\r\n            border: 1px solid #ccc;\r\n        }\r\n\r\n        .btn {\r\n            background-color: #4CAF50;\r\n            color: white;\r\n            padding: 10px 15px;\r\n            border: none;\r\n            border-radius: 5px;\r\n            cursor: pointer;\r\n        }\r\n\r\n        .btn:hover {\r\n            background-color: #45a049;\r\n        }\r\n\r\n    </style>\r\n</head>\r\n<body>\r\n<header class=\"header\">\r\n    <a href=\"\">\r\n        <img src=\"\" alt=\"\">\r\n    </a>\r\n    <nav class=\"navbar navbar-expand-lg navbar-light bg-light\">\r\n        <div class=\"container-fluid d-flex justify-content-between align-items-center\">\r\n            <a class=\"navbar-brand\" href=\"TrangChu\">PC MNhat</a>\r\n            <button class=\"navbar-toggler\" type=\"button\" data-bs-toggle=\"collapse\" data-bs-target=\"#navbarNavDropdown\" aria-controls=\"navbarNavDropdown\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\r\n                <span class=\"navbar-toggler-icon\"></span>\r\n            </button>\r\n            <div class=\"collapse navbar-collapse\" id=\"navbarNavDropdown\">\r\n                <ul class=\"navbar-nav\">\r\n                    <li class=\"nav-item\">\r\n                        <a class=\"nav-link active\" aria-current=\"page\" href=\"#\">Trang chủ</a>\r\n                    </li>\r\n                    <li class=\"nav-item dropdown\">\r\n                        <a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"navbarDropdownMenuLaptop\" role=\"button\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\">\r\n                            Build PC\r\n                        </a>\r\n                        <ul class=\"dropdown-menu\" aria-labelledby=\"navbarDropdownMenuLaptop\">\r\n                            <li><a class=\"dropdown-item\" href=\"#\">Thương hiệu</a></li>\r\n                            <li><a class=\"dropdown-item\" href=\"#\">Giá bán</a></li>\r\n                            <li><a class=\"dropdown-item\" href=\"#\">Nhu cầu sử dụng</a></li>\r\n                        </ul>\r\n                    </li>\r\n                    <li class=\"nav-item dropdown\">\r\n                        <a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"navbarDropdownMenuPC\" role=\"button\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\">\r\n                            Laptop\r\n                        </a>\r\n                        <ul class=\"dropdown-menu\" aria-labelledby=\"navbarDropdownMenuPC\">\r\n                            <li><a class=\"dropdown-item\" href=\"#\">Thương hiệu</a></li>\r\n                            <li><a class=\"dropdown-item\" href=\"#\">Giá bán</a></li>\r\n                            <li><a class=\"dropdown-item\" href=\"#\">Nhu cầu sử dụng</a></li>\r\n                        </ul>\r\n                    </li>\r\n                    <li class=\"nav-item dropdown\">\r\n                        <a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"navbarDropdownMenuPhuKien\" role=\"button\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\">\r\n                            Phụ kiện\r\n                        </a>\r\n                        <ul class=\"dropdown-menu\" aria-labelledby=\"navbarDropdownMenuPhuKien\">\r\n                            <li><a class=\"dropdown-item\" href=\"#\">Tai nghe</a></li>\r\n                            <li><a class=\"dropdown-item\" href=\"#\">Chuột</a></li>\r\n                            <li><a class=\"dropdown-item\" href=\"#\">Bàn phím</a></li>\r\n                            <li><a class=\"dropdown-item\" href=\"#\">Ghế</a></li>\r\n                            <li><a class=\"dropdown-item\" href=\"#\">Tay cầm</a></li>\r\n                        </ul>\r\n                    </li>\r\n                    <%--                    <li class=\"nav-item dropdown\">--%>\r\n                    <%--                        <a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"navbarDropdownMenuKhuyenMai\" role=\"button\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\">--%>\r\n                    <%--                            Khuyến mãi--%>\r\n                    <%--                        </a>--%>\r\n                    <%--                        <ul class=\"dropdown-menu\" aria-labelledby=\"navbarDropdownMenuKhuyenMai\">--%>\r\n                    <%--                            <li><a class=\"dropdown-item\" href=\"#\">Action</a></li>--%>\r\n                    <%--                            <li><a class=\"dropdown-item\" href=\"#\">Another action</a></li>--%>\r\n                    <%--                            <li><a class=\"dropdown-item\" href=\"#\">Something else here</a></li>--%>\r\n                    <%--                        </ul>--%>\r\n                    <%--                    </li>--%>\r\n                </ul>\r\n            </div>\r\n            <div class=\"nav-icons d-flex justify-content-end gap-3\">\r\n                <a href=\"javascript:void(0);\" class=\"icon\" data-bs-toggle=\"tooltip\" title=\"Đăng Nhập\" onclick=\"showLoginModal()\">\r\n                    <i class=\"bi bi-person-fill\"></i>\r\n                </a>\r\n                <a href=\"#\" class=\"icon\" data-  bs-toggle=\"tooltip\" title=\"Messages\">\r\n                    <i class=\"bi bi-chat-left-text\"></i>\r\n                </a>\r\n                <a href=\"Cart\" class=\"cart-icon position-relative\" data-bs-toggle=\"tooltip\" title=\"Cart\">\r\n                    <i class=\"bi bi-cart\"></i>\r\n                    <span class=\"cart-count position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger\">2</span>\r\n                </a>\r\n                <a href=\"#\" class=\"icon\" data-bs-toggle=\"tooltip\" title=\"More\">\r\n                    <i class=\"bi bi-three-dots-vertical\"></i>\r\n                </a>\r\n            </div>\r\n        </div>\r\n    </nav>\r\n\r\n\r\n</header>\r\n<%--<p>Danh sách sản phẩm: ${products}</p>--%>\r\n<div class=\"container mt-4\">\r\n    <div id=\"productList\" class=\"row\">\r\n        <c:forEach var=\"product\" items=\"${products}\">\r\n            <div class=\"col-md-4 mb-4\">\r\n                <div class=\"card\">\r\n                    <img src=\"${product.image_url}\" class=\"card-img-top\" alt=\"${product.description}\">\r\n<%--                    <img src=\"/assets/img/products/laptop_dell_id01.webp\" class=\"card-img-top\" alt=\"${product.description}\">--%>\r\n\r\n                    <div class=\"card-body\">\r\n                        <h5 class=\"card-title\">${product.name}</h5>\r\n                        <h5 class=\"card-title\">${product.description}</h5>\r\n                        <p class=\"card-text\">Giá: ${product.formattedPrice}</p>\r\n                    </div>\r\n<%--                    <button class=\"btn btn-primary add-to-cart\" data-product-id=\"${product.product_id}\"--%>\r\n<%--                            onclick=\"window.location.href='/Cart?product_id=${product.product_id}';\">--%>\r\n<%--                        Mua ngay--%>\r\n<%--                    </button>--%>\r\n                    <button class=\"btn btn-primary add-to-cart\" data-product-id=\"${product.product_id}\">\r\n                        Mua ngay\r\n                    </button>\r\n\r\n                </div>\r\n            </div>\r\n        </c:forEach>\r\n    </div>\r\n</div>\r\n\r\n<link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css\">\r\n<!-- Modal đăng nhập -->\r\n<div class=\"modal fade\" id=\"loginModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"loginModalLabel\" aria-hidden=\"true\">\r\n    <div class=\"modal-dialog\" role=\"document\">\r\n        <div class=\"modal-content\">\r\n            <div class=\"modal-header\">\r\n                <h5 class=\"modal-title\" id=\"loginModalLabel\">Đăng Nhập</h5>\r\n                <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"modal\" aria-label=\"Close\"></button>\r\n            </div>\r\n            <div class=\"modal-body\">\r\n                <form action=\"login\" method=\"post\">\r\n                    <div class=\"form-group\">\r\n                        <label for=\"loginEmail\">Email</label>\r\n                        <input type=\"email\" class=\"form-control\" id=\"loginEmail\" name=\"email\" required>\r\n=======\r\n\r\n    <!-- Modal đăng nhập -->\r\n    <div class=\"modal fade\" id=\"loginModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"loginModalLabel\" inert>\r\n        <div class=\"modal-dialog\" role=\"document\">\r\n            <div class=\"modal-content\">\r\n                <div class=\"modal-header\">\r\n                    <h5 class=\"modal-title\" id=\"loginModalLabel\">Đăng Nhập</h5>\r\n                    <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"modal\" aria-label=\"Close\"></button>\r\n                </div>\r\n                <div class=\"modal-body\">\r\n                    <%-- Hiển thị thông báo lỗi nếu có --%>\r\n                    <%\r\n                        String errorMessage = (String) session.getAttribute(\"error\");\r\n                        if (errorMessage != null) {\r\n                    %>\r\n                    <p style=\"color: red; text-align: center;\"><%= errorMessage %></p>\r\n                    <%\r\n                            session.removeAttribute(\"error\"); // Xóa lỗi sau khi hiển thị\r\n                        }\r\n                    %>\r\n\r\n                    <form action=\"login\" method=\"POST\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"loginEmail\">Email</label>\r\n                            <input type=\"email\" class=\"form-control\" id=\"loginEmail\" name=\"email\" required>\r\n                        </div>\r\n                        <div class=\"form-group\">\r\n                            <label for=\"loginPassword\">Mật Khẩu</label>\r\n                            <input type=\"password\" class=\"form-control\" id=\"loginPassword\" name=\"password\" required>\r\n                        </div>\r\n                        <button type=\"submit\" class=\"btn btn-primary\">Đăng Nhập</button>\r\n                    </form>\r\n                    <!-- Nút đăng ký dưới form đăng nhập -->\r\n                    <div class=\"text-center mt-3\">\r\n                        <p>Chưa có tài khoản? <a href=\"#\" onclick=\"switchToRegister()\">Đăng ký</a></p>\r\n>>>>>>> DangHoangLong\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n\r\n    <!-- Modal đăng ký -->\r\n    <div class=\"modal fade\" id=\"registerModal\" tabindex=\"-1\" aria-labelledby=\"registerModalLabel\" aria-hidden=\"true\" data-bs-backdrop=\"false\">\r\n        <div class=\"modal-dialog\">\r\n            <div class=\"modal-content\">\r\n                <div class=\"modal-header\">\r\n                    <h5 class=\"modal-title\" id=\"registerModalLabel\">Đăng Ký</h5>\r\n                    <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"modal\" aria-label=\"Close\"></button>\r\n                </div>\r\n                <div class=\"modal-body\">\r\n                    <form id=\"registerForm\" action=\"<%= request.getContextPath() %>/register\" method=\"POST\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"registerName\">Họ và Tên</label>\r\n                            <input type=\"text\" class=\"form-control\" id=\"registerName\" name=\"name\" required>\r\n                        </div>\r\n                        <div class=\"form-group\">\r\n                            <label for=\"registerEmail\">Email</label>\r\n                            <input type=\"email\" class=\"form-control\" id=\"registerEmail\" name=\"email\" required>\r\n                        </div>\r\n                        <div class=\"form-group\">\r\n                            <label for=\"registerPassword\">Mật khẩu</label>\r\n                            <input type=\"password\" class=\"form-control\" id=\"registerPassword\" name=\"password\" required>\r\n                        </div>\r\n                        <button type=\"submit\" class=\"btn btn-primary\">Đăng Ký</button>\r\n                    </form>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n\r\n</div>\r\n<script src=\"https://code.jquery.com/jquery-3.6.0.min.js\"></script>\r\n<script src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js\"></script>\r\n<script>\r\n    function showLoginModal() {\r\n        var loginModal = new bootstrap.Modal(document.getElementById('loginModal'));\r\n        loginModal.show();\r\n    }\r\n\r\n    function showRegisterModal() {\r\n        var registerModal = new bootstrap.Modal(document.getElementById('registerModal'));\r\n        registerModal.show();\r\n    }\r\n\r\n    function switchToRegister() {\r\n        var loginModalEl = document.getElementById('loginModal');\r\n        var registerModalEl = document.getElementById('registerModal');\r\n\r\n        if (loginModalEl) {\r\n            var loginModal = bootstrap.Modal.getInstance(loginModalEl) || new bootstrap.Modal(loginModalEl);\r\n            loginModal.hide();\r\n=======\r\n\r\n    <script>\r\n        function showLoginModal() {\r\n            var loginModalEl = document.getElementById('loginModal');\r\n            if (loginModalEl) {\r\n                var loginModal = new bootstrap.Modal(loginModalEl);\r\n                loginModal.show();\r\n            } else {\r\n                console.error(\"Không tìm thấy modal đăng nhập (#loginModal) trong DOM.\");\r\n            }\r\n>>>>>>> DangHoangLong\r\n        }\r\n\r\n        function showRegisterModal() {\r\n            var registerModal = new bootstrap.Modal(document.getElementById('registerModal'));\r\n            registerModal.show();\r\n\r\n\r\n        }, 300);\r\n    }\r\n    // Ajax đọc dữ liệu\r\n    // $(document).ready(function () {\r\n    //     $(\".add-to-cart\").click(function () {\r\n    //\r\n    //         var productId = $(this).data(\"product-id\");\r\n    //         $.ajax({\r\n    //             url: \"/Cart\",\r\n    //             type: \"POST\",\r\n    //             data: {product_id: productId},\r\n    //             success: function (response) {\r\n    //                 alert(productId);\r\n    //                 alert(response.message); // Hiển thị thông báo\r\n    //             },\r\n    //             error: function () {\r\n    //                 alert(\"Có lỗi xảy ra!\");\r\n    //             }\r\n    //         });\r\n    //     });\r\n    // });\r\n    $(document).ready(function () {\r\n        $(\".add-to-cart\").click(function () {\r\n            var productId = $(this).data(\"product-id\");\r\n            var quantity = 1; // Mặc định 1 nếu không chọn số lượng\r\n\r\n            $.ajax({\r\n                url: \"/Cart\",\r\n                type: \"POST\",\r\n                data: { product_id: productId, quantity: quantity }, // Gửi đầy đủ dữ liệu\r\n                dataType: \"json\",  // Nhận phản hồi JSON\r\n                success: function (response) {\r\n                    alert(\"Sản phẩm ID: \" + productId + \" đã được thêm vào giỏ hàng!\");\r\n                    console.log(response); // Kiểm tra phản hồi từ server\r\n                },\r\n                error: function (xhr, status, error) {\r\n                    console.log(\"Lỗi: \" + error);\r\n                    alert(\"Có lỗi xảy ra! Vui lòng thử lại.\");\r\n                }\r\n            });\r\n        });\r\n    });\r\n\r\n</script>\r\n</body>\r\n</html>\r\n=======\r\n        }\r\n\r\n        function switchToRegister() {\r\n            var loginModalEl = document.getElementById('loginModal');\r\n            var registerModalEl = document.getElementById('registerModal');\r\n\r\n            if (loginModalEl) {\r\n                var loginModal = bootstrap.Modal.getInstance(loginModalEl) || new bootstrap.Modal(loginModalEl);\r\n                loginModal.hide();\r\n            }\r\n\r\n            setTimeout(() => {\r\n                var registerModal = bootstrap.Modal.getInstance(registerModalEl) || new bootstrap.Modal(registerModalEl);\r\n                registerModal.show();\r\n            }, 300);\r\n        }\r\n\r\n    </script>\r\n    <script>\r\n        document.addEventListener(\"DOMContentLoaded\", function () {\r\n            var loginModal = document.getElementById(\"loginModal\");\r\n\r\n            // Khi modal được hiển thị, xóa thuộc tính inert và đặt focus vào email\r\n            loginModal.addEventListener(\"show.bs.modal\", function () {\r\n                loginModal.removeAttribute(\"inert\");\r\n                setTimeout(() => document.getElementById(\"loginEmail\").focus(), 100); // Đảm bảo focus vào ô nhập email\r\n            });\r\n\r\n            // Khi modal đóng, thêm lại inert để ngăn focus\r\n            loginModal.addEventListener(\"hide.bs.modal\", function () {\r\n                loginModal.setAttribute(\"inert\", \"\");\r\n            });\r\n        });\r\n    </script>\r\n    <script src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js\"></script>\r\n    </body>\r\n    </html>\r\n>>>>>>> DangHoangLong\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/webapp/WEB-INF/view/product/TrangChu.jsp b/src/main/webapp/WEB-INF/view/product/TrangChu.jsp
+--- a/src/main/webapp/WEB-INF/view/product/TrangChu.jsp	
++++ b/src/main/webapp/WEB-INF/view/product/TrangChu.jsp	
+@@ -1,182 +1,23 @@
+-    <%--
+-      Created by IntelliJ IDEA.
+-      User: PC
+-      Date: 12/02/2025
+-      Time: 1:56 pm
+-      To change this template use File | Settings | File Templates.
+-    --%>
+-    <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
++<%--
++  Created by IntelliJ IDEA.
++  User: PC
++  Date: 12/02/2025
++  Time: 1:56 pm
++  To change this template use File | Settings | File Templates.
++--%>
++<%@ page contentType="text/html;charset=UTF-8" language="java" %>
++<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+ 
+-    <html lang="vi">
+-    <head>
+-        <meta charset="UTF-8">
+-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+-        <title>PC codegym</title>
+-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+-        <%--    <link rel="stylesheet" href="TrangChu.css"> &lt;%&ndash; Updated paths &ndash;%&gt;--%>
+-        <link rel="stylesheet" href="css/TrangChu.css">
+-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+-        <style>
+-            /* Định dạng cho pop-up (Modal) */
+-            #registerModal {
+-                position: fixed;
+-                top: 50%;
+-                left: 50%;
+-                transform: translate(-50%, -50%);
+-                background-color: white;
+-                padding: 20px;
+-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+-                z-index: 1000;
+-                width: 400px;
+-                border-radius: 8px;
+-            }
+-
+-
+-
+-            /* Định dạng nút đóng */
+-            .close {
+-                font-size: 1.5em;
+-                color: #aaa;
+-                border: none;
+-                background: none;
+-                cursor: pointer;
+-            }
+-            .close:hover {
+-                color: black;
+-            }
+-
+-            /* Định dạng form */
+-            .form-group {
+-                margin-bottom: 15px;
+-            }
+-            .form-control {
+-                width: 100%;
+-                padding: 10px;
+-                margin: 5px 0;
+-                border-radius: 5px;
+-                border: 1px solid #ccc;
+-            }
+-            .btn {
+-                background-color: #4CAF50;
+-                color: white;
+-                padding: 10px 15px;
+-                border: none;
+-                border-radius: 5px;
+-                cursor: pointer;
+-            }
+-            .btn:hover {
+-                background-color: #45a049;
+-            }
+-        </style>
+-    </head>
+-    <body>
+-    <header class="header">
+-        <a href="">
+-            <img src="" alt="">
+-        </a>
+-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+-            <div class="container-fluid d-flex justify-content-between align-items-center">
+-                <a class="navbar-brand" href="#">PC MNhat</a>
+-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+-                    <span class="navbar-toggler-icon"></span>
+-                </button>
+-                <div class="collapse navbar-collapse" id="navbarNavDropdown">
+-                    <ul class="navbar-nav">
+-                        <li class="nav-item">
+-                            <a class="nav-link active" aria-current="page" href="#">Trang chủ</a>
+-                        </li>
+-                        <li class="nav-item dropdown">
+-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLaptop" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+-                                Build PC
+-                            </a>
+-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLaptop">
+-                                <li><a class="dropdown-item" href="#">Thương hiệu</a></li>
+-                                <li><a class="dropdown-item" href="#">Giá bán</a></li>
+-                                <li><a class="dropdown-item" href="#">Nhu cầu sử dụng</a></li>
+-                            </ul>
+-                        </li>
+-                        <li class="nav-item dropdown">
+-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuPC" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+-                                Laptop
+-                            </a>
+-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuPC">
+-                                <li><a class="dropdown-item" href="#">Thương hiệu</a></li>
+-                                <li><a class="dropdown-item" href="#">Giá bán</a></li>
+-                                <li><a class="dropdown-item" href="#">Nhu cầu sử dụng</a></li>
+-                            </ul>
+-                        </li>
+-                        <li class="nav-item dropdown">
+-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuPhuKien" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+-                                Phụ kiện
+-                            </a>
+-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuPhuKien">
+-                                <li><a class="dropdown-item" href="#">Tai nghe</a></li>
+-                                <li><a class="dropdown-item" href="#">Chuột</a></li>
+-                                <li><a class="dropdown-item" href="#">Bàn phím</a></li>
+-                                <li><a class="dropdown-item" href="#">Ghế</a></li>
+-                                <li><a class="dropdown-item" href="#">Tay cầm</a></li>
+-                            </ul>
+-                        </li>
+-                        <%--                    <li class="nav-item dropdown">--%>
+-                        <%--                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuKhuyenMai" role="button" data-bs-toggle="dropdown" aria-expanded="false">--%>
+-                        <%--                            Khuyến mãi--%>
+-                        <%--                        </a>--%>
+-                        <%--                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuKhuyenMai">--%>
+-                        <%--                            <li><a class="dropdown-item" href="#">Action</a></li>--%>
+-                        <%--                            <li><a class="dropdown-item" href="#">Another action</a></li>--%>
+-                        <%--                            <li><a class="dropdown-item" href="#">Something else here</a></li>--%>
+-                        <%--                        </ul>--%>
+-                        <%--                    </li>--%>
+-                    </ul>
+-                </div>
+-                <div class="nav-icons d-flex justify-content-end gap-3">
+-                    <a href="javascript:void(0);" class="icon" data-bs-toggle="tooltip" title="Đăng Nhập" onclick="showLoginModal()">
+-                        <i class="bi bi-person-fill"></i>
+-                    </a>
+-                    <a href="#" class="icon" data-  bs-toggle="tooltip" title="Messages">
+-                        <i class="bi bi-chat-left-text"></i>
+-                    </a>
+-                    <a class="cart-icon position-relative" data-bs-toggle="tooltip" title="Cart">
+-                        <i class="bi bi-cart"></i>
+-                        <span class="cart-count position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">2</span>
+-                    </a>
+-                    <a href="#" class="icon" data-bs-toggle="tooltip" title="More">
+-                        <i class="bi bi-three-dots-vertical"></i>
+-                    </a>
+-                </div>
+-            </div>
+-        </nav>
+-
+-
+-    </header>
+-    <%--<p>Danh sách sản phẩm: ${products}</p>--%>
+-    <div class="container mt-4">
+-        <div id="productList" class="row">
+-            <c:forEach var="product" items="${products}">
+-                <div class="col-md-4 mb-4">
+-                    <div class="card">
+-                        <img src="${product.image_url}" class="card-img-top" alt="${product.description}">
+-    <%--                    <img src="/assets/img/products/laptop_dell_id01.webp" class="card-img-top" alt="${product.description}">--%>
+-
+-                        <div class="card-body">
+-                            <h5 class="card-title">${product.name}</h5>
+-                            <h5 class="card-title">${product.description}</h5>
+-                            <p class="card-text">Giá: ${product.price}</p>
+-                            <button class="btn btn-primary" onclick="window.location.href='/TrangChu?action=addToCart&id=${product.product_id}';">Mua ngay</button>
+-                        </div>
+-                    </div>
+-                </div>
+-            </c:forEach>
+-        </div>
+-    </div>
+-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+-
++<html lang="vi">
++<head>
++    <meta charset="UTF-8">
++    <meta name="viewport" content="width=device-width, initial-scale=1.0">
++    <title>PC codegym</title>
++    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+     <%--    <link rel="stylesheet" href="TrangChu.css"> &lt;%&ndash; Updated paths &ndash;%&gt;--%>
+ 
+-<%--    <link rel="stylesheet" href="/css/TrangChu.css">--%>
++    <%--    <link rel="stylesheet" href="/css/TrangChu.css">--%>
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+     <style>
+         body {
+@@ -440,17 +281,17 @@
+             <div class="col-md-4 mb-4">
+                 <div class="card">
+                     <img src="${product.image_url}" class="card-img-top" alt="${product.description}">
+-<%--                    <img src="/assets/img/products/laptop_dell_id01.webp" class="card-img-top" alt="${product.description}">--%>
++                        <%--                    <img src="/assets/img/products/laptop_dell_id01.webp" class="card-img-top" alt="${product.description}">--%>
+ 
+                     <div class="card-body">
+                         <h5 class="card-title">${product.name}</h5>
+                         <h5 class="card-title">${product.description}</h5>
+                         <p class="card-text">Giá: ${product.formattedPrice}</p>
+                     </div>
+-<%--                    <button class="btn btn-primary add-to-cart" data-product-id="${product.product_id}"--%>
+-<%--                            onclick="window.location.href='/Cart?product_id=${product.product_id}';">--%>
+-<%--                        Mua ngay--%>
+-<%--                    </button>--%>
++                        <%--                    <button class="btn btn-primary add-to-cart" data-product-id="${product.product_id}"--%>
++                        <%--                            onclick="window.location.href='/Cart?product_id=${product.product_id}';">--%>
++                        <%--                        Mua ngay--%>
++                        <%--                    </button>--%>
+                     <button class="btn btn-primary add-to-cart" data-product-id="${product.product_id}">
+                         Mua ngay
+                     </button>
+@@ -475,78 +316,49 @@
+                     <div class="form-group">
+                         <label for="loginEmail">Email</label>
+                         <input type="email" class="form-control" id="loginEmail" name="email" required>
+-=======
+-
+-    <!-- Modal đăng nhập -->
+-    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" inert>
+-        <div class="modal-dialog" role="document">
+-            <div class="modal-content">
+-                <div class="modal-header">
+-                    <h5 class="modal-title" id="loginModalLabel">Đăng Nhập</h5>
+-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+-                </div>
+-                <div class="modal-body">
+-                    <%-- Hiển thị thông báo lỗi nếu có --%>
+-                    <%
+-                        String errorMessage = (String) session.getAttribute("error");
+-                        if (errorMessage != null) {
+-                    %>
+-                    <p style="color: red; text-align: center;"><%= errorMessage %></p>
+-                    <%
+-                            session.removeAttribute("error"); // Xóa lỗi sau khi hiển thị
+-                        }
+-                    %>
+-
+-                    <form action="login" method="POST">
+-                        <div class="form-group">
+-                            <label for="loginEmail">Email</label>
+-                            <input type="email" class="form-control" id="loginEmail" name="email" required>
+-                        </div>
+-                        <div class="form-group">
+-                            <label for="loginPassword">Mật Khẩu</label>
+-                            <input type="password" class="form-control" id="loginPassword" name="password" required>
+-                        </div>
+-                        <button type="submit" class="btn btn-primary">Đăng Nhập</button>
+-                    </form>
+-                    <!-- Nút đăng ký dưới form đăng nhập -->
+-                    <div class="text-center mt-3">
+-                        <p>Chưa có tài khoản? <a href="#" onclick="switchToRegister()">Đăng ký</a></p>
+->>>>>>> DangHoangLong
+-                    </div>
+-                </div>
+-            </div>
+-        </div>
+-    </div>
++                    </div>
++                    <div class="form-group">
++                        <label for="loginPassword">Mật Khẩu</label>
++                        <input type="password" class="form-control" id="loginPassword" name="password" required>
++                    </div>
++                    <button type="submit" class="btn btn-primary">Đăng Nhập</button>
++                </form>
++                <!-- Nút đăng ký dưới form đăng nhập -->
++                <div class="text-center mt-3">
++                    <p>Chưa có tài khoản? <a href="#" onclick="switchToRegister()">Đăng ký</a></p>
++                </div>
++            </div>
++        </div>
++    </div>
++</div>
+ 
+-    <!-- Modal đăng ký -->
+-    <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true" data-bs-backdrop="false">
+-        <div class="modal-dialog">
+-            <div class="modal-content">
+-                <div class="modal-header">
+-                    <h5 class="modal-title" id="registerModalLabel">Đăng Ký</h5>
+-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+-                </div>
+-                <div class="modal-body">
+-                    <form id="registerForm" action="<%= request.getContextPath() %>/register" method="POST">
+-                        <div class="form-group">
+-                            <label for="registerName">Họ và Tên</label>
+-                            <input type="text" class="form-control" id="registerName" name="name" required>
+-                        </div>
+-                        <div class="form-group">
+-                            <label for="registerEmail">Email</label>
+-                            <input type="email" class="form-control" id="registerEmail" name="email" required>
+-                        </div>
+-                        <div class="form-group">
+-                            <label for="registerPassword">Mật khẩu</label>
+-                            <input type="password" class="form-control" id="registerPassword" name="password" required>
+-                        </div>
+-                        <button type="submit" class="btn btn-primary">Đăng Ký</button>
+-                    </form>
+-                </div>
++<!-- Modal đăng ký -->
++<div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true" data-bs-backdrop="false">
++    <div class="modal-dialog">
++        <div class="modal-content">
++            <div class="modal-header">
++                <h5 class="modal-title" id="registerModalLabel">Đăng Ký</h5>
++                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
++            </div>
++            <div class="modal-body">
++                <form id="registerForm" action="<%= request.getContextPath() %>/register" method="POST">
++                    <div class="form-group">
++                        <label for="registerName">Họ và Tên</label>
++                        <input type="text" class="form-control" id="registerName" name="name" required>
++                    </div>
++                    <div class="form-group">
++                        <label for="registerEmail">Email</label>
++                        <input type="email" class="form-control" id="registerEmail" name="email" required>
++                    </div>
++                    <div class="form-group">
++                        <label for="registerPassword">Mật khẩu</label>
++                        <input type="password" class="form-control" id="registerPassword" name="password" required>
++                    </div>
++                    <button type="submit" class="btn btn-primary">Đăng Ký</button>
++                </form>
+             </div>
+         </div>
+     </div>
+-
+ </div>
+ <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+@@ -568,25 +380,11 @@
+         if (loginModalEl) {
+             var loginModal = bootstrap.Modal.getInstance(loginModalEl) || new bootstrap.Modal(loginModalEl);
+             loginModal.hide();
+-=======
+-
+-    <script>
+-        function showLoginModal() {
+-            var loginModalEl = document.getElementById('loginModal');
+-            if (loginModalEl) {
+-                var loginModal = new bootstrap.Modal(loginModalEl);
+-                loginModal.show();
+-            } else {
+-                console.error("Không tìm thấy modal đăng nhập (#loginModal) trong DOM.");
+-            }
+->>>>>>> DangHoangLong
+         }
+ 
+-        function showRegisterModal() {
+-            var registerModal = new bootstrap.Modal(document.getElementById('registerModal'));
++        setTimeout(() => {
++            var registerModal = bootstrap.Modal.getInstance(registerModalEl) || new bootstrap.Modal(registerModalEl);
+             registerModal.show();
+-
+-
+         }, 300);
+     }
+     // Ajax đọc dữ liệu
+@@ -632,43 +430,4 @@
+ 
+ </script>
+ </body>
+-</html>
+-=======
+-        }
+-
+-        function switchToRegister() {
+-            var loginModalEl = document.getElementById('loginModal');
+-            var registerModalEl = document.getElementById('registerModal');
+-
+-            if (loginModalEl) {
+-                var loginModal = bootstrap.Modal.getInstance(loginModalEl) || new bootstrap.Modal(loginModalEl);
+-                loginModal.hide();
+-            }
+-
+-            setTimeout(() => {
+-                var registerModal = bootstrap.Modal.getInstance(registerModalEl) || new bootstrap.Modal(registerModalEl);
+-                registerModal.show();
+-            }, 300);
+-        }
+-
+-    </script>
+-    <script>
+-        document.addEventListener("DOMContentLoaded", function () {
+-            var loginModal = document.getElementById("loginModal");
+-
+-            // Khi modal được hiển thị, xóa thuộc tính inert và đặt focus vào email
+-            loginModal.addEventListener("show.bs.modal", function () {
+-                loginModal.removeAttribute("inert");
+-                setTimeout(() => document.getElementById("loginEmail").focus(), 100); // Đảm bảo focus vào ô nhập email
+-            });
+-
+-            // Khi modal đóng, thêm lại inert để ngăn focus
+-            loginModal.addEventListener("hide.bs.modal", function () {
+-                loginModal.setAttribute("inert", "");
+-            });
+-        });
+-    </script>
+-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+-    </body>
+-    </html>
+->>>>>>> DangHoangLong
++</html>
+\ No newline at end of file
+Index: .idea/webContexts.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"WebContextManager\">\r\n    <option name=\"state\">\r\n      <map>\r\n        <entry key=\"file://$PROJECT_DIR$/src/main/webapp/WEB-INF/view/product/TrangChu.jsp\" value=\"file://$PROJECT_DIR$/src/main/webapp/WEB-INF/view/product\" />\r\n      </map>\r\n    </option>\r\n  </component>\r\n</project>
+===================================================================
+diff --git a/.idea/webContexts.xml b/.idea/webContexts.xml
+--- a/.idea/webContexts.xml	
++++ b/.idea/webContexts.xml	
+@@ -3,6 +3,7 @@
+   <component name="WebContextManager">
+     <option name="state">
+       <map>
++        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/view/User/UserProfile.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/view/User" />
+         <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/view/product/TrangChu.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/view/product" />
+       </map>
+     </option>
+Index: src/main/java/org/example/websitekinhdoanhpc_casestudy_module3/repository/OrderRepository.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package org.example.websitekinhdoanhpc_casestudy_module3.repository;\r\n\r\nimport jakarta.servlet.http.HttpSession;\r\nimport org.example.websitekinhdoanhpc_casestudy_module3.Dao.UserDao;\r\nimport org.example.websitekinhdoanhpc_casestudy_module3.entity.Category;\r\nimport org.example.websitekinhdoanhpc_casestudy_module3.entity.Order;\r\nimport org.example.websitekinhdoanhpc_casestudy_module3.entity.User;\r\n\r\nimport java.sql.*;\r\nimport java.time.LocalDate;\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\n\r\npublic class OrderRepository {\r\n\r\n\r\n    public List<Order> findAll() {\r\n        return null;\r\n    }\r\n\r\n    public Order findOrderById(int id) {\r\n        return null;\r\n    }\r\n//    public Order createOrder(int userId) {\r\n//        Order order = null;\r\n//        try {\r\n//            PreparedStatement statement = BaseRepository.getConnection()\r\n//                    .prepareStatement(\"INSERT INTO orders (user_id,order_date,total_price, status,shipping_address,payment_method) VALUES (?, NOW(),?, 'PENDING',?,?)\");\r\n////            statement.setInt(1, userId);\r\n//            statement.executeUpdate();\r\n//\r\n//            ResultSet resultSet = statement.getGeneratedKeys();\r\n//            if (resultSet.next()) {\r\n//                int orderId = resultSet.getInt(\"order_id\");\r\n//                LocalDate order_date = LocalDate.now();\r\n//                double total_price = 0.0;\r\n//\r\n//                order = new Order(orderId, new User(1,\"Minh\",\"nhatminh091003@gmail.com\",\"123456789\",\"members\",\"0765599103\",\"20/11 Trần Quốc Tuấn\"), order_date, total_price,\"PENDING\",\"bike\",\"cash\");\r\n//            }\r\n//        } catch (SQLException e) {\r\n//            e.printStackTrace();\r\n//        }\r\n//        return order;\r\n//    }\r\n\r\n\r\n//public Order createOrder(int userId) {\r\n//    Order order = null;\r\n//    try {\r\n//        PreparedStatement statement = BaseRepository.getConnection()\r\n//                .prepareStatement(\"INSERT INTO orders (user_id,order_date,total_price, status,shipping_address,payment_method) VALUES (?, NOW(), ?, 'PENDING', ?, ?)\",\r\n//                        Statement.RETURN_GENERATED_KEYS);\r\n//\r\n//        // Gán giá trị mặc định\r\n//        double totalPrice = 0.0; // Giá trị tạm\r\n//        String shippingAddress = \"bike\"; // Giá trị tạm\r\n//        String paymentMethod = \"cash\"; // Giá trị tạm\r\n//\r\n//        statement.setInt(1, userId);\r\n//        statement.setDouble(2, totalPrice);\r\n//        statement.setString(3, shippingAddress);\r\n//        statement.setString(4, paymentMethod);\r\n//\r\n//        // Thực thi lệnh INSERT\r\n//        int affectedRows = statement.executeUpdate();\r\n//\r\n//        // Kiểm tra nếu INSERT thành công thì lấy order_id\r\n//        if (affectedRows > 0) {\r\n//            ResultSet resultSet = statement.getGeneratedKeys();\r\n//            if (resultSet.next()) {\r\n//                int orderId = resultSet.getInt(1); // Lấy cột đầu tiên (order_id)\r\n//                LocalDate orderDate = LocalDate.now();\r\n//\r\n//                // Tạo User tạm thời\r\n//                User fakeUser = new User(1, \"Minh\", \"nhatminh091003@gmail.com\", \"123456789\", \"members\", \"0765599103\", \"20/11 Trần Quốc Tuấn\");\r\n//\r\n//                // Tạo order mới\r\n//                order = new Order(orderId, fakeUser, orderDate, totalPrice, \"PENDING\", shippingAddress, paymentMethod);\r\n//            }\r\n//        }\r\n//    } catch (SQLException e) {\r\n//        e.printStackTrace();\r\n//    }\r\n//    return order;\r\n//}\r\n\r\n\r\n    public Order createOrder(User user) {\r\n        if (user == null) {\r\n            System.out.println(\"Không tìm thấy người dùng trong session!\");\r\n            return null;\r\n        }\r\n\r\n        Order order = null;\r\n        try {\r\n            Connection connection = BaseRepository.getConnection();\r\n            if (connection == null) {\r\n                System.out.println(\"Lỗi: Không thể kết nối database!\");\r\n                return null;\r\n            }\r\n\r\n            PreparedStatement statement = connection.prepareStatement(\r\n                    \"INSERT INTO orders (user_id, order_date, total_price, status, shipping_address, payment_method) \" +\r\n                            \"VALUES (?, NOW(), ?, 'PENDING', ?, ?)\",\r\n                    Statement.RETURN_GENERATED_KEYS\r\n            );\r\n\r\n            // Giá trị mặc định\r\n            double totalPrice = 0.0;\r\n            String shippingAddress = \"bike\";\r\n            String paymentMethod = \"cash\";\r\n\r\n            System.out.println(\"Đang tạo đơn hàng cho User ID: \" + user.getUser_id());\r\n\r\n            statement.setInt(1, user.getUser_id());\r\n            statement.setDouble(2, totalPrice);\r\n            statement.setString(3, shippingAddress);\r\n            statement.setString(4, paymentMethod);\r\n\r\n            int affectedRows = statement.executeUpdate();\r\n            System.out.println(\"Số dòng bị ảnh hưởng: \" + affectedRows);\r\n\r\n            if (affectedRows > 0) {\r\n                ResultSet resultSet = statement.getGeneratedKeys();\r\n                if (resultSet.next()) {\r\n                    int orderId = resultSet.getInt(1);\r\n                    System.out.println(\"Đã tạo đơn hàng với ID: \" + orderId);\r\n\r\n                    LocalDate orderDate = LocalDate.now();\r\n                    order = new Order(orderId, user, orderDate, totalPrice, \"PENDING\", shippingAddress, paymentMethod);\r\n                }\r\n            }\r\n            connection.close();\r\n        } catch (SQLException e) {\r\n            e.printStackTrace();\r\n        }\r\n        return order;\r\n    }\r\n\r\n\r\n    public void remove(int id) {\r\n    }\r\n    public void updateTotalPrice(int orderId, double totalPrice) {\r\n        String sql = \"UPDATE `order` SET total_price = ? WHERE order_id = ?\";\r\n\r\n        try (Connection connection = BaseRepository.getConnection();\r\n             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {\r\n\r\n            preparedStatement.setDouble(1, totalPrice);\r\n            preparedStatement.setInt(2, orderId);\r\n\r\n            preparedStatement.executeUpdate();\r\n        } catch (SQLException e) {\r\n            throw new RuntimeException(\"Lỗi khi cập nhật tổng tiền đơn hàng\", e);\r\n        }\r\n    }\r\n    public void save(Order order) {\r\n        String sql = \"INSERT INTO `order` (user_id, order_date, total_price, status, shipping_address, payment_method) \" +\r\n                \"VALUES (?, ?, ?, ?, ?, ?)\";\r\n\r\n\r\n\r\n        try (Connection connection = BaseRepository.getConnection();\r\n             PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {\r\n\r\n            preparedStatement.setInt(1, 1); // Lưu user_id\r\n            preparedStatement.setDate(2, Date.valueOf(order.getOrder_date())); // Lưu order_date\r\n            preparedStatement.setDouble(3, order.getTotal_price()); // Lưu tổng tiền\r\n            preparedStatement.setString(4, order.getStatus()); // Lưu trạng thái đơn hàng\r\n            preparedStatement.setString(5, order.getShipping_address()); // Lưu địa chỉ giao hàng\r\n            preparedStatement.setString(6, order.getPayment_method()); // Lưu phương thức thanh toán\r\n\r\n            int affectedRows = preparedStatement.executeUpdate();\r\n\r\n            if (affectedRows > 0) {\r\n                try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {\r\n                    if (generatedKeys.next()) {\r\n                        order.setOrder_id(generatedKeys.getInt(1)); // Gán ID đơn hàng mới tạo\r\n                    }\r\n                }\r\n            }\r\n\r\n        } catch (SQLException e) {\r\n            throw new RuntimeException(\"Lỗi khi lưu đơn hàng vào cơ sở dữ liệu\", e);\r\n        }\r\n    }\r\n    public boolean updateOrderStatus(int orderId, String status) {\r\n        String sql = \"UPDATE `order` SET status = ? WHERE order_id = ?\";\r\n\r\n        try (Connection conn = BaseRepository.getConnection();\r\n             PreparedStatement stmt = conn.prepareStatement(sql)) {\r\n\r\n            stmt.setString(1, status);\r\n            stmt.setInt(2, orderId);\r\n\r\n            int rowsUpdated = stmt.executeUpdate();\r\n            return rowsUpdated > 0; // Trả về true nếu cập nhật thành công\r\n        } catch (SQLException e) {\r\n            e.printStackTrace();\r\n        }\r\n        return false; // Cập nhật thất bại\r\n    }\r\n    public Order findLastInsertedOrder() {\r\n        String query = \"SELECT * FROM `order` ORDER BY order_id DESC LIMIT 1\";\r\n        Order order = null;\r\n\r\n        try (Connection conn = BaseRepository.getConnection()) {\r\n            if (conn.isClosed()) { // \uD83D\uDD34 Kiểm tra nếu kết nối đã đóng\r\n                System.out.println(\"Kết nối đã bị đóng!\");\r\n                return null;\r\n            }\r\n\r\n            try (PreparedStatement stmt = conn.prepareStatement(query);\r\n                 ResultSet rs = stmt.executeQuery()) {\r\n\r\n                if (rs.next()) {\r\n                    order = new Order();\r\n                    order.setOrder_id(rs.getInt(\"order_id\"));\r\n                }\r\n\r\n            }\r\n        } catch (SQLException e) {\r\n            e.printStackTrace();\r\n        }\r\n        return order;\r\n    }\r\n\r\n\r\n\r\n\r\n    public void update(int id, Order order) {\r\n    }\r\n\r\n    public List<Order> findOrdersByUserId(int userId) {\r\n        List<Order> orders = new ArrayList<>();\r\n        Connection conn = BaseRepository.getConnection();\r\n        String sql = \"SELECT * FROM `order` WHERE user_id = ?\";\r\n        UserDao userDao = new UserDao();\r\n        try {\r\n            PreparedStatement ps = conn.prepareStatement(sql);\r\n            ps.setInt(1, userId);\r\n            ResultSet rs = ps.executeQuery();\r\n\r\n            while (rs.next()) {\r\n                Order order = new Order();\r\n                order.setOrder_id(rs.getInt(\"order_id\"));\r\n                int userIdFromDb = rs.getInt(\"user_id\");\r\n                User user = userDao.findUserById(userIdFromDb);\r\n                order.setUser(user);\r\n\r\n                order.setOrder_date(rs.getDate(\"order_date\").toLocalDate());\r\n                order.setTotal_price(rs.getDouble(\"total_price\"));\r\n                order.setStatus(rs.getString(\"status\"));\r\n                orders.add(order);\r\n\r\n            }\r\n            rs.close();\r\n            ps.close();\r\n            conn.close();\r\n        } catch (SQLException e) {\r\n            e.printStackTrace();\r\n        }\r\n        return orders;\r\n    }\r\n\r\n}\r\n
+===================================================================
+diff --git a/src/main/java/org/example/websitekinhdoanhpc_casestudy_module3/repository/OrderRepository.java b/src/main/java/org/example/websitekinhdoanhpc_casestudy_module3/repository/OrderRepository.java
+--- a/src/main/java/org/example/websitekinhdoanhpc_casestudy_module3/repository/OrderRepository.java	
++++ b/src/main/java/org/example/websitekinhdoanhpc_casestudy_module3/repository/OrderRepository.java	
+@@ -1,11 +1,11 @@
+ package org.example.websitekinhdoanhpc_casestudy_module3.repository;
+ 
+ import jakarta.servlet.http.HttpSession;
+-import org.example.websitekinhdoanhpc_casestudy_module3.Dao.UserDao;
++
+ import org.example.websitekinhdoanhpc_casestudy_module3.entity.Category;
+ import org.example.websitekinhdoanhpc_casestudy_module3.entity.Order;
+ import org.example.websitekinhdoanhpc_casestudy_module3.entity.User;
+-
++import org.example.websitekinhdoanhpc_casestudy_module3.repository.BaseRepository;
+ import java.sql.*;
+ import java.time.LocalDate;
+ import java.util.ArrayList;
+@@ -140,6 +140,7 @@
+ 
+     public void remove(int id) {
+     }
++
+     public void updateTotalPrice(int orderId, double totalPrice) {
+         String sql = "UPDATE `order` SET total_price = ? WHERE order_id = ?";
+ 
+@@ -154,12 +155,12 @@
+             throw new RuntimeException("Lỗi khi cập nhật tổng tiền đơn hàng", e);
+         }
+     }
++
+     public void save(Order order) {
+         String sql = "INSERT INTO `order` (user_id, order_date, total_price, status, shipping_address, payment_method) " +
+                 "VALUES (?, ?, ?, ?, ?, ?)";
+ 
+ 
+-
+         try (Connection connection = BaseRepository.getConnection();
+              PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+ 
+@@ -184,6 +185,7 @@
+             throw new RuntimeException("Lỗi khi lưu đơn hàng vào cơ sở dữ liệu", e);
+         }
+     }
++
+     public boolean updateOrderStatus(int orderId, String status) {
+         String sql = "UPDATE `order` SET status = ? WHERE order_id = ?";
+ 
+@@ -200,6 +202,7 @@
+         }
+         return false; // Cập nhật thất bại
+     }
++
+     public Order findLastInsertedOrder() {
+         String query = "SELECT * FROM `order` ORDER BY order_id DESC LIMIT 1";
+         Order order = null;
+@@ -226,41 +229,36 @@
+     }
+ 
+ 
+-
+-
+     public void update(int id, Order order) {
+     }
+ 
+     public List<Order> findOrdersByUserId(int userId) {
+         List<Order> orders = new ArrayList<>();
+-        Connection conn = BaseRepository.getConnection();
+-        String sql = "SELECT * FROM `order` WHERE user_id = ?";
+-        UserDao userDao = new UserDao();
+-        try {
+-            PreparedStatement ps = conn.prepareStatement(sql);
++
++        try (Connection conn = BaseRepository.getConnection();
++             PreparedStatement ps = conn.prepareStatement("SELECT * FROM `order` WHERE user_id = ?")) {
+             ps.setInt(1, userId);
+             ResultSet rs = ps.executeQuery();
+ 
+             while (rs.next()) {
+                 Order order = new Order();
+                 order.setOrder_id(rs.getInt("order_id"));
+-                int userIdFromDb = rs.getInt("user_id");
+-                User user = userDao.findUserById(userIdFromDb);
++
++                // Lấy user bằng BaseRepository
++                User user = BaseRepository.getUserById(rs.getInt("user_id"));
+                 order.setUser(user);
+ 
+                 order.setOrder_date(rs.getDate("order_date").toLocalDate());
+                 order.setTotal_price(rs.getDouble("total_price"));
+                 order.setStatus(rs.getString("status"));
++
+                 orders.add(order);
+-
+             }
+             rs.close();
+-            ps.close();
+-            conn.close();
+         } catch (SQLException e) {
+             e.printStackTrace();
+         }
+         return orders;
+     }
+ 
+-}
++}
+\ No newline at end of file

@@ -1,0 +1,156 @@
+Index: src/main/webapp/WEB-INF/view/User/UserProfile.jsp
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><%@ page contentType=\"text/html;charset=UTF-8\" language=\"java\" %>\r\n<!DOCTYPE html>\r\n<html lang=\"en\">\r\n<head>\r\n    <meta charset=\"UTF-8\">\r\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\r\n    <title>User Profile</title>\r\n</head>\r\n<body>\r\n<h1 item=${user}>Welcome, ${user.name}!</h1>\r\n<p>Email: ${user.email}</p>\r\n<p>Role: ${user.role}</p>\r\n<p>Phone Number: ${user.phone_number}</p>\r\n<p>Address: ${user.address}</p>\r\n<!-- Nút log out -->\r\n<form action=\"<%= request.getContextPath() %>/logout\" method=\"POST\">\r\n    <input type=\"submit\" value=\"Logout\">\r\n</form>\r\n\r\n<!-- Nút quay về trang chủ -->\r\n<form action=\"<%= request.getContextPath() %>/TrangChu\" method=\"GET\">\r\n    <input type=\"submit\" value=\"Quay về Trang Chủ\">\r\n</form>\r\n\r\n</body>\r\n</html>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/webapp/WEB-INF/view/User/UserProfile.jsp b/src/main/webapp/WEB-INF/view/User/UserProfile.jsp
+--- a/src/main/webapp/WEB-INF/view/User/UserProfile.jsp	
++++ b/src/main/webapp/WEB-INF/view/User/UserProfile.jsp	
+@@ -1,4 +1,5 @@
+ <%@ page contentType="text/html;charset=UTF-8" language="java" %>
++<%@ page import="org.example.websitekinhdoanhpc_casestudy_module3.entity.User" %>
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+@@ -21,6 +22,13 @@
+ <form action="<%= request.getContextPath() %>/TrangChu" method="GET">
+     <input type="submit" value="Quay về Trang Chủ">
+ </form>
++<%
++    User user = (User) session.getAttribute("user");
++    if (user == null) {
++        response.sendRedirect("TrangChu");
++        return;
++    }
++%>
+ 
+ </body>
+ </html>
+Index: src/main/java/org/example/websitekinhdoanhpc_casestudy_module3/controller/RegisterServlet.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package org.example.websitekinhdoanhpc_casestudy_module3.controller;\r\n\r\nimport jakarta.servlet.ServletException;\r\nimport jakarta.servlet.annotation.WebServlet;\r\nimport jakarta.servlet.http.*;\r\nimport java.io.IOException;\r\nimport org.example.websitekinhdoanhpc_casestudy_module3.entity.User;\r\nimport org.example.websitekinhdoanhpc_casestudy_module3.repository.BaseRepository;\r\n\r\n@WebServlet(name = \"RegisterServlet\", value = \"/register\")\r\npublic class RegisterServlet extends HttpServlet {\r\n    @Override\r\n    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {\r\n        String name = req.getParameter(\"name\");\r\n        String email = req.getParameter(\"email\");\r\n        String password = req.getParameter(\"password\");\r\n        String role = \"customer\"; // Mặc định user đăng ký là khách hàng\r\n\r\n        // Kiểm tra xem email đã tồn tại chưa\r\n        if (BaseRepository.getUserByEmail(email) != null) {\r\n            req.getSession().setAttribute(\"error\", \"Email đã được sử dụng!\");\r\n            resp.sendRedirect(req.getContextPath() + \"/register.jsp\");\r\n            return;\r\n        }\r\n\r\n        // Tạo user mới (KHÔNG mã hóa mật khẩu)\r\n        User newUser = new User(null, name, email, password, role, null, null);\r\n        boolean success = BaseRepository.registerUser(newUser);\r\n\r\n        if (success) {\r\n            // Đăng ký thành công => Lưu user vào session và chuyển hướng đến /userProfile\r\n            HttpSession session = req.getSession();\r\n            session.setAttribute(\"user\", newUser);\r\n            session.setAttribute(\"message\", \"Đăng ký thành công!\");\r\n            resp.sendRedirect(req.getContextPath() + \"/userProfile\");\r\n        } else {\r\n            req.getSession().setAttribute(\"error\", \"Đăng ký thất bại, vui lòng thử lại!\");\r\n            resp.sendRedirect(req.getContextPath() + \"/register.jsp\");\r\n        }\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/org/example/websitekinhdoanhpc_casestudy_module3/controller/RegisterServlet.java b/src/main/java/org/example/websitekinhdoanhpc_casestudy_module3/controller/RegisterServlet.java
+--- a/src/main/java/org/example/websitekinhdoanhpc_casestudy_module3/controller/RegisterServlet.java	
++++ b/src/main/java/org/example/websitekinhdoanhpc_casestudy_module3/controller/RegisterServlet.java	
+@@ -18,8 +18,8 @@
+ 
+         // Kiểm tra xem email đã tồn tại chưa
+         if (BaseRepository.getUserByEmail(email) != null) {
+-            req.getSession().setAttribute("error", "Email đã được sử dụng!");
+-            resp.sendRedirect(req.getContextPath() + "/register.jsp");
++            req.setAttribute("error", "Email đã được sử dụng!");
++            req.getRequestDispatcher("/WEB-INF/view/User/Register.jsp").forward(req, resp);
+             return;
+         }
+ 
+@@ -34,8 +34,8 @@
+             session.setAttribute("message", "Đăng ký thành công!");
+             resp.sendRedirect(req.getContextPath() + "/userProfile");
+         } else {
+-            req.getSession().setAttribute("error", "Đăng ký thất bại, vui lòng thử lại!");
+-            resp.sendRedirect(req.getContextPath() + "/register.jsp");
++            req.setAttribute("error", "Đăng ký thất bại, vui lòng thử lại!");
++            req.getRequestDispatcher("/WEB-INF/view/User/Register.jsp").forward(req, resp);
+         }
+     }
+-}
++}
+\ No newline at end of file
+Index: src/main/webapp/javascript/userProfile.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>// Xử lý chỉnh sửa hồ sơ người dùng\r\nfunction editProfile() {\r\n    let newUsername = prompt(\"Nhập tên mới:\", document.getElementById(\"username\").innerText);\r\n    if (newUsername !== null && newUsername.trim() !== \"\") {\r\n        document.getElementById(\"username\").innerText = newUsername;\r\n        alert(\"Tên đã được cập nhật!\");\r\n        // TODO: Gửi AJAX cập nhật tên trên server\r\n    }\r\n}\r\n\r\n// Xử lý đăng xuất\r\nfunction confirmLogout() {\r\n    let confirmAction = confirm(\"Bạn có chắc chắn muốn đăng xuất?\");\r\n    if (confirmAction) {\r\n        window.location.href = \"logout\"; // Điều hướng đến Servlet xử lý đăng xuất\r\n    }\r\n}\r\n\r\n// Chạy khi trang tải xong\r\ndocument.addEventListener(\"DOMContentLoaded\", function () {\r\n    console.log(\"UserProfile.js loaded!\");\r\n});\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/webapp/javascript/userProfile.js b/src/main/webapp/javascript/userProfile.js
+--- a/src/main/webapp/javascript/userProfile.js	
++++ b/src/main/webapp/javascript/userProfile.js	
+@@ -1,4 +1,4 @@
+-// Xử lý chỉnh sửa hồ sơ người dùng
++
+ function editProfile() {
+     let newUsername = prompt("Nhập tên mới:", document.getElementById("username").innerText);
+     if (newUsername !== null && newUsername.trim() !== "") {
+Index: src/main/java/org/example/websitekinhdoanhpc_casestudy_module3/Dao/UserDao.java
+===================================================================
+diff --git a/src/main/java/org/example/websitekinhdoanhpc_casestudy_module3/Dao/UserDao.java b/src/main/java/org/example/websitekinhdoanhpc_casestudy_module3/Dao/UserDao.java
+deleted file mode 100644
+--- a/src/main/java/org/example/websitekinhdoanhpc_casestudy_module3/Dao/UserDao.java	
++++ /dev/null	
+@@ -1,69 +0,0 @@
+-package org.example.websitekinhdoanhpc_casestudy_module3.Dao;
+-
+-import org.example.websitekinhdoanhpc_casestudy_module3.entity.User;
+-import org.example.websitekinhdoanhpc_casestudy_module3.repository.BaseRepository;
+-
+-import java.sql.*;
+-
+-public class UserDao {
+-
+-    public boolean isEmailExist(String email) {
+-        boolean exists = false;
+-        String query = "SELECT * FROM users WHERE email = ?";
+-
+-        try (Connection connection = BaseRepository.getConnection();
+-             PreparedStatement statement = connection.prepareStatement(query)) {
+-            statement.setString(1, email);
+-            ResultSet resultSet = statement.executeQuery();
+-            exists = resultSet.next(); // Nếu có kết quả, email đã tồn tại
+-        } catch (SQLException e) {
+-            e.printStackTrace();
+-        }
+-
+-        return exists;
+-    }
+-
+-    // Hàm đăng ký người dùng
+-    public void registerUser(User user) {
+-        String query = "INSERT INTO users (name, email, password, role, phone_number, address) VALUES (?, ?, ?, ?, ?, ?)";
+-
+-        try (Connection connection = BaseRepository.getConnection();
+-             PreparedStatement statement = connection.prepareStatement(query)) {
+-            statement.setString(1, user.getName());
+-            statement.setString(2, user.getEmail());
+-            statement.setString(3, user.getPassword());
+-            statement.setString(4, user.getRole());
+-            statement.setString(5, user.getPhone_number());
+-            statement.setString(6, user.getAddress());
+-            statement.executeUpdate(); // Thực thi câu lệnh SQL
+-        } catch (SQLException e) {
+-            e.printStackTrace();
+-        }
+-    }
+-
+-    public User findUserById(int userId) {
+-        User user = null;
+-        Connection conn = BaseRepository.getConnection();
+-        String sql = "SELECT * FROM users WHERE user_id = ?";
+-
+-        try {
+-            PreparedStatement ps = conn.prepareStatement(sql);
+-            ps.setInt(1, userId);
+-            ResultSet rs = ps.executeQuery();
+-
+-            if (rs.next()) {
+-                user = new User();
+-                user.setUser_id(rs.getInt("user_id"));
+-                user.setName(rs.getString("user_name"));
+-                user.setEmail(rs.getString("email"));
+-            }
+-
+-            rs.close();
+-            ps.close();
+-            conn.close();
+-        } catch (SQLException e) {
+-            e.printStackTrace();
+-        }
+-        return user;
+-    }
+-}

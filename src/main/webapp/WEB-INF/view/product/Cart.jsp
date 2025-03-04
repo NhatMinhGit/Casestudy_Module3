@@ -336,6 +336,7 @@
                                     </td>
 
                                 </tr>
+
                             </c:forEach>
                         </tr>
 
@@ -499,7 +500,8 @@
                                             <span>Tiếp tục mua sắm</span>
                                         </a>
                                     </button>
-                                    <button type="button" class="btn btn-primary w-20 btn-lg" id="btnThanhToan">
+                                    <% session.setAttribute("previousPage", request.getRequestURI()); %>
+                                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#loginModal">
                                         Thanh toán
                                     </button>
 
@@ -514,6 +516,62 @@
             </div>
         </div>
     </div>
+
+    <!-- Bootstrap Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="loginModalLabel">Đăng nhập để tiếp tục</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Form đăng nhập bằng email -->
+                    <form action="/login" method="post">
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Mật khẩu</label>
+                            <input type="password" class="form-control" id="password" name="password" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Đăng nhập</button>
+                    </form>
+                    <hr>
+                    <p class="text-center">Hoặc</p>
+                    <form action="checkout.jsp" method="post">
+                    <a href="<%= request.getContextPath() %>/checkout-guest" class="btn btn-outline-secondary w-100">
+                        Thanh toán ngay
+                    </a>
+                    </form>>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <%-- Thêm thông tin khách hàng ở đây --%>
+    <%@ page import="org.example.websitekinhdoanhpc_casestudy_module3.entity.User" %>
+    <%
+        HttpSession sessionObj = request.getSession(false);
+        User user = (sessionObj != null) ? (User) sessionObj.getAttribute("user") : null;
+    %>
+
+    <% if (user != null) { %>
+    <div class="card mt-3">
+        <div class="card-header">
+            <h5>Thông tin khách hàng</h5>
+        </div>
+        <div class="card-body">
+            <p><strong>Họ tên:</strong> <%= user.getName() %></p>
+            <p><strong>Email:</strong> <%= user.getEmail() %></p>
+            <p><strong>Số điện thoại:</strong> <%= user.getPhone_number() %></p>
+            <p><strong>Địa chỉ:</strong> <%= user.getAddress() %></p>
+        </div>
+    </div>
+    <% } else { %>
+    <p class="text-danger">Vui lòng đăng nhập để tiếp tục thanh toán!</p>
+    <% } %>
 </section>
 
 <%--<script src="../../../javascript/TrangChu.js"></script>--%>
