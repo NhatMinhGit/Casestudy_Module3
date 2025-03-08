@@ -30,39 +30,36 @@ import java.util.List;
 
 @WebServlet("/orders")
 public class OrderController extends HttpServlet {
-
     private IOrderService orderService = new OrderService();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
 
-        // Lấy session
-        HttpSession session = request.getSession(false); // Không tạo session mới nếu chưa có
+        HttpSession session = request.getSession(false);
         if (session == null || session.getAttribute("userId") == null) {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             response.getWriter().write("{\"error\": \"Bạn chưa đăng nhập!\"}");
             return;
         }
 
-        // Lấy userId từ session
         int userId = (int) session.getAttribute("userId");
-
-        // Gọi service để lấy danh sách đơn hàng
         List<Order> orders = orderService.findOrdersByUserId(userId);
-        request.setAttribute("order", orders);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/product/HoaDonCuaToi.jsp");
-        dispatcher.forward(request, response);
 
-        // Chuyển danh sách đơn hàng thành JSON
-        String json = new Gson().toJson(orders);
-
-        // Trả JSON về client
-        PrintWriter out = response.getWriter();
-        out.print(json);
-        out.flush();
+        // Kiểm tra xem request có phải từ AJAX không
+        String ajaxHeader = request.getHeader("X-Requested-With");
+        if ("XMLHttpRequest".equals(ajaxHeader)) {
+            // Nếu là AJAX, trả về JSON
+            response.setContentType("application/json");
+            PrintWriter out = response.getWriter();
+            out.print(new Gson().toJson(orders));
+            out.flush();
+        } else {
+            // Nếu không phải AJAX, hiển thị JSP
+            request.setAttribute("order", orders);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/product/HoaDonCuaToi.jsp");
+            dispatcher.forward(request, response);
+        }
     }
-
 }

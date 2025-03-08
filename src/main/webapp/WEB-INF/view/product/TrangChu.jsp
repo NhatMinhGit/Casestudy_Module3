@@ -253,7 +253,7 @@
             </div>
             <div class="nav-icons d-flex justify-content-end gap-3">
                 <% if (isLoggedIn) { %>
-                <span class="nav-link">Xin chào, <%= userSession.getName() %>!</span>
+                <span class="nav-link-light bg-light">Xin chào, <%= userSession.getName() %>!</span>
                 <a href="logout" class="btn btn-danger">Đăng xuất</a>
                 <% } else { %>
                 <a href="javascript:void(0);" class="icon" data-bs-toggle="tooltip" title="Đăng Nhập" onclick="showLoginModal()">

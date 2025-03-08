@@ -78,7 +78,7 @@ CREATE TABLE Voucher (
 
 -- Dữ liệu mẫu user
 INSERT INTO Users (name, email, password, role, phone_number, address) VALUES
-('Nguyễn Văn A', 'nguyenvana@example.com', 'password123', 'customer', '0987654321', 'Hà Nội, Việt Nam'),
+    ('Nguyễn Văn A', 'nguyenvana@example.com', 'password123', 'customer', '0987654321', 'Hà Nội, Việt Nam'),
 ('Trần Thị B', 'tranthib@example.com', 'password123', 'customer', '0978123456', 'TP. Hồ Chí Minh, Việt Nam'),
 ('Lê Văn C', 'levanc@example.com', 'password123', 'admin', '0912345678', 'Đà Nẵng, Việt Nam'),
 ('Phạm Thị D', 'phamthid@example.com', 'password123', 'customer', '0923456789', 'Cần Thơ, Việt Nam'),

@@ -1,10 +1,4 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: PC
-  Date: 18/02/2025
-  Time: 9:09 pm
-  To change this template use File | Settings | File Templates.
---%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -12,6 +6,13 @@
 <%@ page import="org.example.websitekinhdoanhpc_casestudy_module3.entity.OrderItem" %>
 <%@ page import="java.util.List" %>
 <%--<% int cart = (Integer) request.getAttribute("cart"); %>--%>
+<%@ page import="org.example.websitekinhdoanhpc_casestudy_module3.entity.User" %>
+<%
+    HttpSession userSession = request.getSession(false);
+    boolean isLoggedIn = (userSession != null && userSession.getAttribute("user") != null);
+    User user = isLoggedIn ? (User) userSession.getAttribute("user") : null;
+%>
+
 
 <html lang="vi">
 <head>
@@ -20,8 +21,6 @@
     <title>Chi tiết giỏ hàng</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         body {
             background-color: #fff;
@@ -249,18 +248,17 @@
                 </ul>
             </div>
             <div class="nav-icons d-flex justify-content-end gap-3">
-                <a href="#" class="icon" data-bs-toggle="tooltip" title="Login">
-                    <i class="bi bi-person"></i> <span class="d-none d-md-inline">Đăng nhập</span>
+                <% if (isLoggedIn) { %>
+                <span class="nav-link-light bg-light">Xin chào, <%= user.getName() %>!</span>
+                <a href="logout" class="btn btn-danger">Đăng xuất</a>
+                <% } else { %>
+                <a href="javascript:void(0);" class="icon" data-bs-toggle="tooltip" title="Đăng Nhập" onclick="showLoginModal()">
+                    <i class="bi bi-person-fill"></i>
                 </a>
-                <a href="#" class="icon" data-bs-toggle="tooltip" title="Messages">
-                    <i class="bi bi-chat-left-text"></i>
-                </a>
+                <% } %>
                 <a href="Cart" class="cart-icon position-relative" data-bs-toggle="tooltip" title="Cart">
                     <i class="bi bi-cart"></i>
                     <span class="cart-count position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">2</span>
-                </a>
-                <a href="#" class="icon" data-bs-toggle="tooltip" title="More">
-                    <i class="bi bi-three-dots-vertical"></i>
                 </a>
             </div>
         </div>
@@ -344,89 +342,7 @@
                     </table>
                 </div>
 
-<%--                <div class="card shadow-2-strong mb-5 mb-lg-0" style="border-radius: 16px;">--%>
-<%--                    <div class="card-body p-4">--%>
-<%--                        <div class="row gap-4"> <!-- Thêm khoảng cách giữa hai phần -->--%>
-<%--                            <div class="col-md-6 col-lg-4 col-xl-3 mb-4 mb-md-0">--%>
-<%--                                <form>--%>
-<%--                                    <div class="d-flex flex-row pb-3">--%>
-<%--                                        <div class="d-flex align-items-center pe-2">--%>
-<%--                                            <input class="form-check-input" type="radio" name="radioNoLabel" id="radioNoLabel1v"--%>
-<%--                                                   value="" aria-label="..." checked />--%>
-<%--                                        </div>--%>
-<%--                                        <div class="rounded border w-100 p-3">--%>
-<%--                                            <p class="d-flex align-items-center mb-0">--%>
-<%--                                                <i class="fab fa-cc-mastercard fa-2x text-body pe-2"></i>Chuyển khoản--%>
-<%--                                            </p>--%>
-<%--                                        </div>--%>
-<%--                                    </div>--%>
-<%--                                    <div class="d-flex flex-row pb-3">--%>
-<%--                                        <div class="d-flex align-items-center pe-2">--%>
-<%--                                            <input class="form-check-input" type="radio" name="radioNoLabel" id="radioNoLabel2v"--%>
-<%--                                                   value="" aria-label="..." />--%>
-<%--                                        </div>--%>
-<%--                                        <div class="rounded border w-100 p-3">--%>
-<%--                                            <p class="d-flex align-items-center mb-0">--%>
-<%--                                                <i class="fab fa-cc-visa fa-2x fa-lg text-body pe-2"></i>Thanh toán trực tiếp--%>
-<%--                                            </p>--%>
-<%--                                        </div>--%>
-<%--                                    </div>--%>
-<%--                                </form>--%>
-<%--                            </div>--%>
 
-<%--                            <!-- Thêm lớp flex-grow-1 để đẩy nội dung bên phải sang cạnh phải -->--%>
-<%--                            <div class="col-lg-4 col-xl-3 d-flex flex-column">--%>
-<%--                                <div class="d-flex justify-content-between" style="font-weight: 500;">--%>
-<%--                                    <p class="mb-2">Subtotal</p>--%>
-
-
-<%--                                    <!-- Tạo biến `totalPrice` tạm thời chỉ để hiển thị -->--%>
-<%--                                    <c:set var="subTotalPrice" value="0" />--%>
-
-<%--                                    <!-- Lặp qua danh sách orderItems để tính tổng -->--%>
-<%--                                    <c:forEach var="item" items="${cart}">--%>
-<%--                                        <c:set var="subTotalPrice" value="${subTotalPrice + (item.product.price * item.quantity)}" />--%>
-<%--                                    </c:forEach>--%>
-
-
-<%--                                    <!-- Hiển thị tổng tiền đã định dạng -->--%>
-<%--                                    <p class="mb-2">--%>
-<%--                                        <fmt:setLocale value="vi_VN"/>--%>
-<%--                                        Tổng cộng:--%>
-<%--                                        <fmt:formatNumber value="${subTotalPrice}" type="currency" currencySymbol="₫"/>--%>
-<%--                                    </p>--%>
-<%--                                </div>--%>
-
-<%--                                <div class="d-flex justify-content-between" style="font-weight: 500;">--%>
-<%--                                    <p class="mb-0">Shipping</p>--%>
-<%--                                    <p class="mb-0">100.000đ</p>--%>
-<%--                                </div>--%>
-
-<%--                                <hr class="my-4">--%>
-<%--                                <c:set var="totalPrice" value="${subTotalPrice - 100000}" />--%>
-<%--                                <div class="d-flex justify-content-between mb-4" style="font-weight: 500;">--%>
-<%--                                    <p class="mb-2">Total (tax included)</p>--%>
-<%--                                    <p class="mb-2">--%>
-<%--                                        <fmt:formatNumber value="${totalPrice}" type="currency" currencySymbol="₫"/>--%>
-<%--                                    </p>--%>
-<%--                                </div>--%>
-
-<%--                                <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block btn-lg">--%>
-<%--                                    <div class="d-flex justify-content-between">--%>
-<%--                                        <span>Thanh toán</span>--%>
-<%--                                    </div>--%>
-<%--                                </button>--%>
-<%--                                <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block btn-lg">--%>
-<%--                                    <div class="d-flex justify-content-between">--%>
-<%--                                        <a href="TrangChu" style="color: white; text-decoration: none;">--%>
-<%--                                            <span>Tiếp tục mua sắm</span>--%>
-<%--                                        </a>--%>
-<%--                                    </div>--%>
-<%--                                </button>--%>
-<%--                            </div>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
                 <div class="card shadow-2-strong mb-5 mb-lg-0" style="border-radius: 16px;">
                     <div class="card-body p-4">
                         <div class="row">
@@ -501,7 +417,7 @@
                                         </a>
                                     </button>
                                     <% session.setAttribute("previousPage", request.getRequestURI()); %>
-                                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#loginModal">
+                                    <button type="button" class="btn btn-success" id="btnThanhToan" data-bs-toggle="modal" data-bs-target="#loginModal">
                                         Thanh toán
                                     </button>
 
@@ -517,7 +433,8 @@
         </div>
     </div>
 
-    <!-- Bootstrap Modal -->
+    <% if (!isLoggedIn) { %>
+    <!-- Modal đăng nhập (chỉ hiển thị khi chưa đăng nhập) -->
     <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -526,7 +443,6 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <!-- Form đăng nhập bằng email -->
                     <form action="/login" method="post">
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
@@ -538,26 +454,14 @@
                         </div>
                         <button type="submit" class="btn btn-primary w-100">Đăng nhập</button>
                     </form>
-                    <hr>
-                    <p class="text-center">Hoặc</p>
-                    <form action="checkout.jsp" method="post">
-                    <a href="<%= request.getContextPath() %>/checkout-guest" class="btn btn-outline-secondary w-100">
-                        Thanh toán ngay
-                    </a>
-                    </form>>
-
                 </div>
             </div>
         </div>
     </div>
-    <%-- Thêm thông tin khách hàng ở đây --%>
-    <%@ page import="org.example.websitekinhdoanhpc_casestudy_module3.entity.User" %>
-    <%
-        HttpSession sessionObj = request.getSession(false);
-        User user = (sessionObj != null) ? (User) sessionObj.getAttribute("user") : null;
-    %>
+    <% } %>
 
-    <% if (user != null) { %>
+    <!-- Thông tin khách hàng -->
+    <% if (isLoggedIn) { %>
     <div class="card mt-3">
         <div class="card-header">
             <h5>Thông tin khách hàng</h5>
@@ -635,24 +539,45 @@
         var orderId = "<%= order_id != null ? order_id : "" %>";
         console.log("Order ID in JSP:", orderId);
 
-        document.getElementById('btnThanhToan').addEventListener('click', function() {
-        if (!confirm('Bạn có chắc chắn muốn thanh toán?')) return;
+    document.addEventListener("DOMContentLoaded", function () {
+        var btnThanhToan = document.getElementById('btnThanhToan');
+        var loginModalEl = document.getElementById('loginModal');
 
-        fetch(`/Cart/ThanhToan`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: `order_id=${orderId}` // ✅ Đặt đúng tên tham số
-    })
-        .then(response => response.text())
-        .then(data => {
-        alert(data);
-        window.location.href = "/Cart/ThanhToan";
-    })
-        .catch(error => {
-        alert('Có lỗi xảy ra! Vui lòng thử lại.');
-        console.error('Lỗi:', error);
+        if (btnThanhToan) {
+            btnThanhToan.addEventListener('click', function () {
+                var isLoggedIn = <%= isLoggedIn %>; // Lấy biến từ JSP
+
+                if (!isLoggedIn) {
+                    if (loginModalEl) {
+                        var loginModal = new bootstrap.Modal(loginModalEl);
+                        loginModal.show();
+                    } else {
+                        console.warn("⚠️ Không tìm thấy modal đăng nhập!");
+                    }
+                } else {
+                    if (!confirm('Bạn có chắc chắn muốn thanh toán?')) return;
+
+                    fetch(`/Cart/ThanhToan`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                        body: `order_id=${orderId}`
+                    })
+                        .then(response => response.text())
+                        .then(data => {
+                            alert(data);
+                            window.location.href = "/Cart/ThanhToan";
+                        })
+                        .catch(error => {
+                            alert('Có lỗi xảy ra! Vui lòng thử lại.');
+                            console.error('Lỗi:', error);
+                        });
+                }
+            });
+        } else {
+            console.warn("⚠️ Không tìm thấy nút btnThanhToan!");
+        }
     });
-    });
+
 </script>
 
 </body>

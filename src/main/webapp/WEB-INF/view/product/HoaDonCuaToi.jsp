@@ -294,90 +294,10 @@
 </div>
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-<!-- Modal đăng nhập -->
-<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="loginModalLabel">Đăng Nhập</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form action="login" method="post">
-                    <div class="form-group">
-                        <label for="loginEmail">Email</label>
-                        <input type="email" class="form-control" id="loginEmail" name="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="loginPassword">Mật Khẩu</label>
-                        <input type="password" class="form-control" id="loginPassword" name="password" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Đăng Nhập</button>
-                </form>
-                <!-- Nút đăng ký dưới form đăng nhập -->
-                <div class="text-center mt-3">
-                    <p>Chưa có tài khoản? <a href="#" onclick="switchToRegister()">Đăng ký</a></p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
-<!-- Modal đăng ký -->
-<div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true" data-bs-backdrop="false">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="registerModalLabel">Đăng Ký</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form id="registerForm" action="<%= request.getContextPath() %>/register" method="POST">
-                    <div class="form-group">
-                        <label for="registerName">Họ và Tên</label>
-                        <input type="text" class="form-control" id="registerName" name="name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="registerEmail">Email</label>
-                        <input type="email" class="form-control" id="registerEmail" name="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="registerPassword">Mật khẩu</label>
-                        <input type="password" class="form-control" id="registerPassword" name="password" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Đăng Ký</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-    function showLoginModal() {
-        var loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
-        loginModal.show();
-    }
-
-    function showRegisterModal() {
-        var registerModal = new bootstrap.Modal(document.getElementById('registerModal'));
-        registerModal.show();
-    }
-
-    function switchToRegister() {
-        var loginModalEl = document.getElementById('loginModal');
-        var registerModalEl = document.getElementById('registerModal');
-
-        if (loginModalEl) {
-            var loginModal = bootstrap.Modal.getInstance(loginModalEl) || new bootstrap.Modal(loginModalEl);
-            loginModal.hide();
-        }
-
-        setTimeout(() => {
-            var registerModal = bootstrap.Modal.getInstance(registerModalEl) || new bootstrap.Modal(registerModalEl);
-            registerModal.show();
-        }, 300);
-    }
 
     // Ajax đọc dữ liệu
     $(document).ready(function () {
